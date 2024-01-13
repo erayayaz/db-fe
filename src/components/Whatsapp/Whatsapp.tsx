@@ -6,7 +6,7 @@ const Whatsapp: React.FC = () => {
 
     const openWhatsApp = () => {
         // Replace '123456789' with the actual phone number (including country code) you want to open in WhatsApp
-        const phoneNumber = '905388220883';
+        const phoneNumber = '905438169230';
 
         // Create a WhatsApp URL
         const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}`;
