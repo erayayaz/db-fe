@@ -1,0 +1,78 @@
+.whyus {
+  padding: 6rem 6rem 2rem 18rem;
+  display: flex;
+  width: 80%;
+  background-color: #F9EDC8;;
+
+  .whyus-section {
+    width: 60%;
+
+    .whyus-section__img {
+      position: absolute;
+      right: -200px;
+      width: 68%;
+      height: 50%;
+      margin-left: 100px;
+    }
+
+    .whyus__title-brand {
+      color: #555555;
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0 30px;
+      font-family: math;
+    }
+
+    .whyus__title-guest {
+      color: chocolate;
+      font-size: 28px;
+      margin: 6px auto;
+      font-weight: bold;
+    }
+
+    .whyus__title-why {
+      color: #333333;
+      font-size: 40px;
+      margin-top: 8px;
+      font-weight: bold;
+    }
+
+    .whyus-maybach-photo {
+      justify-content: right;
+    }
+
+    .whyus__list {
+      display: flex;
+      justify-content: space-between;
+
+      .whyus__list-first {
+        flex: 1;
+
+        .whyus__list-ul {
+          padding-left: 0;
+        }
+      }
+
+      .whyus__list-second {
+        flex: 1;
+
+        .whyus__list-ul {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+    text-align: center;
+    width: auto;
+    .whyus-section {
+      width: 100%;
+
+      .whyus-section__img {
+        display: none;
+      }
+    }
+  }
+}

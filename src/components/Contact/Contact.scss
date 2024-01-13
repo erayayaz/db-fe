@@ -1,0 +1,14 @@
+.contacts {
+  display: block;
+  text-align: center;
+  margin: auto;
+  padding: 3rem 0;
+  width: 58%;
+  .contacts-info {
+    display: flex;
+    .contacts-info__subtitle {
+      font-weight: bold;
+      margin-right: 4px;
+    }
+  }
+}

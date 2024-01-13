@@ -1,0 +1,26 @@
+.payments {
+  padding: 3rem ;
+  text-align: center;
+
+  display: flex;
+  justify-content: space-around; // Görseller arasında boşluk bırakmak için
+  align-items: center; // Görselleri dikey eksende hizalamak için
+  .payments-item {
+    text-align: center;
+  }
+  img {
+    max-width: 100%; // Her bir görseli konteynerin genişliğine sığdır
+    height: 65px; // Oranları koruyarak yüksekliği otomatik ayarla
+  }
+  @media (max-width: 768px) {
+    padding: 2rem;
+    width: auto;
+    display: grid;
+    .payment-item {
+      display: contents;
+      width: auto; // Tablet ve büyük ekranlarda orijinal genişlikte olacak
+    }
+  }
+}
+
+

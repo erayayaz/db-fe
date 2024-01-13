@@ -1,0 +1,50 @@
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+
+  .logo {
+    margin-left: auto;
+    img {
+      width: 200px;
+    }
+  }
+
+  .menu {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    gap: 4px;
+    .menu-item {
+      margin-right: 25px;
+      cursor: pointer;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+
+      &:hover {
+        color: #007bff; /* Hover durumunda metin rengi değişimi */
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .phone-button {
+
+    button {
+      background-color: #fff;
+      color: #333;
+      padding: 8px 15px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  }
+}

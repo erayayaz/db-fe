@@ -1,0 +1,13 @@
+.facetime {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  cursor: pointer;
+
+  img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}

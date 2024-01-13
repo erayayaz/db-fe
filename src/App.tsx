@@ -1,26 +1,134 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import './App.scss';
+import Navbar from "./components/Navbar/Navbar";
+import Sidebar from "./components/Sidebar/Sidebar";
+import logo from "./img/logo.png";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import About from "./components/AboutUs/About";
+import Regions from "./components/Regions/Regions";
+import Media from "./components/Media/Media";
+import Vehicles from "./components/Vehicles/Vehicles";
+import Contacts from "./components/Contact/Contact";
+import Appointment from "./components/Appointment/Appointment";
+import {Link} from "react-router-dom";
+import WhyUs from "./components/WhyUs/WhyUs";
+import Memories from "./components/Memories/Memories";
+import TravelRoutes from "./components/TravelRoutes/TravelRoutes";
+import Payments from "./components/Payments/Payments";
+import Footer from "./components/Footer/Footer";
+import Facetime from "./components/Facetime/Facetime";
+import Whatsapp from "./components/Whatsapp/Whatsapp";
+import Reservation from "./components/Reservation/Reservation";
+import Form from "./components/Form/Form";
+import AdminPanel from "./Panel/AdminPanel/AdminPanel";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isAboutVisible, setIsAboutVisible] = useState(true);
+    const [isAdminPanel, setIsAdminPanel] = useState(false);
+    const urls = [
+        {url: "/regions"},
+        {url: "/about-us"},
+        {url: "/media"},
+        {url: "/admin"},
+        {url: "/vehicles"},
+        {url: "/contacts"},
+        {url: "/form"},
+        {url: "/admin"},
+        {url: "/reservation"},
+
+    ];
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
+    const toggleUrl = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+        setIsAboutVisible(false);
+    };
+
+    const toggleHome = () => {
+        setIsAboutVisible(true);
+    }
+
+    const routeMenu = () => {
+        setIsAboutVisible(false);
+    }
+
+    const routeAdminPanel = () => {
+        setIsAdminPanel(true);
+        setIsAboutVisible(false);
+    }
+
+    const routeWebsite = () => {
+        setIsAdminPanel(false);
+    }
+    const location = useLocation();
+    const navigate = useNavigate();
+    const handleResize = () => {
+        setIsMobile(window.innerWidth <= 768);
+    };
+
+    useEffect(() => {
+        const currentPath = location.pathname;
+        urls.forEach((item) => {
+            if (currentPath === item.url) {
+                if (currentPath === '/admin') {
+                    routeAdminPanel();
+                } else {
+                    routeMenu();
+                    routeWebsite();
+                }
+                navigate(item.url);
+            }
+        });
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    return (
+        <div className="app">
+            {isMobile && !isAdminPanel ? (
+                <>
+                    <Link to="/" className="app-logo" onClick={toggleHome}>
+                        <img src={logo} alt="DB Transfer" />
+                    </Link>
+                    <button onClick={toggleSidebar} className="sidebar-btn">
+                        ☰
+                    </button>
+                    <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} menuButtonClicked={toggleUrl}/>
+                </>
+            ) : (
+                <>
+                    {!isAdminPanel && <Navbar iconClicked={toggleHome} menuButtonClicked={routeMenu}/>}
+                </>
+            )}
+            {isAboutVisible && <Appointment searchButtonClicked={routeMenu}/>}
+            {isAboutVisible && <WhyUs />}
+            {isAboutVisible && <Payments />}
+            {isAboutVisible && <TravelRoutes toggleRegions={routeMenu}/>}
+            {isAboutVisible && <Memories />}
+            {isAboutVisible && <Footer menuButtonClicked={routeMenu}/>}
+            {!isAdminPanel && <Facetime />}
+            {!isAdminPanel && <Whatsapp /> }
+            <Routes>
+                <Route path="/about-us" Component={About} />
+                <Route path="/regions" Component={Regions} />
+                <Route path="/media" Component={Media} />
+                <Route path="/vehicles" Component={() => <Vehicles reservationButtonClicked={toggleHome} />} />
+                <Route path="/contacts" Component={Contacts} />
+                <Route path="/form" Component={Form} />
+                <Route path="/admin" Component={AdminPanel} />
+                <Route path="/reservation" Component={() => <Reservation reservationButtonClicked={routeMenu} />} />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
