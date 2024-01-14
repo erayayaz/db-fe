@@ -29,9 +29,8 @@ const ReservationPanel: React.FC = () => {
     const ITEMS_PER_PAGE = 8;
     const MAX_PAGE_BUTTONS = 3;
     useEffect(() => {
-        console.log(showPending + ' showPending');
         if (showPending) {
-            axios.get('https://db-be-65356a298783.herokuapp.com/api/reservation/pending')
+            axios.get('http://localhost:8080/api/reservation/pending')
                 .then(response => {
                     const reservations: Reservation[] = response.data;
                     setReservations(reservations);
@@ -40,7 +39,7 @@ const ReservationPanel: React.FC = () => {
                     console.error('Veri çekme hatası:', error);
                 });
         } else {
-            axios.get('https://db-be-65356a298783.herokuapp.com/api/reservation/approved')
+            axios.get('http://localhost:8080/api/reservation/approved')
                 .then(response => {
                     const reservations: Reservation[] = response.data;
                     setReservations(reservations);
@@ -113,7 +112,7 @@ const ReservationPanel: React.FC = () => {
 
     const handleApproval = async (reservationId: number) => {
         try {
-            const response = await axios.patch(`https://db-be-65356a298783.herokuapp.com/api/reservation/approved/${reservationId}`);
+            const response = await axios.patch(`http://localhost:8080/api/reservation/approved/${reservationId}`);
             setReservations(response.data);
         } catch (error) {
 
@@ -122,7 +121,7 @@ const ReservationPanel: React.FC = () => {
 
     const handleDenial= async (reservationId: number) => {
         try {
-            const response = await axios.patch(`https://db-be-65356a298783.herokuapp.com/reservation/denial/${reservationId}`);
+            const response = await axios.patch(`http://localhost:8080/reservation/denial/${reservationId}`);
             setReservations(response.data);
             setShowPending(false);
         } catch (error) {
@@ -132,7 +131,7 @@ const ReservationPanel: React.FC = () => {
 
     const handleDelete = async (reservationId: number) => {
         try {
-            const response = await axios.delete(`https://db-be-65356a298783.herokuapp.com/api/reservation/${reservationId}`);
+            const response = await axios.delete(`http://localhost:8080/api/reservation/${reservationId}`);
             setReservations(response.data);
         } catch (error) {
 

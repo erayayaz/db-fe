@@ -5,6 +5,7 @@ import Navbar from "../Navbar/Navbar";
 import {useNavigate} from "react-router-dom";
 
 interface IProps {
+    iconClicked: () => void;
 }
 
 const AdminPanel: React.FC<IProps> = (props) => {
@@ -12,8 +13,9 @@ const AdminPanel: React.FC<IProps> = (props) => {
     const [displayReservation, setDisplayReservation] = useState(true);
 
     const routeWebsite = () => {
-        navigate('/');
+        //navigate('/');
         setDisplayReservation(false);
+        props.iconClicked();
     }
 
     const routeReservation = () => {

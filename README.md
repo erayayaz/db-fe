@@ -44,3 +44,11 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+bazı sayfaların mobile uyarlanması
+Admin Sayfasından Ücretlendirme Updatei
+Nereden Nereye kısmında veriler güncellenmeli
+Araçlar kısmında araca basıldığında araç görselleri gelmeli
+Bölgelere tıklandığında bölgeler ile ilgili yazılar gelmeli  dalamana uzaklığı gösterilmeli
+Rez oluşturulurken verilerin doğruluğunun kontrolü

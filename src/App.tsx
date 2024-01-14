@@ -21,12 +21,14 @@ import Whatsapp from "./components/Whatsapp/Whatsapp";
 import Reservation from "./components/Reservation/Reservation";
 import Form from "./components/Form/Form";
 import AdminPanel from "./Panel/AdminPanel/AdminPanel";
+import Login from "./Panel/Login/Login";
 
 function App() {
     const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isAboutVisible, setIsAboutVisible] = useState(true);
     const [isAdminPanel, setIsAdminPanel] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const urls = [
         {url: "/regions"},
         {url: "/about-us"},
@@ -37,9 +39,9 @@ function App() {
         {url: "/form"},
         {url: "/admin"},
         {url: "/reservation"},
+        {url: "/login"},
 
     ];
-
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
@@ -50,11 +52,19 @@ function App() {
     };
 
     const toggleHome = () => {
+        setIsAdminPanel(false);
         setIsAboutVisible(true);
     }
 
     const routeMenu = () => {
         setIsAboutVisible(false);
+    }
+
+    const loginSuccess = () => {
+        navigate('/admin');
+        setIsAdminPanel(true);
+        setIsAboutVisible(false);
+        setIsLoggedIn(true);
     }
 
     const routeAdminPanel = () => {
@@ -63,6 +73,7 @@ function App() {
     }
 
     const routeWebsite = () => {
+        setIsLoggedIn(false);
         setIsAdminPanel(false);
     }
     const location = useLocation();
@@ -75,13 +86,20 @@ function App() {
         const currentPath = location.pathname;
         urls.forEach((item) => {
             if (currentPath === item.url) {
-                if (currentPath === '/admin') {
+                if (currentPath === '/login' || currentPath === '/admin') {
+                    if (isLoggedIn) {
+                        navigate('/admin');
+                    } else {
+                        navigate('/login');
+                    }
+
                     routeAdminPanel();
                 } else {
                     routeMenu();
                     routeWebsite();
+                    navigate(item.url);
                 }
-                navigate(item.url);
+
             }
         });
 
@@ -124,7 +142,8 @@ function App() {
                 <Route path="/vehicles" Component={() => <Vehicles reservationButtonClicked={toggleHome} />} />
                 <Route path="/contacts" Component={Contacts} />
                 <Route path="/form" Component={Form} />
-                <Route path="/admin" Component={AdminPanel} />
+                <Route path="/login" Component={() => <Login loginSuccess={loginSuccess}/>} />
+                <Route path="/admin" Component={() => <AdminPanel iconClicked={toggleHome}/>} />
                 <Route path="/reservation" Component={() => <Reservation reservationButtonClicked={routeMenu} />} />
             </Routes>
         </div>

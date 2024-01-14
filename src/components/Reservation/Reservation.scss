@@ -70,5 +70,36 @@
       border-bottom: none;
     }
   }
+
+  @media (max-width: 768px) {
+    padding: 2rem 0;
+    display: block;
+    .reservation-dropdown {
+      margin: auto;
+      padding: 0;
+    }
+
+    .reservation-right {
+      justify-content: center;
+      padding: 0;
+      .reservation-vehicle {
+        .reservation-vehicle-info {
+          margin: auto;
+
+          h2 {
+            font-size: 20px;
+          }
+        }
+
+        .reservation-vehicle-button {
+          margin: 20px auto auto;
+        }
+
+        .reservation-vehicle-button:last-child {
+          margin: 0;
+        }
+      }
+    }
+  }
 }
 

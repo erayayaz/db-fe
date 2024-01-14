@@ -70,7 +70,7 @@ const Form: React.FC<IProps> = (props) => {
 
     const sendReservation = (reservation: any) => {
         setIsReservationSend(true);
-        axios.post('https://db-be-65356a298783.herokuapp.com/api/reservation', reservation)
+        axios.post('http://localhost:8080/api/reservation', reservation)
             .then(response => {
 
             })
