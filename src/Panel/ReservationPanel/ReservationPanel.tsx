@@ -121,7 +121,7 @@ const ReservationPanel: React.FC = () => {
 
     const handleDenial= async (reservationId: number) => {
         try {
-            const response = await axios.patch(`http://localhost:8080/reservation/denial/${reservationId}`);
+            const response = await axios.patch(`http://localhost:8080/api/reservation/denial/${reservationId}`);
             setReservations(response.data);
             setShowPending(false);
         } catch (error) {

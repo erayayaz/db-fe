@@ -35,10 +35,39 @@
     }
     .vehicle-button {
       margin-left: 80px;
+
+      button {
+        border: 1px solid gray;
+        border-radius: 10px;
+        padding: 5px;
+        background-color: gainsboro;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #f1f0f0;
+        }
+      }
     }
   }
 
   .vehicle:last-child{
     border-bottom: none;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 0;
+    .vehicle {
+      display: grid;
+      text-align: center;
+      padding: 0;
+
+      .vehicle-info {
+        margin: auto;
+      }
+
+      .vehicle-button {
+        margin: 0 0 10px;
+      }
+    }
   }
 }

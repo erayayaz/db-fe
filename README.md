@@ -45,8 +45,6 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-
-bazı sayfaların mobile uyarlanması
 Admin Sayfasından Ücretlendirme Updatei
 Nereden Nereye kısmında veriler güncellenmeli
 Araçlar kısmında araca basıldığında araç görselleri gelmeli

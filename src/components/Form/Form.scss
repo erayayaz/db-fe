@@ -115,9 +115,20 @@
           background-color: #e06868;
         }
       }
+    }
+  }
 
-
+  @media (max-width: 768px) {
+    display: grid;
+    .form__left-side {
+      padding: 2rem 0;
+      margin: auto;
     }
 
+    .form__right-side {
+      width: 80%;
+      padding: 2rem 2rem;
+      margin: auto;
+    }
   }
 }

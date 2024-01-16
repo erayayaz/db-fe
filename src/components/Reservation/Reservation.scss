@@ -63,6 +63,17 @@
       }
       .reservation-vehicle-button {
         margin-left: 80px;
+        button {
+          border: 1px solid gray;
+          border-radius: 10px;
+          padding: 5px;
+          background-color: gainsboro;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #f1f0f0;
+          }
+        }
       }
     }
 
@@ -96,7 +107,7 @@
         }
 
         .reservation-vehicle-button:last-child {
-          margin: 0;
+          margin: 20px 0 0;
         }
       }
     }
