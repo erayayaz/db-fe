@@ -6,7 +6,8 @@ import {Link} from "react-router-dom";
 interface IProps {
     iconClicked: () => void;
     reservationButton: () => void;
-    reservationButton2: () => void;
+    pricingButton: () => void;
+    updateUser: () => void;
 }
 
 const Navbar: React.FC<IProps> = (props) => {
@@ -21,14 +22,11 @@ const Navbar: React.FC<IProps> = (props) => {
                         <li onClick={props.reservationButton}>
                             Reservasyonlar
                         </li>
-                        <li onClick={props.reservationButton2}>
+                        <li onClick={props.updateUser}>
                             Kullanıcı
                         </li>
-                        <li onClick={props.reservationButton2}>
+                        <li onClick={props.pricingButton}>
                             Fiyatlamalar
-                        </li>
-                        <li onClick={props.reservationButton2}>
-                            Medya
                         </li>
                     </ul>
                 </nav>

@@ -8,6 +8,15 @@ import sprinters from "../../img/vehicles/sprinters.png";
 import person from "../../img/vehicles/person.svg";
 import luggage from "../../img/vehicles/luggage.png";
 import {useLocation, useNavigate} from "react-router-dom";
+import axios from "axios";
+
+interface Car {
+    id: number;
+    personLimit: number;
+    luggageLimit: number;
+    carType: string;
+    price: number;
+}
 
 interface IProps {
     reservationButtonClicked: () => void;
@@ -26,13 +35,7 @@ const Reservation: React.FC<IProps> = (props) => {
     const [destination1, setDestination] = useState(destination);
     const [departure1, setDeparture] = useState(departure);
     const [date1, setDate] = useState(date);
-
-    useEffect(() => {
-        console.log('Gidiş-Dönüş:', tripType1);
-        console.log('Nereden Gidecekleri:', departure1);
-        console.log('Gidecekleri Yer:', destination1);
-        console.log('Tarih:', date1);
-    }, []);
+    const [carInfo, setCarInfo] = useState<Car[]>([]);
 
     const handleRedirect = (vehicleId: number, vehiclePrice: number, vehicleType: string) => {
         tripType = tripType1;
@@ -54,11 +57,22 @@ const Reservation: React.FC<IProps> = (props) => {
         });
     }
 
-    const images = [
-        {id: 0, url: passat, person: 3, luggage: 3, type:'Otomobil', price: 4500},
-        {id: 1, url: vito, person: 6, luggage: 6, type:'Mercedes Vito', price: 5500},
-        {id: 2, url: sprinters, person: 10, luggage: 15, type:'Mercedes Sprinter', price: 6500},
+    const carInfos = [
+        {id: 1, url: passat},
+        {id: 2, url: vito},
+        {id: 3, url: sprinters},
     ];
+
+    useEffect(() => {
+            axios.get('http://localhost:8080/api/car')
+                .then(response => {
+                    const carInfo: Car[] = response.data;
+                    setCarInfo(carInfo);
+                })
+                .catch(error => {
+                    console.error('Veri çekme hatası:', error);
+                });
+    }, []);
 
     return (
         <>
@@ -88,24 +102,25 @@ const Reservation: React.FC<IProps> = (props) => {
                            onChange={(e) => setDate(e.target.value)}/>
                 </div>
                 <div className={'reservation-right'}>
-                    {images.map((vehicle) => (
+                    {carInfo.map((vehicle, index) => (
                         <div key={vehicle.id} className="reservation-vehicle">
                             <div className="reservation-vehicle-img">
-                                <img src={vehicle.url} alt={''} />
+                                <img src={carInfos.find(info => info.id === vehicle.id)?.url} alt={''} />
                             </div>
                             <div className="reservation-vehicle-info">
-                                <h2>{vehicle.type}</h2>
+                                <h2>{vehicle.carType}</h2>
                                 <div className={'reservation-vehicle-info__person-size'}>
                                     <img src={person} alt="Icon" width="24" height="24" />
-                                    <p className={'reservation-vehicle-info__person-size__info'}>Kişi Kapasitesi: {vehicle.person}</p>
+                                    <p className={'reservation-vehicle-info__person-size__info'}>Kişi Kapasitesi: {vehicle.personLimit}</p>
                                 </div>
                                 <div className={'reservation-vehicle-info__person-size'}>
                                     <img src={luggage} alt="Icon" width="24" height="24" />
-                                    <p className={'reservation-vehicle-info__person-size__info'}>Valiz Kapasitesi: {vehicle.luggage}</p>
+                                    <p className={'reservation-vehicle-info__person-size__info'}>Valiz Kapasitesi: {vehicle.luggageLimit}</p>
                                 </div>
                             </div>
                             <div className={'reservation-vehicle-button'}>
-                                <button onClick={() => handleRedirect(vehicle.id, vehicle.price, vehicle.type)}>Rezervasyon</button>
+                                <p>Toplam Fiyat: {vehicle.price} TL</p>
+                                <button onClick={() => handleRedirect(vehicle.id, vehicle.price, vehicle.carType)}>Rezervasyon</button>
                             </div>
                         </div>
                     ))}
