@@ -14,10 +14,7 @@ interface IProps {
 }
 
 const Form: React.FC<IProps> = (props) => {
-    const {i18n} = useTranslation();
-    const handleLanguageChange = async (newLang: string) => {
-        await i18n.changeLanguage(newLang);
-    };
+    const {t} = useTranslation();
 
     const location = useLocation();
     const { tripType, destination, departure, date, vehicleId, vehiclePrice, vehicleType } = location.state || {};
@@ -111,26 +108,26 @@ const Form: React.FC<IProps> = (props) => {
                     <img src={logo} alt="DB Transfer"/>
                     <div className={'form__left-side__details'}>
                         <div className={'form__left-side__details__part'}>
-                            <p className={'form__left-side__details__title'}>Rezervasyon Detayları</p>
+                            <p className={'form__left-side__details__title'}>{t('reservationDetail')}</p>
                             <div className={'form__left-side__details__body'}>
-                                <p className={'form__left-side__details__sub-title'}>Gidiş Türü: </p>
+                                <p className={'form__left-side__details__sub-title'}>{t('departureType')}: </p>
                                 <p className={'form__left-side__details__sub-body'}>{tripType}</p>
                             </div>
                             <div className={'form__left-side__details__body'}>
-                                <p className={'form__left-side__details__sub-title'}>Nereden: </p>
+                                <p className={'form__left-side__details__sub-title'}>{t('fromWhere')}: </p>
                                 <p className={'form__left-side__details__sub-body'}>{destination}</p>
                             </div>
                             <div className={'form__left-side__details__body'}>
-                                <p className={'form__left-side__details__sub-title'}>Nereye: </p>
+                                <p className={'form__left-side__details__sub-title'}>{t('where')}: </p>
                                 <p className={'form__left-side__details__sub-body'}>{departure}</p>
                             </div>
                             <div className={'form__left-side__details__body'}>
-                                <p className={'form__left-side__details__sub-title'}>Tarih: </p>
+                                <p className={'form__left-side__details__sub-title'}>{t('date')}: </p>
                                 <p className={'form__left-side__details__sub-body'}>{date}</p>
                             </div>
                             <div className={'form__left-side__details__body-inputs'}>
                                 <label>
-                                    Saat:
+                                    {t('hour')}:
                                     <input className={'form__left-side__details__body-hour__input'}
                                            placeholder={'Saat'}
                                            type="time"
@@ -141,7 +138,7 @@ const Form: React.FC<IProps> = (props) => {
                             </div>
                             <div className={'form__left-side__details__body-inputs'}>
                                 <label>
-                                    Kişi Sayısı:
+                                    {t('numberOfPerson')}:
                                     <input
                                         className={'form__left-side__details__body-hour__input'}
                                         placeholder={'Kişi Sayısı'}
@@ -154,7 +151,7 @@ const Form: React.FC<IProps> = (props) => {
                             </div>
                             <div className={'form__left-side__details__body-inputs'}>
                                 <label>
-                                    Çocuk Sayısı:
+                                    {t('numberOfChild')}:
                                     <input
                                         className={'form__left-side__details__body-hour__input'}
                                         placeholder={'Çocuk Sayısı'}
@@ -167,7 +164,7 @@ const Form: React.FC<IProps> = (props) => {
                             </div>
                             <div className={'form__left-side__details__body-inputs'}>
                                 <label>
-                                    Çocuk Koltuğu:
+                                    {t('childSeat')}:
                                     <input
                                         type="checkbox"
                                         checked={childSeat}
@@ -178,7 +175,7 @@ const Form: React.FC<IProps> = (props) => {
                             </div>
                             <div className={'form__left-side__details__body-inputs'}>
                                 <label>
-                                    Araç Bilgileri:
+                                    {t('carInformation')}:
                                 </label>
                             </div>
                             <div className={'form__left-side__details__body-car'}>
@@ -195,12 +192,10 @@ const Form: React.FC<IProps> = (props) => {
                                         <div className={'form__left-side__details__body-car__attr'}>
                                             <p className={'form__left-side__details__body-car__type'}>{vehicleType}</p>
                                             <p className={'form__left-side__details__body-car__type'}>{vehiclePrice} TL</p>
-                                            <p className={'form__left-side__details__body-car__price'}>Toplam Fiyat (Her şey dahil)</p>
+                                            <p className={'form__left-side__details__body-car__price'}>{t('allPrice')}</p>
                                         </div>
-
                                     )
                                 ))}
-
                             </div>
                         </div>
                     </div>
@@ -209,36 +204,36 @@ const Form: React.FC<IProps> = (props) => {
                     <form onSubmit={handleSubmit}>
                         <div className={'form__right-side__inputs'}>
                             <label>
-                                Ad-Soyad*
+                                {t('fullName')}*
                             </label>
                             <input placeholder={'Ad-Soyad'} type="text" name="fullName" value={formData.fullName} onChange={handleChange} />
                         </div>
                         <div className={'form__right-side__inputs'}>
                             <label>
-                                Telefon Numarası*
+                                {t('telephone')}*
                             </label>
                             <input placeholder={'Telefon Numarası'} type="tel" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
                         </div>
                         <div className={'form__right-side__inputs'}>
                             <label>
-                                Email*
+                                {t('email')}*
                             </label>
                             <input placeholder={'Email'} type="email" name="email" value={formData.email} onChange={handleChange} />
                         </div>
                         <div className={'form__right-side__inputs'}>
                             <label>
-                                Uçak No*
+                                {t('flightNumber')}*
                             </label>
                             <input placeholder={'Uçak No'} type="text" name="flightNumber" value={formData.flightNumber} onChange={handleChange} />
                         </div>
                         <div className={'form__right-side__inputs'}>
                             <label>
-                                Ek Bilgi:
+                                {t('extraInformation')}:
                             </label>
                             <textarea name="additionalInfo" value={formData.additionalInfo} onChange={handleChange} />
                         </div>
                         <div className={'form__right-side__button'}>
-                            <button disabled={isReservationSend} className={'form__right-side__buttons'} type="submit">Gönder</button>
+                            <button disabled={isReservationSend} className={'form__right-side__buttons'} type="submit">{t('send')}</button>
                         </div>
                     </form>
                 </div>

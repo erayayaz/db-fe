@@ -45,10 +45,9 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-dil eklencek
-goole maps
 Nereden Nereye kısmında veriler güncellenmeli
 Araçlar kısmında araca basıldığında araç görselleri gelmeli
 Bölgelere tıklandığında bölgeler ile ilgili yazılar gelmeli  dalamana uzaklığı gösterilmeli
 Rez oluşturulurken verilerin doğruluğunun kontrolü
+goole maps
 Ödeme sistemi denenecek

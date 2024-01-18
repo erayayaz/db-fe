@@ -1,6 +1,6 @@
 .reservation {
   display: grid;
-  grid-template-columns: 30% 70%; /* 30% sol, 70% sağ */
+  grid-template-columns: 25% 75%; /* 30% sol, 70% sağ */
   gap: 10px; /* İki sütun arasındaki boşluk */
   .reservation-dropdown {
     display: flex;
@@ -70,7 +70,7 @@
           padding: 5px;
           background-color: gainsboro;
           cursor: pointer;
-
+          min-width: 100px;
           &:hover {
             background-color: #f1f0f0;
           }

@@ -10,10 +10,7 @@ import fam6 from "../../img/media/fam6.png";
 
 
 const Memories: React.FC = () => {
-    const {i18n} = useTranslation();
-    const handleLanguageChange = async (newLang: string) => {
-        await i18n.changeLanguage(newLang);
-    };
+    const {t} = useTranslation();
 
     const images = [
         {id: 1, url: fam1, name: 'fam1'},
@@ -26,8 +23,8 @@ const Memories: React.FC = () => {
 
     return (
         <div className={'memories'}>
-            <p className={'memories-title'}>Sizden Kareler</p>
-            <p className={'memories-small-title'}>Seyahatlerinizden Anılar</p>
+            <p className={'memories-title'}>{t('yourPhotos')}</p>
+            <p className={'memories-small-title'}>{t('memories')}</p>
 
             <div className={'memories-images'}>
                 {images.map((image, index) => (

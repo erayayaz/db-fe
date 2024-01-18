@@ -23,10 +23,7 @@ interface IProps {
 }
 
 const Reservation: React.FC<IProps> = (props) => {
-    const {i18n} = useTranslation();
-    const handleLanguageChange = async (newLang: string) => {
-        await i18n.changeLanguage(newLang);
-    };
+    const {t} = useTranslation();
     const location = useLocation();
     const navigate = useNavigate();
     let { tripType, destination, departure, date } = location.state || {};
@@ -80,25 +77,20 @@ const Reservation: React.FC<IProps> = (props) => {
                 <div className={'reservation-dropdown'}>
                     {/* 1. Dropdown */}
                     <select value={tripType1} className={'reservation-dropdown-item'} onChange={(e) => setTripType(e.target.value)}>
-                        <option value="Tek Yön"> {'\u21c0'} Tek Yön</option>
-                        <option value="Gidiş-Dönüş">{'\u21CB'} Gidiş-Dönüş</option>
-                        {/* ... */}
+                        <option value="Tek Yön"> {'\u21c0'} {t('oneWay')}</option>
+                        <option value="Gidiş-Dönüş">{'\u21CB'} {t('ways')}</option>
                     </select>
 
-                    {/* 2. Dropdown */}
                     <select value={departure1} onChange={(e) => setDeparture(e.target.value)} className={'reservation-dropdown-item'}>
                         <option value="Ankara">Ankara</option>
                         <option value="İstanbul">İstanbul</option>
-                        {/* ... */}
                     </select>
 
-                    {/* 3. Dropdown */}
                     <select value={destination1} onChange={(e) => setDestination(e.target.value)} className={'reservation-dropdown-item'}>
                         <option value="İzmir">İzmir</option>
                         <option value="Muğla">Muğla</option>
-                        {/* ... */}
                     </select>
-                    <input className={'reservation-dropdown-item'} placeholder={'Gidiş'} type="date" value={date1}
+                    <input className={'reservation-dropdown-item'} placeholder={t('go')} type="date" value={date1}
                            onChange={(e) => setDate(e.target.value)}/>
                 </div>
                 <div className={'reservation-right'}>
@@ -111,16 +103,16 @@ const Reservation: React.FC<IProps> = (props) => {
                                 <h2>{vehicle.carType}</h2>
                                 <div className={'reservation-vehicle-info__person-size'}>
                                     <img src={person} alt="Icon" width="24" height="24" />
-                                    <p className={'reservation-vehicle-info__person-size__info'}>Kişi Kapasitesi: {vehicle.personLimit}</p>
+                                    <p className={'reservation-vehicle-info__person-size__info'}>{t('numberOfPersonLimit')}: {vehicle.personLimit}</p>
                                 </div>
                                 <div className={'reservation-vehicle-info__person-size'}>
                                     <img src={luggage} alt="Icon" width="24" height="24" />
-                                    <p className={'reservation-vehicle-info__person-size__info'}>Valiz Kapasitesi: {vehicle.luggageLimit}</p>
+                                    <p className={'reservation-vehicle-info__person-size__info'}>{t('numberOfLuggageLimit')}: {vehicle.luggageLimit}</p>
                                 </div>
                             </div>
                             <div className={'reservation-vehicle-button'}>
-                                <p>Toplam Fiyat: {vehicle.price} TL</p>
-                                <button onClick={() => handleRedirect(vehicle.id, vehicle.price, vehicle.carType)}>Rezervasyon</button>
+                                <p>{t('totalPrice')}: {vehicle.price} TL</p>
+                                <button onClick={() => handleRedirect(vehicle.id, vehicle.price, vehicle.carType)}>{t('reservation')}</button>
                             </div>
                         </div>
                     ))}
@@ -128,7 +120,6 @@ const Reservation: React.FC<IProps> = (props) => {
             </div>
             <Footer />
         </>
-
     );
 };
 

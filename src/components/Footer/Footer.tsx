@@ -1,12 +1,15 @@
 import React from 'react';
 import './Footer.scss';
 import {Link} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 interface IProps {
     menuButtonClicked?: () => void;
 }
 
 const Footer : React.FC<IProps> = (props) => {
+    const {t} = useTranslation();
+
     const defaultProps = {menuButtonClicked:{}}
     return (
         <footer className="footer">
@@ -14,31 +17,31 @@ const Footer : React.FC<IProps> = (props) => {
                 <div className="footer-content">
 
                     <div className="footer-section">
-                        <h2>Hakkımızda</h2>
-                        <p>2023'te kurulan DB Transfer, güvenilir ve düzenli taşımacılık hizmeti sunar. Geniş araç filomuzla müşterilerimize güvenli ve konforlu seyahat imkânı sağlıyoruz. Seyahat deneyiminizi özel kılmak için buradayız!</p>
+                        <h2>{t('aboutUs')}</h2>
+                        <p>{t('footerAbout')}</p>
                     </div>
 
                     <div className="footer-section">
                         <ul>
-                            <li><Link to="/about-us" onClick={props.menuButtonClicked}>Hakkımızda</Link></li>
-                            <li><Link to="/regions" onClick={props.menuButtonClicked} >Bölgeler</Link></li>
-                            <li><Link to="/media" onClick={props.menuButtonClicked} >Medya</Link></li>
-                            <li><Link to="/vehicles" onClick={props.menuButtonClicked} >Araçlar</Link></li>
-                            <li><Link to="/contacts" onClick={props.menuButtonClicked}>İletişim</Link></li>
+                            <li><Link to="/about-us" onClick={props.menuButtonClicked}>{t('aboutUs')}</Link></li>
+                            <li><Link to="/regions" onClick={props.menuButtonClicked} >{t('regions')}</Link></li>
+                            <li><Link to="/media" onClick={props.menuButtonClicked} >{t('media')}</Link></li>
+                            <li><Link to="/vehicles" onClick={props.menuButtonClicked} >{t('vehicles')}</Link></li>
+                            <li><Link to="/contacts" onClick={props.menuButtonClicked}>{t('contacts')}</Link></li>
                         </ul>
                     </div>
 
                     <div className="footer-section">
-                        <h2>İletişim</h2>
-                        <p>Adres: Tur Caddesi No: 123, Şehir, Ülke</p>
-                        <p>Telefon: +90 123 456 7890</p>
-                        <p>E-posta: info@turacentasi.com</p>
+                        <h2>{t('contacts')}</h2>
+                        <p>{t('address')}: {t('ourAddress')}</p>
+                        <p>{t('telephone')}: +90 123 456 7890</p>
+                        <p>{t('email')}: info@turacentasi.com</p>
                     </div>
 
                 </div>
 
                 <div className="footer-bottom">
-                    <p>&copy; 2024 DB Transfer. Tüm hakları saklıdır.</p>
+                    <p>&copy; {t('copyRight')}</p>
                 </div>
             </div>
         </footer>

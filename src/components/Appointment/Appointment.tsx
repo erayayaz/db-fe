@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './Appointment.scss';
 import {useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 interface IProps {
     searchButtonClicked: () => void;
@@ -12,6 +13,7 @@ const Appointment: React.FC<IProps> = (props) => {
     const [departure, setDeparture] = useState('İzmir');
     const [date, setDate] = useState('');
     const navigate = useNavigate();
+    const {t} = useTranslation();
 
     const handleRedirect = () => {
         const params = {
@@ -22,10 +24,6 @@ const Appointment: React.FC<IProps> = (props) => {
         };
 
         props.searchButtonClicked();
-        console.log('Gidiş-Dönüş:', tripType);
-        console.log('Nereden Gidecekleri:', departure);
-        console.log('Gidecekleri Yer:', destination);
-        console.log('Tarih:', date);
 
         navigate('/reservation', {
             state: params,
@@ -38,17 +36,17 @@ const Appointment: React.FC<IProps> = (props) => {
                 <form onSubmit={handleRedirect}>
                     <div>
                         <label>
-                            Gidiş Türü
+                            {t('departureType')}
                             <select value={tripType} onChange={(e) => setTripType(e.target.value)}>
-                                <option value="Tek Yön"> {'\u21c0'} Tek Yön</option>
-                                <option value="Gidiş-Dönüş">{'\u21CB'} Gidiş-Dönüş</option>
+                                <option value="Tek Yön"> {'\u21c0'} {t('oneWay')}</option>
+                                <option value="Gidiş-Dönüş">{'\u21CB'} {t('ways')}</option>
                             </select>
                         </label>
                     </div>
 
                     <div>
                         <label>
-                            Nereden
+                            {t('fromWhere')}
                             <select value={departure} onChange={(e) => setDeparture(e.target.value)}>
                                 <option value="Ankara">Ankara</option>
                                 <option value="İstanbul">İstanbul</option>
@@ -58,7 +56,7 @@ const Appointment: React.FC<IProps> = (props) => {
 
                     <div>
                         <label>
-                            Nereye
+                            {t('where')}
                             <select value={destination} onChange={(e) => setDestination(e.target.value)}>
                                 <option value="İzmir">İzmir</option>
                                 <option value="Muğla">Muğla</option>
@@ -68,14 +66,14 @@ const Appointment: React.FC<IProps> = (props) => {
 
                     <div>
                         <label>
-                            Tarih
+                            {t('date')}
                             <input placeholder={'Gidiş'} type="date" value={date}
                                    onChange={(e) => setDate(e.target.value)}/>
                         </label>
                     </div>
                     <div className={'appointment-button'}>
                         <button onClick={handleRedirect} className={'apt-button'} type="submit">
-                            Ara
+                            {t('search')}
                         </button>
                     </div>
                 </form>

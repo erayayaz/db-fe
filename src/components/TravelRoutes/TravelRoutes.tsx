@@ -13,16 +13,13 @@ interface IProps {
 }
 
 const TravelRoutes: React.FC<IProps> = (props) => {
-    const {i18n} = useTranslation();
-    const handleLanguageChange = async (newLang: string) => {
-        await i18n.changeLanguage(newLang);
-    };
+    const {t} = useTranslation();
 
     return (
         <div className="travel">
             <div className={'travel-titles'}>
-                <p className={'travel__title'}>Güzergahlarımız</p>
-                <p className={'travel__sub-title'}>Rotamızda yer alan bazı güzergahları sizler için derledik</p>
+                <p className={'travel__title'}>{t('route')}</p>
+                <p className={'travel__sub-title'}>{t('routeMessage')}</p>
             </div>
             <div className={'travel-route'}>
                 <div className="big-image">

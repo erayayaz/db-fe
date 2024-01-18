@@ -9,12 +9,7 @@ import fam5 from "../../img/media/fam5.png";
 import fam6 from "../../img/media/fam6.png";
 import Footer from "../Footer/Footer";
 
-
 const Media: React.FC = () => {
-    const {i18n} = useTranslation();
-    const handleLanguageChange = async (newLang: string) => {
-        await i18n.changeLanguage(newLang);
-    };
 
     const images = [
         {id: 1, url: fam1, name: 'fam1'},

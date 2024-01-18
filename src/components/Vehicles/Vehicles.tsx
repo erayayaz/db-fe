@@ -14,15 +14,12 @@ interface IProps {
 }
 
 const Vehicles: React.FC<IProps> = (props) => {
-    const {i18n} = useTranslation();
-    const handleLanguageChange = async (newLang: string) => {
-        await i18n.changeLanguage(newLang);
-    };
+    const {t} = useTranslation();
 
     const images = [
-        {id: 1, url: passat, person: 3, luggage: 3, type:'Otomobil'},
-        {id: 2, url: vito, person: 6, luggage: 6, type:'Mercedes Vito'},
-        {id: 3, url: sprinters, person: 10, luggage: 15, type:'Mercedes Sprinter'},
+        {id: 1, url: passat, person: 3, luggage: 3, type:t('sedan')},
+        {id: 2, url: vito, person: 6, luggage: 6, type:t('vito')},
+        {id: 3, url: sprinters, person: 10, luggage: 15, type:t('sprinter')},
     ];
 
     return (
@@ -37,16 +34,16 @@ const Vehicles: React.FC<IProps> = (props) => {
                             <h2>{vehicle.type}</h2>
                             <div className={'vehicle-info__person-size'}>
                                 <img src={person} alt="Icon" width="24" height="24" />
-                                <p className={'vehicle-info__person-size__info'}>Kişi Kapasitesi: {vehicle.person}</p>
+                                <p className={'vehicle-info__person-size__info'}>{t('numberOfPersonLimit')}: {vehicle.person}</p>
                             </div>
                             <div className={'vehicle-info__person-size'}>
                                 <img src={luggage} alt="Icon" width="24" height="24" />
-                                <p className={'vehicle-info__person-size__info'}>Valiz Kapasitesi: {vehicle.luggage}</p>
+                                <p className={'vehicle-info__person-size__info'}>{t('numberOfLuggageLimit')}: {vehicle.luggage}</p>
                             </div>
                         </div>
                         <div className={'vehicle-button'}>
                             <Link to={'/'}>
-                                <button onClick={props.reservationButtonClicked}>Rezervasyon</button>
+                                <button onClick={props.reservationButtonClicked}>{t('reservation')}</button>
                             </Link>
                         </div>
                     </div>
