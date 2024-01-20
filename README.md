@@ -45,6 +45,5 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-Bölgelere tıklandığında bölgeler ile ilgili yazılar gelmeli  dalamana uzaklığı gösterilmeli
-goole maps
+google maps
 Ödeme sistemi denenecek
