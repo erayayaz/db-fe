@@ -8,6 +8,7 @@
   .media-item {
     position: relative;
     height: 60%;
+
     &:hover {
       transform: scale(1.05);
     }
@@ -20,8 +21,9 @@
       transition: transform 0.2s ease-in-out;
     }
   }
+
   @media (max-width: 768px) {
-    padding: 2rem 2rem ;
+    padding: 2rem 2rem;
     grid-template-columns: 1fr;
 
     .media-item {

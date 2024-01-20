@@ -34,43 +34,67 @@
 
     .reservation-vehicle {
       display: flex;
-      flex-wrap: wrap;
+      //flex-wrap: wrap;
       width: 70%;
+      justify-content: center;
+
       align-items: center;
       margin-bottom: 20px;
-      padding-top: 2rem;
       padding-bottom: 2rem;
       border-bottom: 1px solid #D6D5D8;
+
       .reservation-vehicle-img {
         margin-right: 40px;
       }
 
-      .reservation-vehicle-img img {
-        width: 300px;
-        height: 150px;
+      .reservation-vehicle-img {
+
+        .reservation-vehicle__gallery {
+          cursor: pointer;
+          border: none;
+          padding: 0;
+          margin: auto;
+          background-color: transparent;
+          width: 24px;
+          height: 24px;
+          img {
+            width: 24px;
+            height: 24px;
+          }
+        }
+        img{
+          width: 300px;
+          height: 200px;
+        }
       }
 
       .reservation-vehicle-info {
+        min-width: 320px;
         h2 {
           margin-top: 0;
         }
+
         .reservation-vehicle-info__person-size {
           display: flex;
+
           .reservation-vehicle-info__person-size__info {
-            margin:5px;
+            margin: 5px;
           }
         }
       }
+
       .reservation-vehicle-button {
         margin-left: 80px;
+
         button {
-          margin-left: 30px ;
+          margin-left: 30px;
           border: 1px solid gray;
           border-radius: 10px;
           padding: 5px;
           background-color: gainsboro;
           cursor: pointer;
           min-width: 100px;
+
           &:hover {
             background-color: #f1f0f0;
           }
@@ -78,8 +102,22 @@
       }
     }
 
-    .reservation-vehicle:last-child{
+    .reservation-vehicle:last-child {
       border-bottom: none;
+    }
+
+    .reservation-vehicle:first-child {
+      .reservation-vehicle-img {
+        img{
+          transform: scaleX(-1);
+        }
+
+        .reservation-vehicle__gallery {
+          img {
+            transform: scaleX(1);
+          }
+        }
+      }
     }
   }
 
@@ -94,6 +132,7 @@
     .reservation-right {
       justify-content: center;
       padding: 0;
+
       .reservation-vehicle {
         .reservation-vehicle-info {
           margin: auto;

@@ -1,13 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Vehicles.scss';
 import {useTranslation} from "react-i18next";
 import Footer from "../Footer/Footer";
-import passat from "../../img/vehicles/passat.png";
-import vito from "../../img/vehicles/vito.png";
-import sprinters from "../../img/vehicles/sprinters.png";
+import sedan from "../../img/vehicles/sedan.png";
+import vito from "../../img/vehicles/vitowithout.png";
+import vito1 from "../../img/vehicles/vito1.png";
+import vito2 from "../../img/vehicles/vito2.png";
+import vito3 from "../../img/vehicles/vito3.png";
+import sprinter1 from "../../img/vehicles/sprinter1.png";
+import sprinter2 from "../../img/vehicles/sprinter2.png";
+import sprinter3 from "../../img/vehicles/sprinter3.png";
+import sprinters from "../../img/vehicles/sprinterwithout.png";
 import person from "../../img/vehicles/person.svg";
 import luggage from "../../img/vehicles/luggage.png";
+import photo from "../../img/photo.png";
+
 import {Link} from "react-router-dom";
+import VehicleGallery from "../VehicleGallery/VehicleGallery";
 
 interface IProps {
     reservationButtonClicked: () => void;
@@ -15,11 +24,22 @@ interface IProps {
 
 const Vehicles: React.FC<IProps> = (props) => {
     const {t} = useTranslation();
+    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    const handleClick = (id: number) => {
+        setCurrentImageIndex((id-1));
+        setIsGalleryOpen(true);
+    }
+
+    const handleClose = () => {
+        setIsGalleryOpen(false);
+    }
 
     const images = [
-        {id: 1, url: passat, person: 3, luggage: 3, type:t('sedan')},
-        {id: 2, url: vito, person: 6, luggage: 6, type:t('vito')},
-        {id: 3, url: sprinters, person: 10, luggage: 15, type:t('sprinter')},
+        {id: 1, url: sedan, person: 3, luggage: 3, type: t('sedan')},
+        {id: 2, url: vito, person: 6, luggage: 6, type: t('vito')},
+        {id: 3, url: sprinters, person: 10, luggage: 15, type: t('sprinter')},
     ];
 
     return (
@@ -28,16 +48,19 @@ const Vehicles: React.FC<IProps> = (props) => {
                 {images.map((vehicle) => (
                     <div key={vehicle.id} className="vehicle">
                         <div className="vehicle-img">
-                            <img src={vehicle.url} alt={''} />
+                            <img src={vehicle.url} alt={''}/>
+                            <button className={'vehicle-img__gallery'} onClick={() => handleClick(vehicle.id)}>
+                                <img src={photo} alt={'photo-icon'}/>
+                            </button>
                         </div>
                         <div className="vehicle-info">
                             <h2>{vehicle.type}</h2>
                             <div className={'vehicle-info__person-size'}>
-                                <img src={person} alt="Icon" width="24" height="24" />
+                                <img src={person} alt="Icon" width="24" height="24"/>
                                 <p className={'vehicle-info__person-size__info'}>{t('numberOfPersonLimit')}: {vehicle.person}</p>
                             </div>
                             <div className={'vehicle-info__person-size'}>
-                                <img src={luggage} alt="Icon" width="24" height="24" />
+                                <img src={luggage} alt="Icon" width="24" height="24"/>
                                 <p className={'vehicle-info__person-size__info'}>{t('numberOfLuggageLimit')}: {vehicle.luggage}</p>
                             </div>
                         </div>
@@ -49,7 +72,8 @@ const Vehicles: React.FC<IProps> = (props) => {
                     </div>
                 ))}
             </div>
-            <Footer />
+            <Footer/>
+            {isGalleryOpen && <VehicleGallery vehicleId={currentImageIndex} onClose={handleClose} />}
         </>
 
     );

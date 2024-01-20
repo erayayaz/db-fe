@@ -16,16 +16,16 @@ const Payments: React.FC = () => {
     return (
         <div className={'payments'}>
             <div className={'payments-item'}>
-                <img src={d2} alt="" />
+                <img src={d2} alt=""/>
             </div>
             <div className={'payments-item'}>
-                <img src={tursab} alt="" />
+                <img src={tursab} alt=""/>
             </div>
             <div className={'payments-item'}>
-                <img src={visa} alt="" />
+                <img src={visa} alt=""/>
             </div>
             <div className={'payments-item'}>
-                <img src={ssl} alt="" />
+                <img src={ssl} alt=""/>
             </div>
         </div>
     );

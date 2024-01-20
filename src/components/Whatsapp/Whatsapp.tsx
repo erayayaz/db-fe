@@ -17,7 +17,7 @@ const Whatsapp: React.FC = () => {
 
     return (
         <div className={'whatsapp'} onClick={openWhatsApp}>
-            <img src={wp} alt="WhatsApp" />
+            <img src={wp} alt="WhatsApp"/>
         </div>
     );
 };

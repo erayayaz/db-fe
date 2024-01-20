@@ -2,6 +2,7 @@
   background-color: #F2F3AE;
   padding: 3rem 18rem 22rem 18rem;
   margin: auto;
+
   .memories-title {
     color: #333333;
     font-size: 24px;
@@ -23,9 +24,11 @@
     grid-template-columns: repeat(3, minmax(0px, 1fr));
     gap: 20px;
     height: 300px;
+
     .memories-item {
       position: relative;
       height: 60%;
+
       &:hover {
         transform: scale(1.05);
       }
@@ -39,11 +42,13 @@
       }
     }
   }
+
   @media (max-width: 768px) {
     padding: 2rem;
     .memories-images {
       height: 100%;
       grid-template-columns: 1fr;
+
       .memories-item {
         height: 100%;
       }

@@ -7,10 +7,10 @@ interface IProps {
     menuButtonClicked?: () => void;
 }
 
-const Footer : React.FC<IProps> = (props) => {
+const Footer: React.FC<IProps> = (props) => {
     const {t} = useTranslation();
 
-    const defaultProps = {menuButtonClicked:{}}
+    const defaultProps = {menuButtonClicked: {}}
     return (
         <footer className="footer">
             <div className="container">
@@ -24,9 +24,9 @@ const Footer : React.FC<IProps> = (props) => {
                     <div className="footer-section">
                         <ul>
                             <li><Link to="/about-us" onClick={props.menuButtonClicked}>{t('aboutUs')}</Link></li>
-                            <li><Link to="/regions" onClick={props.menuButtonClicked} >{t('regions')}</Link></li>
-                            <li><Link to="/media" onClick={props.menuButtonClicked} >{t('media')}</Link></li>
-                            <li><Link to="/vehicles" onClick={props.menuButtonClicked} >{t('vehicles')}</Link></li>
+                            <li><Link to="/regions" onClick={props.menuButtonClicked}>{t('regions')}</Link></li>
+                            <li><Link to="/media" onClick={props.menuButtonClicked}>{t('media')}</Link></li>
+                            <li><Link to="/vehicles" onClick={props.menuButtonClicked}>{t('vehicles')}</Link></li>
                             <li><Link to="/contacts" onClick={props.menuButtonClicked}>{t('contacts')}</Link></li>
                         </ul>
                     </div>

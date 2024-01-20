@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './Pricing.scss';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 interface Car {
     id: number;
@@ -24,7 +24,7 @@ const Pricing: React.FC<IProps> = (props) => {
             .catch(error => console.error('Veri çekme hatası:', error));
     }, []);
 
-    const handlePriceChange = (id: number, carType:string, personLimit:number, luggageLimit:number, newPrice: number) => {
+    const handlePriceChange = (id: number, carType: string, personLimit: number, luggageLimit: number, newPrice: number) => {
         const newCar = {
             id: id,
             carType: carType,
@@ -63,7 +63,10 @@ const Pricing: React.FC<IProps> = (props) => {
                                 value={car.personLimit}
                                 onChange={(e) => {
                                     const personLimit2 = parseFloat(e.target.value);
-                                    setCars(prevCars => prevCars.map(c => (c.id === car.id ? { ...c, personLimit: personLimit2 } : c)));
+                                    setCars(prevCars => prevCars.map(c => (c.id === car.id ? {
+                                        ...c,
+                                        personLimit: personLimit2
+                                    } : c)));
                                 }}
                             />
                         </td>
@@ -73,7 +76,10 @@ const Pricing: React.FC<IProps> = (props) => {
                                 value={car.luggageLimit}
                                 onChange={(e) => {
                                     const luggageLimit2 = parseFloat(e.target.value);
-                                    setCars(prevCars => prevCars.map(c => (c.id === car.id ? { ...c, luggageLimit: luggageLimit2 } : c)));
+                                    setCars(prevCars => prevCars.map(c => (c.id === car.id ? {
+                                        ...c,
+                                        luggageLimit: luggageLimit2
+                                    } : c)));
                                 }}
                             />
                         </td>
@@ -83,12 +89,17 @@ const Pricing: React.FC<IProps> = (props) => {
                                 value={car.price}
                                 onChange={(e) => {
                                     const newPrice = parseFloat(e.target.value);
-                                    setCars(prevCars => prevCars.map(c => (c.id === car.id ? { ...c, price: newPrice } : c)));
+                                    setCars(prevCars => prevCars.map(c => (c.id === car.id ? {
+                                        ...c,
+                                        price: newPrice
+                                    } : c)));
                                 }}
                             />
                         </td>
                         <td>
-                            <button onClick={() => handlePriceChange(car.id, car.carType, car.personLimit, car.luggageLimit, car.price)}>Kaydet</button>
+                            <button
+                                onClick={() => handlePriceChange(car.id, car.carType, car.personLimit, car.luggageLimit, car.price)}>Kaydet
+                            </button>
                         </td>
                     </tr>
                 ))}

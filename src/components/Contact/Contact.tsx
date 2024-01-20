@@ -18,8 +18,8 @@ const Contacts: React.FC = () => {
                     <p>+90 534 694 04 60</p>
                 </div>
             </div>
-            <Payments />
-            <Footer />
+            <Payments/>
+            <Footer/>
         </>
     );
 };

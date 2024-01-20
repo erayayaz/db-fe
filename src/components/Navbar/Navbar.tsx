@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './Navbar.scss';
 import logo from '../../img/logo.png';
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
-import axios from "axios/index";
 
 interface IProps {
     iconClicked: () => void;
@@ -14,12 +13,12 @@ const Navbar: React.FC<IProps> = (props) => {
     const {t, i18n} = useTranslation();
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [selectedLanguage, setSelectedLanguage] = useState('tr');
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
 
     const handleLanguageChange = async (newLang: string) => {
         setSelectedLanguage(newLang);
         setDropdownVisible(false);
         await i18n.changeLanguage(newLang);
-        console.log(i18n.language);
     };
 
     const toggleLanguageDropdown = () => {
@@ -30,8 +29,8 @@ const Navbar: React.FC<IProps> = (props) => {
         const changeLanguage = async () => {
             await i18n.changeLanguage(selectedLanguage);
         };
-
         changeLanguage();
+
     }, []);
 
     const languages = [
@@ -55,7 +54,7 @@ const Navbar: React.FC<IProps> = (props) => {
                     <Link to="/contacts" onClick={props.menuButtonClicked} className="menu-item">{t('contacts')}</Link>
                 </div>
                 <div className="language-dropdown">
-                    <button onClick={toggleLanguageDropdown} className="language-button" >
+                    <button onClick={toggleLanguageDropdown} className="language-button">
                         {selectedLanguage.toUpperCase()}
                     </button>
                     {dropdownVisible && (

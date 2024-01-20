@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './Login.scss';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
@@ -7,7 +7,7 @@ interface IProps {
     loginSuccess: () => void;
 }
 
-const Login: React.FC <IProps> = (props)  => {
+const Login: React.FC<IProps> = (props) => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const navigate = useNavigate();

@@ -4,7 +4,7 @@ import './Map.scss';
 const Map: React.FC = () => {
     useEffect(() => {
         const initMap = () => {
-            const myLatLng = { lat: 141.0151, lng: 28.9983 }; // Istanbul/Beylikdüzü koordinatları
+            const myLatLng = {lat: 141.0151, lng: 28.9983}; // Istanbul/Beylikdüzü koordinatları
             const googleMap = (window as any).google.maps;
 
             const map = new googleMap.Map(document.getElementById('map'), {
@@ -25,8 +25,6 @@ const Map: React.FC = () => {
         // Eğer API yüklendiyse initMap fonksiyonunu çağır
         if ((window as any).google) {
             initMap();
-        } else {
-            console.log('bir şey yüklenmedi')
         }
     }, []);
 

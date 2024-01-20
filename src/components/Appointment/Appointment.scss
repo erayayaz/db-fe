@@ -55,7 +55,7 @@
           font-size: 16px;
           border: 1px solid #ced4da;
           border-radius: 4px;
-          margin-top: 5px;
+          margin-top: 12px;
           outline: none;
 
           &:focus {
@@ -80,6 +80,7 @@
         margin: auto;
 
         .apt-button {
+          margin-top: -2px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -104,5 +105,15 @@
   @media (max-width: 768px) {
     padding: 2rem;
     background-size: cover;
+    .appointment-form label {
+      font-size: 14px;
+      padding: 6px;
+    }
+
+    .appointment-form select,
+    .appointment-form input {
+      font-size: 14px;
+      padding: 6px;
+    }
   }
 }

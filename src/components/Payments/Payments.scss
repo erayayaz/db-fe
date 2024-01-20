@@ -1,5 +1,5 @@
 .payments {
-  padding: 3rem ;
+  padding: 3rem;
   text-align: center;
 
   display: flex;
@@ -8,10 +8,12 @@
   .payments-item {
     text-align: center;
   }
+
   img {
     max-width: 100%; // Her bir görseli konteynerin genişliğine sığdır
     height: 65px; // Oranları koruyarak yüksekliği otomatik ayarla
   }
+
   @media (max-width: 768px) {
     padding: 2rem;
     width: auto;

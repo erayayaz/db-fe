@@ -9,6 +9,7 @@
 
   .logo {
     margin-left: auto;
+
     img {
       width: 200px;
     }
@@ -19,6 +20,7 @@
     margin-right: auto;
     display: flex;
     gap: 4px;
+
     .menu-item {
       margin-right: 25px;
       cursor: pointer;
@@ -46,6 +48,7 @@
       border: none;
       cursor: pointer;
       font-weight: bold;
+      border-radius: 15px;
     }
 
     .dropdown-content {
@@ -66,6 +69,8 @@
         border: none;
         cursor: pointer;
         font-weight: bold;
+        border-radius: 15px;
+
 
         &:hover {
           background-color: #ddd;

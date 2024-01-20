@@ -20,6 +20,7 @@ interface Reservation {
     vehiclePrice: string;
     reservationStatus: string;
 }
+
 const ReservationPanel: React.FC = () => {
 
     const [reservations, setReservations] = useState<Reservation[]>([]);
@@ -119,7 +120,7 @@ const ReservationPanel: React.FC = () => {
         }
     };
 
-    const handleDenial= async (reservationId: number) => {
+    const handleDenial = async (reservationId: number) => {
         try {
             const response = await axios.patch(`http://localhost:8080/api/reservation/denial/${reservationId}`);
             setReservations(response.data);
@@ -144,7 +145,7 @@ const ReservationPanel: React.FC = () => {
             <div className={'reservation-panel__switch'}>
                 <span>Bekleyen Rezervasyonlar</span>
                 <label className="switch">
-                    <input type="checkbox" onChange={() => setShowPending(!showPending)} />
+                    <input type="checkbox" onChange={() => setShowPending(!showPending)}/>
                     <span className="slider round"></span>
                 </label>
                 <span>Onaylanmış Rezervasyonlar</span>
@@ -181,14 +182,14 @@ const ReservationPanel: React.FC = () => {
                         <td>{reservation.time}</td>
                         <td>{reservation.numberOfPeople}</td>
                         <td>{reservation.numberOfChild}</td>
-                        <td>{reservation.childSeat ? 'Evet' : ' Hayır' }</td>
+                        <td>{reservation.childSeat ? 'Evet' : ' Hayır'}</td>
                         <td>{reservation.tripType}</td>
                         <td>{reservation.tripDestination}</td>
                         <td>{reservation.tripDeparture}</td>
                         <td>{reservation.vehicleType}</td>
                         <td>{reservation.vehiclePrice}</td>
                         <td>
-                            { showPending ?
+                            {showPending ?
                                 <button onClick={() => handleApproval(reservation.id)}>
                                     <span role="img" aria-label="Onayla">
                                         ✔️

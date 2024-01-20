@@ -9,7 +9,7 @@ const Facetime: React.FC = () => {
 
     return (
         <div className="facetime" onClick={handleFacetimeClick}>
-            <img src={phone} width="60" height="60" alt="FaceTime Başlat" />
+            <img src={phone} width="60" height="60" alt="FaceTime Başlat"/>
         </div>
     );
 };

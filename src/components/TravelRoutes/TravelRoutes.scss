@@ -4,6 +4,7 @@
 
   .travel-titles {
     padding-left: 6rem;
+
     .travel__title {
       font-weight: bold;
       font-size: 30px;
@@ -30,16 +31,18 @@
     width: 80%;
     padding: 3rem 6rem 8rem 6rem;
 
-    .big-image{
+    .big-image {
       .travel-route__overlay-img {
         transform: translate(10%, -120%);
         font-size: 24px;
         font-family: cursive;
         color: white;
+
         .travel-route__overlay-text {
           margin: 0;
         }
       }
+
       img {
         filter: brightness(70%);
         width: 100%;
@@ -61,10 +64,12 @@
           font-size: 24px;
           font-family: cursive;
           color: white;
+
           .travel-route__overlay-text {
             margin: 0;
           }
         }
+
         img {
           filter: brightness(70%);
           width: 100%;
@@ -73,12 +78,14 @@
       }
     }
   }
+
   @media (max-width: 768px) {
     padding: 0;
     width: auto;
     text-align: center;
     .travel-titles {
       padding-left: 0;
+
       .travel__sub-title {
         padding: 0 2rem;
       }
@@ -88,11 +95,13 @@
       width: auto;
       padding: 3rem 2rem 4rem;
       grid-template-columns: 1fr;
+
       .big-image {
         .travel-route__overlay-text {
           text-align: left;
         }
       }
+
       .small-images {
         grid-template-columns: 1fr;
       }

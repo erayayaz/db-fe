@@ -6,8 +6,10 @@
   .container {
     max-width: 1200px;
     margin: 0 auto;
+
     .footer-content {
       display: flex;
+
       .footer-section {
         flex: 1;
         text-align: center;
@@ -40,6 +42,7 @@
           }
         }
       }
+
       .footer-section:nth-child(2) {
         margin-top: 30px;
       }
@@ -51,6 +54,7 @@
       font-size: 14px;
     }
   }
+
   @media (max-width: 768px) {
     .container {
       .footer-content {

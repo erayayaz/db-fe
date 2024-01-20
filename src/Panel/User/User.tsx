@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import './User.scss';
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
 
 interface IProps {
 }
@@ -41,7 +40,7 @@ const User: React.FC<IProps> = (props) => {
                     onChange={(e) => setNewUsername(e.target.value)}
                 />
             </label>
-            <br />
+            <br/>
             <label>
                 Yeni Şifre:
                 <input
@@ -50,7 +49,7 @@ const User: React.FC<IProps> = (props) => {
                     onChange={(e) => setNewPassword(e.target.value)}
                 />
             </label>
-            <br />
+            <br/>
             <div className={'user-container__buttons'}>
                 <button className={'user-container__buttons-password'} type="button" onClick={togglePasswordVisibility}>
                     {isPasswordVisible ? "Şifreyi Gizle" : "Şifreyi Göster"}

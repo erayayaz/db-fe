@@ -1,5 +1,6 @@
 .form {
   display: flex;
+
   .form__left-side {
 
     display: flex;
@@ -17,21 +18,26 @@
       border: 1px solid #A03232;
       height: auto;
       width: 350px;
+
       .form__left-side__details__part {
         margin-left: 1rem;
+
         .form__left-side__details__title {
           margin-left: -1rem;
           margin-bottom: 2rem;
           text-align: center;
           font-weight: bold;
         }
+
         .form__left-side__details__body {
 
           display: flex;
+
           .form__left-side__details__sub-title {
             margin-top: 0;
             font-weight: bold;
           }
+
           .form__left-side__details__sub-body {
             margin-top: 0;
             margin-left: 3px;
@@ -42,6 +48,7 @@
           display: flex;
           font-weight: bold;
           margin-bottom: 1rem;
+
           .form__left-side__details__body-hour__input {
             padding: 0.375rem 0.75rem;
             margin-left: 5px;
@@ -55,13 +62,16 @@
           margin-left: -25px;
           width: fit-content;
           display: flex;
+
           .form__left-side__details__body-car__attr {
             text-align: center;
+
             .form__left-side__details__body-car__type {
               font-size: 18px;
               font-weight: bold;
               margin-top: 0;
             }
+
             .form__left-side__details__body-car__price {
               font-size: 12px;
               font-weight: lighter;
@@ -71,20 +81,24 @@
       }
     }
   }
+
   .form__right-side {
     display: flex;
     padding-top: 3rem;
     padding-right: 3rem;
     flex-direction: column;
-    margin-top:100px;
+    margin-top: 100px;
     width: 40%;
+
     .form__right-side__inputs {
 
       display: grid;
       margin-bottom: 20px;
+
       label {
         margin-bottom: 5px;
       }
+
       input, textarea {
         line-height: 1.5;
         border-style: solid;
@@ -92,7 +106,7 @@
         border-width: 1px;
         padding: 0.5rem;
         font-size: 14px;
-        border-color:rgb(206, 212, 218);
+        border-color: rgb(206, 212, 218);
         color: rgb(73, 80, 87);
       }
     }
@@ -103,7 +117,7 @@
         border-style: solid;
         border-radius: 0.25rem;
         border-width: 1px;
-        border-color:rgb(206, 212, 218);
+        border-color: rgb(206, 212, 218);
         font-size: 14px;
         line-height: 1.5;
         padding: 0.5rem;

@@ -3,14 +3,13 @@ import './App.scss';
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import logo from "./img/logo.png";
-import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import {Link, Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import About from "./components/AboutUs/About";
 import Regions from "./components/Regions/Regions";
 import Media from "./components/Media/Media";
 import Vehicles from "./components/Vehicles/Vehicles";
 import Contacts from "./components/Contact/Contact";
 import Appointment from "./components/Appointment/Appointment";
-import {Link} from "react-router-dom";
 import WhyUs from "./components/WhyUs/WhyUs";
 import Memories from "./components/Memories/Memories";
 import TravelRoutes from "./components/TravelRoutes/TravelRoutes";
@@ -115,7 +114,7 @@ function App() {
             {isMobile && !isAdminPanel ? (
                 <>
                     <Link to="/" className="app-logo" onClick={toggleHome}>
-                        <img src={logo} alt="DB Transfer" />
+                        <img src={logo} alt="DB Transfer"/>
                     </Link>
                     <button onClick={toggleSidebar} className="sidebar-btn">
                         ☰
@@ -128,23 +127,23 @@ function App() {
                 </>
             )}
             {isAboutVisible && <Appointment searchButtonClicked={routeMenu}/>}
-            {isAboutVisible && <WhyUs />}
-            {isAboutVisible && <Payments />}
+            {isAboutVisible && <WhyUs/>}
+            {isAboutVisible && <Payments/>}
             {isAboutVisible && <TravelRoutes toggleRegions={routeMenu}/>}
-            {isAboutVisible && <Memories />}
+            {isAboutVisible && <Memories/>}
             {isAboutVisible && <Footer menuButtonClicked={routeMenu}/>}
-            {!isAdminPanel && <Facetime />}
-            {!isAdminPanel && <Whatsapp /> }
+            {!isAdminPanel && <Facetime/>}
+            {!isAdminPanel && <Whatsapp/>}
             <Routes>
-                <Route path="/about-us" Component={About} />
-                <Route path="/regions" Component={Regions} />
-                <Route path="/media" Component={Media} />
-                <Route path="/vehicles" Component={() => <Vehicles reservationButtonClicked={toggleHome} />} />
-                <Route path="/contacts" Component={Contacts} />
-                <Route path="/form" Component={Form} />
-                <Route path="/login" Component={() => <Login loginSuccess={loginSuccess}/>} />
-                <Route path="/admin" Component={() => <AdminPanel iconClicked={toggleHome}/>} />
-                <Route path="/reservation" Component={() => <Reservation reservationButtonClicked={routeMenu} />} />
+                <Route path="/about-us" Component={About}/>
+                <Route path="/regions" Component={Regions}/>
+                <Route path="/media" Component={Media}/>
+                <Route path="/vehicles" Component={() => <Vehicles reservationButtonClicked={toggleHome}/>}/>
+                <Route path="/contacts" Component={Contacts}/>
+                <Route path="/form" Component={Form}/>
+                <Route path="/login" Component={() => <Login loginSuccess={loginSuccess}/>}/>
+                <Route path="/admin" Component={() => <AdminPanel iconClicked={toggleHome}/>}/>
+                <Route path="/reservation" Component={() => <Reservation reservationButtonClicked={routeMenu}/>}/>
             </Routes>
         </div>
     );

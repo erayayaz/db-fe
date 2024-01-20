@@ -3,11 +3,8 @@ import './Form.scss';
 import {useTranslation} from "react-i18next";
 import Footer from "../Footer/Footer";
 import logo from "../../img/logo.png";
-import passat from "../../img/vehicles/passat.png";
-import vito from "../../img/vehicles/vito.png";
-import sprinters from "../../img/vehicles/sprinters.png";
 import {useLocation} from "react-router-dom";
-import { jsPDF } from 'jspdf';
+import {jsPDF} from 'jspdf';
 import axios from 'axios';
 
 interface IProps {
@@ -17,18 +14,17 @@ const Form: React.FC<IProps> = (props) => {
     const {t} = useTranslation();
 
     const location = useLocation();
-    const { tripType, destination, departure, date, vehicleId, vehiclePrice, vehicleType } = location.state || {};
+    const {tripType, destination, departure, date, vehicleId, vehiclePrice, vehicleType, img} = location.state || {};
     const [time, setTime] = useState('12:00');
-    const [numberOfPeople, setNumberOfPeople] = useState(1);
+    const [numberOfPeople, setNumberOfPeople] = useState(0);
     const [numberOfChild, setNumberOfChild] = useState(0);
     const [childSeat, setChildSeat] = useState(false);
     const [isReservationSend, setIsReservationSend] = useState(false);
 
-    const images = [
-        {id: 0, url: passat, person: 3, luggage: 3, type:'Otomobil', price: 4500},
-        {id: 1, url: vito, person: 6, luggage: 6, type:'Mercedes Vito', price: 5500},
-        {id: 2, url: sprinters, person: 10, luggage: 15, type:'Mercedes Sprinter', price: 6500},
-    ];
+    const isEmailValid = (email: string) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
 
     const [formData, setFormData] = useState({
         fullName: '',
@@ -39,13 +35,15 @@ const Form: React.FC<IProps> = (props) => {
     });
 
     const handleChange = (e: any) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
     };
 
+    let formValid = (numberOfPeople > 0) && formData.fullName && formData.phoneNumber && formData.email
+        && formData.flightNumber && isEmailValid(formData.email);
     const handleSubmit = (e: any) => {
         e.preventDefault();
         handleDownloadPDF();
@@ -75,6 +73,7 @@ const Form: React.FC<IProps> = (props) => {
                 console.error('API isteği başarısız:', error);
             });
     };
+
 
     const handleDownloadPDF = () => {
         const pdf = new jsPDF();
@@ -133,7 +132,7 @@ const Form: React.FC<IProps> = (props) => {
                                            type="time"
                                            value={time}
                                            step={1800}
-                                           onChange={(e) => setTime(e.target.value)} />
+                                           onChange={(e) => setTime(e.target.value)}/>
                                 </label>
                             </div>
                             <div className={'form__left-side__details__body-inputs'}>
@@ -179,23 +178,12 @@ const Form: React.FC<IProps> = (props) => {
                                 </label>
                             </div>
                             <div className={'form__left-side__details__body-car'}>
-                                {images.map((vehicle) => (
-                                    vehicle.id === vehicleId &&
-                                    (
-                                        <img key={vehicle.id} src={vehicle.url} alt="chosen-vehicle" />
-
-                                    )
-                                ))}
-                                {images.map((vehicle) => (
-                                    vehicle.id === vehicleId &&
-                                    (
-                                        <div className={'form__left-side__details__body-car__attr'}>
-                                            <p className={'form__left-side__details__body-car__type'}>{vehicleType}</p>
-                                            <p className={'form__left-side__details__body-car__type'}>{vehiclePrice} TL</p>
-                                            <p className={'form__left-side__details__body-car__price'}>{t('allPrice')}</p>
-                                        </div>
-                                    )
-                                ))}
+                                <img src={img} alt="chosen-vehicle"/>
+                                <div className={'form__left-side__details__body-car__attr'}>
+                                    <p className={'form__left-side__details__body-car__type'}>{vehicleType}</p>
+                                    <p className={'form__left-side__details__body-car__type'}>{vehiclePrice} TL</p>
+                                    <p className={'form__left-side__details__body-car__price'}>{t('allPrice')}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -206,39 +194,45 @@ const Form: React.FC<IProps> = (props) => {
                             <label>
                                 {t('fullName')}*
                             </label>
-                            <input placeholder={'Ad-Soyad'} type="text" name="fullName" value={formData.fullName} onChange={handleChange} />
+                            <input placeholder={'Ad-Soyad'} type="text" name="fullName" value={formData.fullName}
+                                   onChange={handleChange}/>
                         </div>
                         <div className={'form__right-side__inputs'}>
                             <label>
                                 {t('telephone')}*
                             </label>
-                            <input placeholder={'Telefon Numarası'} type="tel" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
+                            <input placeholder={'Telefon Numarası'} type="tel" name="phoneNumber"
+                                   value={formData.phoneNumber} onChange={handleChange}/>
                         </div>
                         <div className={'form__right-side__inputs'}>
                             <label>
                                 {t('email')}*
                             </label>
-                            <input placeholder={'Email'} type="email" name="email" value={formData.email} onChange={handleChange} />
+                            <input placeholder={'Email'} type="email" name="email" value={formData.email}
+                                   onChange={handleChange}/>
                         </div>
                         <div className={'form__right-side__inputs'}>
                             <label>
                                 {t('flightNumber')}*
                             </label>
-                            <input placeholder={'Uçak No'} type="text" name="flightNumber" value={formData.flightNumber} onChange={handleChange} />
+                            <input placeholder={'Uçak No'} type="text" name="flightNumber" value={formData.flightNumber}
+                                   onChange={handleChange}/>
                         </div>
                         <div className={'form__right-side__inputs'}>
                             <label>
                                 {t('extraInformation')}:
                             </label>
-                            <textarea name="additionalInfo" value={formData.additionalInfo} onChange={handleChange} />
+                            <textarea name="additionalInfo" value={formData.additionalInfo} onChange={handleChange}/>
                         </div>
                         <div className={'form__right-side__button'}>
-                            <button disabled={isReservationSend} className={'form__right-side__buttons'} type="submit">{t('send')}</button>
+                            <button disabled={!formValid || isReservationSend} className={'form__right-side__buttons'} type="submit">
+                                {t('send')}
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
         </>
     );
 };

@@ -12,8 +12,8 @@ const About: React.FC = () => {
             <div className={'about-us'}>
                 <p>{t('about-paragraph')}</p>
             </div>
-            <Payments />
-            <Footer />
+            <Payments/>
+            <Footer/>
         </>
     );
 };

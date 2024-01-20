@@ -1,5 +1,6 @@
 .app {
   font-family: 'Arial', sans-serif;
+
   &.mobile {
     .logo {
       margin-bottom: 10px;
@@ -10,6 +11,7 @@
     display: flex;
     margin: auto;
     background-color: #333333;
+
     img {
       padding-top: 10px;
       padding-left: 10px;
@@ -17,6 +19,7 @@
       padding-bottom: 1rem;
     }
   }
+
   .sidebar-btn {
     position: fixed;
     top: 20px;

@@ -1,6 +1,5 @@
 import React from 'react';
 import './Media.scss';
-import {useTranslation} from "react-i18next";
 import fam1 from "../../img/media/fam1.png";
 import fam2 from "../../img/media/fam2.png";
 import fam3 from "../../img/media/fam3.png";
@@ -29,7 +28,7 @@ const Media: React.FC = () => {
                     </div>
                 ))}
             </div>
-            <Footer />
+            <Footer/>
         </>
 
     );

@@ -32,7 +32,7 @@ const AdminPanel: React.FC<IProps> = (props) => {
         setDisplayUser(false);
     }
 
-    const routeUser= () => {
+    const routeUser = () => {
         setDisplayReservation(false);
         setDisplayPricing(false);
         setDisplayUser(true);
@@ -45,9 +45,9 @@ const AdminPanel: React.FC<IProps> = (props) => {
                     pricingButton={routePricing}
                     updateUser={routeUser}
             />
-            {displayReservation && <ReservationPanel />}
-            {displayPricing && <Pricing />}
-            {displayUser && <User />}
+            {displayReservation && <ReservationPanel/>}
+            {displayPricing && <Pricing/>}
+            {displayUser && <User/>}
         </div>
 
     );
