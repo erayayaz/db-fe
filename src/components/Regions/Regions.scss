@@ -25,10 +25,7 @@
       object-fit: cover;
       filter: brightness(70%);
     }
-
   }
-
-
 
   @media (max-width: 768px) {
     padding: 2rem;
@@ -47,7 +44,9 @@
     margin: auto;
     width: 58%;
     padding-bottom: 9rem;
+  }
 
+  .region-img {
     img {
       width: 740px;
       height: 420px;
@@ -61,6 +60,23 @@
       background-color: white;
       border:none;
       cursor: pointer;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .region-text {
+      width: 80%;
+      padding-bottom: 2rem;
+    }
+
+    .region-img {
+      img {
+        display: flex;
+        margin: auto;
+        width: 90%;
+        height: 100%;
+        padding-bottom: 1rem;
+      }
     }
   }
 }

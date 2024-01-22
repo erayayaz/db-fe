@@ -39,7 +39,7 @@ const Navbar: React.FC<IProps> = (props) => {
         {id: 2, language: 'ru'},
         {id: 3, language: 'ar'},
     ];
-
+    //                     <Link to="/contacts" onClick={props.menuButtonClicked} className="menu-item">{t('contacts')}</Link>
     return (
         <div>
             <nav className="navbar">
@@ -51,7 +51,6 @@ const Navbar: React.FC<IProps> = (props) => {
                     <Link to="/regions" onClick={props.menuButtonClicked} className="menu-item">{t('regions')}</Link>
                     <Link to="/media" onClick={props.menuButtonClicked} className="menu-item">{t('media')}</Link>
                     <Link to="/vehicles" onClick={props.menuButtonClicked} className="menu-item">{t('vehicles')}</Link>
-                    <Link to="/contacts" onClick={props.menuButtonClicked} className="menu-item">{t('contacts')}</Link>
                 </div>
                 <div className="language-dropdown">
                     <button onClick={toggleLanguageDropdown} className="language-button">

@@ -110,6 +110,8 @@ const Regions: React.FC = () => {
                     </div>
                     <div className={'region-text'}>
                         <p>{currentText}</p>
+                    </div>
+                    <div className={'region-img'}>
                         <img src={currentImage} alt={''}/>
                     </div>
                 </div>

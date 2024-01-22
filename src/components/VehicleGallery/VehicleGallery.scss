@@ -48,4 +48,12 @@
       right: 15px;
     }
   }
+  @media (max-width: 768px) {
+    .gallery-content {
+      img {
+        height: 40vh;
+        width: 100%;
+      }
+    }
+  }
 }
