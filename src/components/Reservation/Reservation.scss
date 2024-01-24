@@ -1,6 +1,6 @@
 .reservation {
   display: grid;
-  grid-template-columns: 25% 75%; /* 30% sol, 70% sağ */
+  grid-template-columns: 30% 70%; /* 30% sol, 70% sağ */
   gap: 10px; /* İki sütun arasındaki boşluk */
   .reservation-dropdown {
     display: flex;
@@ -12,7 +12,6 @@
 
     .reservation-dropdown-item {
       height: 40px;
-      padding: 10px;
       font-size: 16px;
       border: 1px solid #ced4da;
       border-radius: 4px;
@@ -23,7 +22,6 @@
     .reservation-dropdown-item:last-child {
       padding-top: 0;
       padding-bottom: 0;
-      width: 278px;
     }
   }
 
@@ -34,20 +32,14 @@
 
     .reservation-vehicle {
       display: flex;
-      width: 70%;
-      justify-content: center;
-
+      width: 100%;
       align-items: center;
       margin-bottom: 20px;
-      padding-bottom: 2rem;
+      padding: 0 2rem 1rem 0;
       border-bottom: 1px solid #D6D5D8;
 
       .reservation-vehicle-img {
         margin-right: 40px;
-      }
-
-      .reservation-vehicle-img {
-
         .reservation-vehicle__gallery {
           cursor: pointer;
           border: none;
@@ -108,12 +100,12 @@
     .reservation-vehicle:first-child {
       .reservation-vehicle-img {
         img{
-          transform: scaleX(-1);
+          //transform: scaleX(-1);
         }
 
         .reservation-vehicle__gallery {
           img {
-            transform: scaleX(1);
+            //transform: scaleX(1);
           }
         }
       }

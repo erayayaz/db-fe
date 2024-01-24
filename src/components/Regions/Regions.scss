@@ -38,15 +38,20 @@
     opacity: 0.5; /* İnaktif hale getirir */
   }
 }
+
 .region-info {
   .region-text {
     text-align: center;
     margin: auto;
     width: 58%;
     padding-bottom: 9rem;
+    line-height: 1.7;
   }
 
   .region-img {
+    text-align: center;
+    margin: auto;
+
     img {
       width: 740px;
       height: 420px;
@@ -56,9 +61,10 @@
   .region-return {
     display: flex;
     margin-left: 30px;
+
     .region-return__button {
       background-color: white;
-      border:none;
+      border: none;
       cursor: pointer;
     }
   }

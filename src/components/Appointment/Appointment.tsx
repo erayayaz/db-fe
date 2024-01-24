@@ -3,7 +3,7 @@ import './Appointment.scss';
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import CustomDropdown from "../Dropdown/CustomDropdown";
-
+import { AiOutlineCalendar } from 'react-icons/ai';
 interface IProps {
     searchButtonClicked: () => void;
 }
@@ -12,7 +12,8 @@ const Appointment: React.FC<IProps> = (props) => {
     const [tripType, setTripType] = useState('Tek Yön');
     const [destination, setDestination] = useState('');
     const [departure, setDeparture] = useState('');
-    const [date, setDate] = useState('');
+    const [departureDate, setDepartureDate] = useState('');
+    const [returnDate, setReturnDate] = useState('');
     const navigate = useNavigate();
     const {t} = useTranslation();
 
@@ -56,7 +57,8 @@ const Appointment: React.FC<IProps> = (props) => {
             tripType,
             destination,
             departure,
-            date,
+            departureDate: departureDate,
+            returnDate: returnDate
         };
 
         props.searchButtonClicked();
@@ -66,7 +68,7 @@ const Appointment: React.FC<IProps> = (props) => {
         });
     }
 
-    const isFormValid = tripType && departure && destination && date;
+    const isFormValid = tripType && departure && destination && departureDate;
     return (
         <div className={'appointment'}>
             <div className="appointment-form">
@@ -102,11 +104,25 @@ const Appointment: React.FC<IProps> = (props) => {
                     </div>
 
                     <div>
-                        <label>
-                            <input placeholder={'Gidiş'} type="date" value={date}
-                                   onChange={(e) => setDate(e.target.value)}/>
+                        <label className={'date-label'}>
+                            <AiOutlineCalendar className="icon" />
+                            <input id ="typeId" type="text" placeholder={t('departureDate')} onFocus={(e) => (e.target.type = "date")}
+                                   onBlur={(e) => (e.target.type = "text")} value={departureDate}
+                                   onChange={(e) => setDepartureDate(e.target.value)}/>
+
                         </label>
                     </div>
+
+                    { tripType === 'Gidiş-Dönüş' &&
+                        <div>
+                            <label className={'date-label'}>
+                                <AiOutlineCalendar className="icon" />
+                                <input id ="typeId" type="text" placeholder={t('returnDate')}   onFocus={(e) => (e.target.type = "date")}
+                                       onBlur={(e) => (e.target.type = "text")} value={returnDate}
+                                       onChange={(e) => setReturnDate(e.target.value)}/>
+                            </label>
+                        </div>
+                    }
                     <div className={'appointment-button'}>
                         <button disabled={!isFormValid} onClick={handleRedirect} className={'apt-button'} type="submit">
                             {t('search')}

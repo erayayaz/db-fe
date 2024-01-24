@@ -1,11 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './Form.scss';
 import {useTranslation} from "react-i18next";
 import Footer from "../Footer/Footer";
 import logo from "../../img/logo.png";
 import {useLocation} from "react-router-dom";
 import {jsPDF} from 'jspdf';
+import 'jspdf-autotable';
 import axios from 'axios';
+import {fonts} from './Forms';
 
 interface IProps {
 }
@@ -14,12 +16,13 @@ const Form: React.FC<IProps> = (props) => {
     const {t} = useTranslation();
 
     const location = useLocation();
-    const {tripType, destination, departure, date, vehicleId, vehiclePrice, vehicleType, img} = location.state || {};
+    const {tripType, destination, departure, departureDate, returnDate, vehiclePrice, vehicleType, img} = location.state || {};
     const [time, setTime] = useState('12:00');
     const [numberOfPeople, setNumberOfPeople] = useState(0);
     const [numberOfChild, setNumberOfChild] = useState(0);
     const [childSeat, setChildSeat] = useState(false);
     const [isReservationSend, setIsReservationSend] = useState(false);
+    const [notification, setNotification] = useState<string | null>(null);
 
     const isEmailValid = (email: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -44,12 +47,14 @@ const Form: React.FC<IProps> = (props) => {
 
     let formValid = (numberOfPeople > 0) && formData.fullName && formData.phoneNumber && formData.email
         && formData.flightNumber && isEmailValid(formData.email);
+
     const handleSubmit = (e: any) => {
         e.preventDefault();
         handleDownloadPDF();
         const reservation = {
             ...formData,
-            travelDate: date,
+            departureDate: departureDate,
+            returnDate: returnDate,
             time: time,
             numberOfPeople: numberOfPeople,
             numberOfChild: numberOfChild,
@@ -61,6 +66,7 @@ const Form: React.FC<IProps> = (props) => {
             vehiclePrice: vehiclePrice,
         };
         sendReservation(reservation);
+        showNotification('Rezervasyonunuz başarıyla oluşturulmuştur \u2713');
     };
 
     const sendReservation = (reservation: any) => {
@@ -74,6 +80,12 @@ const Form: React.FC<IProps> = (props) => {
             });
     };
 
+    const showNotification = (message: string) => {
+        setNotification(message);
+        setTimeout(() => {
+            setNotification(null);
+        }, 5000);
+    };
 
     const handleDownloadPDF = () => {
         const pdf = new jsPDF();
@@ -84,17 +96,44 @@ const Form: React.FC<IProps> = (props) => {
 
         const logoX = middleX - logoWidth / 2;
         const logoY = 20;
+        pdf.addFileToVFS('Roboto-Medium-normal.ttf', fonts);
+        pdf.addFont('Roboto-Medium-normal.ttf', 'Roboto-Medium', 'normal');
+        pdf.setFont('Roboto-Medium');
 
         pdf.addImage(logo, 'PNG', logoX, logoY, logoWidth, logoHeight);
-        pdf.text(`Ad-Soyad: ${formData.fullName}`, 20, logoY + logoHeight + 20);
-        pdf.text(`Telefon: ${formData.phoneNumber}`, 20, logoY + logoHeight + 30);
-        pdf.text(`Email: ${formData.email}`, 20, logoY + logoHeight + 40);
-        pdf.text(`Uçak No: ${formData.flightNumber}`, 20, logoY + logoHeight + 50);
-        pdf.text(`Ek Bilgi: ${formData.additionalInfo}`, 20, logoY + logoHeight + 60);
+        const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' } as Intl.DateTimeFormatOptions;;
+        const currentDateTime = new Intl.DateTimeFormat('tr-TR', options).format(new Date());
 
-        pdf.text(`Araç Bilgileri`, 20, logoY + logoHeight + 80);
-        pdf.text(`Araç Tipi: ${vehicleType}`, 20, logoY + logoHeight + 90);
-        pdf.text(`Fiyat: ${vehiclePrice}`, 20, logoY + logoHeight + 100);
+
+        // Add the current date to the top-right corner
+        pdf.setFontSize(10);
+        pdf.text(currentDateTime, pageWidth - 25, logoY + 10, { align: 'right' });
+
+        pdf.setFontSize(16);
+        pdf.setDrawColor(255, 100, 102);
+        pdf.setLineWidth(0.3);
+        pdf.rect(15, logoY + logoHeight + 10, pageWidth - 30, logoY + logoHeight + 110);
+
+        pdf.text(`${t('fullName')}: ${formData.fullName}`, 20, logoY + logoHeight + 20);
+        pdf.text(`${t('telephone')}: ${formData.phoneNumber}`, 20, logoY + logoHeight + 30);
+        pdf.text(`${t('email')}: ${formData.email}`, 20, logoY + logoHeight + 40);
+        pdf.text(`${t('flightNumber')}: ${formData.flightNumber}`, 20, logoY + logoHeight + 50);
+        pdf.text(`${t('extraInformation')}: ${formData.additionalInfo}`, 20, logoY + logoHeight + 60);
+
+        pdf.text(`${t('departureType')}: ${tripType}` , 20, logoY + logoHeight + 80);
+        pdf.text(`${t('fromWhere')}: ${destination}`, 20, logoY + logoHeight + 90);
+        pdf.text(`${t('where')}: ${departure}`, 20, logoY + logoHeight + 100);
+        pdf.text(`${t('departureDateString')}: ${departureDate}`, 20, logoY + logoHeight + 110);
+        pdf.text(`${t('returnDateString')}: ${returnDate}`, 20, logoY + logoHeight + 120);
+        pdf.text(`${t('hour')}: ${time}`, 20, logoY + logoHeight + 130);
+        pdf.text(`${t('numberOfPerson')}: ${numberOfPeople}`, 20, logoY + logoHeight + 140);
+        pdf.text(`${t('numberOfChild')}: ${numberOfChild}`, 20, logoY + logoHeight + 150);
+        { childSeat && pdf.text(`${t('childSeat')}: \u2713`, 20, logoY + logoHeight + 160); }
+
+
+        pdf.text(t('carInformation'), 20, logoY + logoHeight + 175);
+        pdf.text(`${t('carType')}: ${vehicleType}`, 20, logoY + logoHeight + 185);
+        pdf.text(`${t('allPrice')}: ${vehiclePrice} TL`, 20, logoY + logoHeight + 195);
 
         const fileName = `${formData.fullName.replace(/\s+/g, '_')}_Reservation.pdf`;
         pdf.save(fileName);
@@ -121,8 +160,12 @@ const Form: React.FC<IProps> = (props) => {
                                 <p className={'form__left-side__details__sub-body'}>{departure}</p>
                             </div>
                             <div className={'form__left-side__details__body'}>
-                                <p className={'form__left-side__details__sub-title'}>{t('date')}: </p>
-                                <p className={'form__left-side__details__sub-body'}>{date}</p>
+                                <p className={'form__left-side__details__sub-title'}>{t('departureDateString')}: </p>
+                                <p className={'form__left-side__details__sub-body'}>{departureDate}</p>
+                            </div>
+                            <div className={'form__left-side__details__body'}>
+                                <p className={'form__left-side__details__sub-title'}>{t('returnDateString')}: </p>
+                                <p className={'form__left-side__details__sub-body'}>{returnDate}</p>
                             </div>
                             <div className={'form__left-side__details__body-inputs'}>
                                 <label>
@@ -225,13 +268,19 @@ const Form: React.FC<IProps> = (props) => {
                             <textarea name="additionalInfo" value={formData.additionalInfo} onChange={handleChange}/>
                         </div>
                         <div className={'form__right-side__button'}>
-                            <button disabled={!formValid || isReservationSend} className={'form__right-side__buttons'} type="submit">
+                            <button disabled={!formValid || isReservationSend} className={'form__right-side__buttons'}
+                                    type="submit">
                                 {t('send')}
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
+            {notification && (
+                <div className={`notification ${notification ? 'show' : ''}`}>
+                    <p>{notification}</p>
+                </div>
+            )}
             <Footer/>
         </>
     );

@@ -35,32 +35,32 @@ const Regions: React.FC = () => {
     const {t} = useTranslation();
 
     const regionsData = [
-        {id: 1, name: 'Alanya', image: alanya, text:t('alanya')},
-        {id: 2, name: 'Antalya', image: antalya, text:t('antalya')},
-        {id: 3, name: 'Bozburun', image: bozburun, text:t('bozburun')},
-        {id: 4, name: 'Fethiye', image: fethiye, text:t('fethiye')},
-        {id: 5, name: 'Marmaris', image: marmaris, text:t('marmaris')},
-        {id: 6, name: 'İzmir', image: izmir, text:t('izmir')},
-        {id: 7, name: 'İçmeler', image: icmeler, text:t('icmeler')},
-        {id: 8, name: 'Orhaniye', image: orhaniye, text:t('orhaniye')},
-        {id: 9, name: 'Selimiye', image: selimiye, text:t('selimiye')},
-        {id: 10, name: 'Angels Marmaris', image: angelsMarmaris, text:t('angelsMarmaris')},
-        {id: 11, name: 'Göcek', image: gocek, text:t('göcek')},
-        {id: 12, name: 'Hillside Beach', image: hillsideBeach, text:t('hillsideBeach')},
-        {id: 13, name: 'Liberty Hotels', image: libertyHotels, text:t('libertyHotels')},
-        {id: 14, name: 'Marmaris Netsel Marina', image: marmarisNetselMarina, text:t('marmarisNetsel')},
-        {id: 15, name: 'Marmaris Yatch Marina', image: marmarisYatchMarina, text:t('marmarisYatch')},
-        {id: 16, name: 'Rixos Premium Göcek', image: rixosPremiumGocek, text:t('rixos')},
-        {id: 17, name: 'Hilton Sarıgerme', image: hiltonSarigerme, text:t('sarıgerme')},
-        {id: 18, name: 'Akyaka', image: akyaka, text:t('akyaka')},
-        {id: 19, name: 'D-Marin', image: Dmarin, text:t('dmarin')},
-        {id: 20, name: 'D-Maris Bay', image: Dmaris, text:t('dmaris')},
-        {id: 21, name: 'Datça', image: datca, text:t('datca')},
-        {id: 22, name: 'Hisarönü', image: hisaronu, text:t('oludeniz')},
-        {id: 23, name: 'Ölüdeniz', image: oludeniz, text:t('hisaronu')},
-        {id: 24, name: 'Söğüt', image: sogut, text:t('sogut')},
-        {id: 25, name: 'Turunç', image: turunc, text:t('turunc')},
-        {id: 26, name: 'İstanbul', image: istanbul, text:t('istanbul')},
+        {id: 1, name: 'Alanya', image: alanya, text: t('alanya')},
+        {id: 2, name: 'Antalya', image: antalya, text: t('antalya')},
+        {id: 3, name: 'Bozburun', image: bozburun, text: t('bozburun')},
+        {id: 4, name: 'Fethiye', image: fethiye, text: t('fethiye')},
+        {id: 5, name: 'Marmaris', image: marmaris, text: t('marmaris')},
+        {id: 6, name: 'İzmir', image: izmir, text: t('izmir')},
+        {id: 7, name: 'İçmeler', image: icmeler, text: t('icmeler')},
+        {id: 8, name: 'Orhaniye', image: orhaniye, text: t('orhaniye')},
+        {id: 9, name: 'Selimiye', image: selimiye, text: t('selimiye')},
+        {id: 10, name: 'Angels Marmaris', image: angelsMarmaris, text: t('angelsMarmaris')},
+        {id: 11, name: 'Göcek', image: gocek, text: t('göcek')},
+        {id: 12, name: 'Hillside Beach', image: hillsideBeach, text: t('hillsideBeach')},
+        {id: 13, name: 'Liberty Hotels', image: libertyHotels, text: t('libertyHotels')},
+        {id: 14, name: 'Marmaris Netsel Marina', image: marmarisNetselMarina, text: t('marmarisNetsel')},
+        {id: 15, name: 'Marmaris Yatch Marina', image: marmarisYatchMarina, text: t('marmarisYatch')},
+        {id: 16, name: 'Rixos Premium Göcek', image: rixosPremiumGocek, text: t('rixos')},
+        {id: 17, name: 'Hilton Sarıgerme', image: hiltonSarigerme, text: t('sarıgerme')},
+        {id: 18, name: 'Akyaka', image: akyaka, text: t('akyaka')},
+        {id: 19, name: 'D-Marin', image: Dmarin, text: t('dmarin')},
+        {id: 20, name: 'D-Maris Bay', image: Dmaris, text: t('dmaris')},
+        {id: 21, name: 'Datça', image: datca, text: t('datca')},
+        {id: 22, name: 'Hisarönü', image: hisaronu, text: t('oludeniz')},
+        {id: 23, name: 'Ölüdeniz', image: oludeniz, text: t('hisaronu')},
+        {id: 24, name: 'Söğüt', image: sogut, text: t('sogut')},
+        {id: 25, name: 'Turunç', image: turunc, text: t('turunc')},
+        {id: 26, name: 'İstanbul', image: istanbul, text: t('istanbul')},
     ];
 
     const sortRegions = () => {
@@ -94,7 +94,8 @@ const Regions: React.FC = () => {
             <div className={`regions ${isDetailOpen ? 'inactive' : ''}`}>
                 {!isDetailOpen && regions.map(region => (
                     <div key={region.id} className="region">
-                        <img onClick={() => handleClick(region.id, region.text, region.image)} src={region.image} alt={region.name}/>
+                        <img onClick={() => handleClick(region.id, region.text, region.image)} src={region.image}
+                             alt={region.name}/>
                         <div className={'regions__overlay-img'}>
                             <h3 className={'regions__overlay-text'}>{region.name}</h3>
                         </div>

@@ -15,19 +15,14 @@ interface VehicleGalleryProps {
 
 const VehicleGallery: React.FC<VehicleGalleryProps> = ({ vehicleId, onClose }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-    const sedanImages = [sedan];
-    const vitoImages = [vito1, vito2, vito3];
-    const sprintersImages = [sprinter1, sprinter2, sprinter3];
-
-    const images = [[sedan], [vito1, vito2, vito3], [sprinter1, sprinter2, sprinter3]]
+    const images = [[sedan, sedan, sedan], [vito1, vito2, vito3], [sprinter1, sprinter2, sprinter3]]
 
     const handlePrev = () => {
-        setCurrentImageIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : vitoImages.length - 1));
+        setCurrentImageIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : images.length - 1));
     };
 
     const handleNext = () => {
-        setCurrentImageIndex((prevIndex) => (prevIndex < vitoImages.length - 1 ? prevIndex + 1 : 0));
+        setCurrentImageIndex((prevIndex) => (prevIndex < images.length - 1 ? prevIndex + 1 : 0));
     };
 
     return (

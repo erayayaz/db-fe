@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './Reservation.scss';
 import {useTranslation} from "react-i18next";
 import Footer from "../Footer/Footer";
-import sedan from "../../img/sedan.png";
+import sedan from "../../img/vehicles/sedan.png";
 import vito from "../../img/vehicles/vitowithout.png";
 import sprinters from "../../img/vehicles/sprinterwithout.png";
 import person from "../../img/vehicles/person.svg";
@@ -19,6 +19,7 @@ interface Car {
     luggageLimit: number;
     carType: string;
     price: number;
+    doublePrice: number;
 }
 
 interface IProps {
@@ -29,14 +30,15 @@ const Reservation: React.FC<IProps> = (props) => {
     const {t} = useTranslation();
     const location = useLocation();
     const navigate = useNavigate();
-    let {tripType, destination, departure, date} = location.state || {};
+    let {tripType, destination, departure, departureDate, returnDate} = location.state || {};
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const [tripType1, setTripType] = useState(tripType);
     const [destination1, setDestination] = useState(destination);
     const [departure1, setDeparture] = useState(departure);
-    const [date1, setDate] = useState(date);
+    const [departureDate1, setDepartureDate] = useState(departureDate);
+    const [returnDate1, setReturnDate] = useState(returnDate);
     const [carInfo, setCarInfo] = useState<Car[]>([]);
 
     const handleClick = (id: number) => {
@@ -87,13 +89,14 @@ const Reservation: React.FC<IProps> = (props) => {
         tripType = tripType1;
         destination = destination1;
         departure = departure1;
-        date = date1;
+        departureDate = departureDate1;
+        returnDate = returnDate1;
         const params = {
             tripType,
             destination,
             departure,
-            date,
-            vehicleId,
+            departureDate,
+            returnDate,
             vehiclePrice,
             vehicleType,
             img
@@ -145,8 +148,13 @@ const Reservation: React.FC<IProps> = (props) => {
                         value={destination1}
                         onChange={(value) => setDestination(value)}
                     />
-                    <input className={'reservation-dropdown-item'} placeholder={t('go')} type="date" value={date1}
-                           onChange={(e) => setDate(e.target.value)}/>
+                    <input className={'reservation-dropdown-item'} type="date" value={departureDate1}
+                           onChange={(e) => setDepartureDate(e.target.value)}/>
+
+                    { tripType1 === 'Gidiş-Dönüş' &&
+                        <input className={'reservation-dropdown-item'} type="date" value={returnDate1}
+                               onChange={(e) => setReturnDate(e.target.value)}/>
+                    }
                 </div>
                 <div className={'reservation-right'}>
                     {carInfo.map((vehicle, index) => (
@@ -169,7 +177,9 @@ const Reservation: React.FC<IProps> = (props) => {
                                 </div>
                             </div>
                             <div className={'reservation-vehicle-button'}>
-                                <p>{t('totalPrice')}: {vehicle.price} TL</p>
+                                { tripType1 !== 'Gidiş-Dönüş' ?
+                                        <p>{t('totalPrice')}: {vehicle.price} TL</p>
+                                    :   <p>{t('totalPrice')}: {vehicle.doublePrice} TL</p>}
                                 <button
                                     onClick={() => handleRedirect(vehicle.id, vehicle.price, vehicle.carType, carInfos.find(info => info.id === vehicle.id)?.url)}>{t('reservation')}</button>
                             </div>

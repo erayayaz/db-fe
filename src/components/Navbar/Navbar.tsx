@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Navbar.scss';
 import logo from '../../img/logo.png';
 import {useTranslation} from "react-i18next";

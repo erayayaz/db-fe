@@ -6,7 +6,7 @@
     justify-content: center;
     text-align: center;
     display: flex;
-    width: 80%;
+    width: 100%;
     margin: auto;
     padding: 20px;
     background-color: #f8f9fa;
@@ -19,65 +19,72 @@
       flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
+      .date-label{
+        position: relative;
 
-      label {
-
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        margin-bottom: 16px;
-
-        span {
-          font-size: 14px;
-          margin-bottom: 4px;
-          color: #555;
+        .icon {
+          position: absolute;
+          left: 10px; // Adjust the left value to position the icon
+          top: 0;
+          transform: translateX(10px);
         }
 
-        select,
-        button {
-          width: 170px;
-          height: 40px;
-          padding: 10px;
-          font-size: 16px;
-          border: 1px solid #ced4da;
-          border-radius: 4px;
-          margin-top: 5px;
-          outline: none;
-
-          &:focus {
-            border-color: #007bff;
-          }
-        }
-
-        input {
-          width: 170px;
-          height: 38px;
-          font-size: 16px;
-          border: 1px solid #ced4da;
-          border-radius: 4px;
-          margin-top: 12px;
-          outline: none;
-
-          &:focus {
-            border-color: #007bff;
-          }
-        }
-
-        button {
-
-          background-color: #007bff;
-          color: #fff;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-
-          &:hover {
-            background-color: #0056b3;
-          }
+        input[type="text"],
+        input[type="date"] {
+          padding-left: 30px; // Adjust the padding to make space for the icon
         }
       }
 
+      button {
+        width: 170px;
+        height: 40px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        margin-top: 5px;
+        outline: none;
+
+        &:focus {
+          border-color: #007bff;
+        }
+      }
+
+      input {
+        width: 170px;
+        height: 36px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        margin-top: 12px;
+        outline: none;
+        text-align: center;
+
+        &:focus {
+          border-color: #007bff;
+        }
+      }
+
+      #typeId::placeholder {
+        margin-left: 20px;
+        color: black;
+      }
+
+      button {
+
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+
+
       .appointment-button {
-        margin: auto;
+        margin: 13px auto auto;
 
         .apt-button {
           margin-top: -2px;
