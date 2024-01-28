@@ -9,6 +9,8 @@ interface Reservation {
     email: string;
     flightNumber: string;
     additionalInfo: string;
+    departureDate: string;
+    returnDate: string;
     time: string;
     numberOfPeople: number;
     numberOfChild: number;
@@ -159,6 +161,8 @@ const ReservationPanel: React.FC = () => {
                     <th>Mail</th>
                     <th>Uçuş No</th>
                     <th>Ek Bilgi</th>
+                    <th>Gidiş Tarihi</th>
+                    <th>Dönüş Tarihi</th>
                     <th>Saat</th>
                     <th>Kişi Sayısı</th>
                     <th>Çocuk Sayısı</th>
@@ -179,6 +183,8 @@ const ReservationPanel: React.FC = () => {
                         <td>{reservation.email}</td>
                         <td>{reservation.flightNumber}</td>
                         <td>{reservation.additionalInfo}</td>
+                        <td>{reservation.departureDate}</td>
+                        <td>{reservation.returnDate}</td>
                         <td>{reservation.time}</td>
                         <td>{reservation.numberOfPeople}</td>
                         <td>{reservation.numberOfChild}</td>

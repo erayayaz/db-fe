@@ -45,5 +45,5 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-dönüş tarihi eklenecek
-pdf tarzı düzenlecenek
+silinenler listelencek adminde
+dil butonu mobilde navbara geçilecek

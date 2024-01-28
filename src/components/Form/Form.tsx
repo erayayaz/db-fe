@@ -3,20 +3,21 @@ import './Form.scss';
 import {useTranslation} from "react-i18next";
 import Footer from "../Footer/Footer";
 import logo from "../../img/logo.png";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {jsPDF} from 'jspdf';
 import 'jspdf-autotable';
 import axios from 'axios';
 import {fonts} from './Forms';
 
 interface IProps {
+    returnHome: () => void;
 }
 
 const Form: React.FC<IProps> = (props) => {
     const {t} = useTranslation();
 
     const location = useLocation();
-    const {tripType, destination, departure, departureDate, returnDate, vehiclePrice, vehicleType, img} = location.state || {};
+    const {tripType, destination, departure, departureDate, returnDate, currencyIcon, vehiclePrice, vehicleType, img} = location.state || {};
     const [time, setTime] = useState('12:00');
     const [numberOfPeople, setNumberOfPeople] = useState(0);
     const [numberOfChild, setNumberOfChild] = useState(0);
@@ -66,7 +67,7 @@ const Form: React.FC<IProps> = (props) => {
             vehiclePrice: vehiclePrice,
         };
         sendReservation(reservation);
-        showNotification('Rezervasyonunuz başarıyla oluşturulmuştur \u2713');
+        showNotification(`${t('success')} \u2713`);
     };
 
     const sendReservation = (reservation: any) => {
@@ -84,7 +85,8 @@ const Form: React.FC<IProps> = (props) => {
         setNotification(message);
         setTimeout(() => {
             setNotification(null);
-        }, 5000);
+            props.returnHome();
+        }, 3000);
     };
 
     const handleDownloadPDF = () => {
@@ -133,7 +135,7 @@ const Form: React.FC<IProps> = (props) => {
 
         pdf.text(t('carInformation'), 20, logoY + logoHeight + 175);
         pdf.text(`${t('carType')}: ${vehicleType}`, 20, logoY + logoHeight + 185);
-        pdf.text(`${t('allPrice')}: ${vehiclePrice} TL`, 20, logoY + logoHeight + 195);
+        pdf.text(`${t('allPrice')}: ${vehiclePrice} ${currencyIcon}`, 20, logoY + logoHeight + 195);
 
         const fileName = `${formData.fullName.replace(/\s+/g, '_')}_Reservation.pdf`;
         pdf.save(fileName);
@@ -224,7 +226,7 @@ const Form: React.FC<IProps> = (props) => {
                                 <img src={img} alt="chosen-vehicle"/>
                                 <div className={'form__left-side__details__body-car__attr'}>
                                     <p className={'form__left-side__details__body-car__type'}>{vehicleType}</p>
-                                    <p className={'form__left-side__details__body-car__type'}>{vehiclePrice} TL</p>
+                                    <p className={'form__left-side__details__body-car__type'}>{vehiclePrice} {currencyIcon}</p>
                                     <p className={'form__left-side__details__body-car__price'}>{t('allPrice')}</p>
                                 </div>
                             </div>

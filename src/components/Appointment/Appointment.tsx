@@ -14,6 +14,7 @@ const Appointment: React.FC<IProps> = (props) => {
     const [departure, setDeparture] = useState('');
     const [departureDate, setDepartureDate] = useState('');
     const [returnDate, setReturnDate] = useState('');
+    const [isTripIncludeReturn, setIsTripIncludeReturn] = useState(false);
     const navigate = useNavigate();
     const {t} = useTranslation();
 
@@ -46,6 +47,14 @@ const Appointment: React.FC<IProps> = (props) => {
         {id: 26, name: 'İstanbul'},
     ];
 
+    const currencies = [
+        {id: 1, name: '₺ TRY', icon: '₺'},
+        {id: 2, name: '€ EUR', icon: '€'},
+        {id: 3, name: '$ USD', icon: '$'},
+    ];
+    const [currency, setCurrency] = useState(currencies[0].name);
+    const [currencyIcon, setCurrencyIcon] = useState(currencies[0].icon);
+
     const sortRegions = () => {
         return [...notSortedRegions].sort((a, b) => a.name.localeCompare(b.name));
     };
@@ -57,8 +66,11 @@ const Appointment: React.FC<IProps> = (props) => {
             tripType,
             destination,
             departure,
-            departureDate: departureDate,
-            returnDate: returnDate
+            departureDate,
+            returnDate,
+            currency,
+            currencyIcon,
+            isTripIncludeReturn
         };
 
         props.searchButtonClicked();
@@ -66,6 +78,27 @@ const Appointment: React.FC<IProps> = (props) => {
         navigate('/reservation', {
             state: params,
         });
+    }
+    const trips = [
+        {id: 1, name: t('oneWay')},
+        {id: 2, name: t('ways')},
+    ];
+    const handleTripType = (value: string) => {
+        const selectedTrip = trips.find(cur => cur.name === value);
+
+        if (selectedTrip) {
+            setTripType(value);
+            setIsTripIncludeReturn(selectedTrip.id % 2 === 0);
+        }
+    }
+
+    const handleCurrency = (value: string) => {
+        const selectedCurrency = currencies.find(cur => cur.name === value);
+
+        if (selectedCurrency) {
+            setCurrency(value);
+            setCurrencyIcon(selectedCurrency.icon);
+        }
     }
 
     const isFormValid = tripType && departure && destination && departureDate;
@@ -75,13 +108,10 @@ const Appointment: React.FC<IProps> = (props) => {
                 <form onSubmit={handleRedirect}>
                     <div>
                         <CustomDropdown
-                            options={[
-                                {id: 1, name: 'Tek Yön'},
-                                {id: 2, name: 'Gidiş-Dönüş'},
-                            ]}
+                            options={trips}
                             placeholder={t('departureType')}
                             value={tripType}
-                            onChange={(value) => setTripType(value)}
+                            onChange={(value) => handleTripType(value)}
                         />
                     </div>
 
@@ -113,7 +143,7 @@ const Appointment: React.FC<IProps> = (props) => {
                         </label>
                     </div>
 
-                    { tripType === 'Gidiş-Dönüş' &&
+                    { isTripIncludeReturn &&
                         <div>
                             <label className={'date-label'}>
                                 <AiOutlineCalendar className="icon" />
@@ -123,6 +153,16 @@ const Appointment: React.FC<IProps> = (props) => {
                             </label>
                         </div>
                     }
+
+                    <div>
+                        <CustomDropdown
+                            options={currencies.filter((currency2) => currency2.name !== currency) }
+                            value={currency}
+                            placeholder={currencies[0].name}
+                            onChange={(value) => handleCurrency(value)}
+                        />
+                    </div>
+
                     <div className={'appointment-button'}>
                         <button disabled={!isFormValid} onClick={handleRedirect} className={'apt-button'} type="submit">
                             {t('search')}

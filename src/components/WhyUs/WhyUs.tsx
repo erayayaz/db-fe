@@ -1,7 +1,7 @@
 import React from 'react';
 import './WhyUs.scss';
 import {useTranslation} from "react-i18next";
-import maybach from "../../img/maybach.png";
+import logo from "../../img/logo.png";
 
 const WhyUs: React.FC = () => {
     const {t} = useTranslation();
@@ -9,7 +9,7 @@ const WhyUs: React.FC = () => {
     return (
         <div className={'whyus'}>
             <div className={'whyus-section'}>
-                <img className={'whyus-section__img'} src={maybach} alt=""/>
+                <img className={'whyus-section__img'} src={logo} alt=""/>
                 <p className={'whyus__title-brand'}>DB VIP Transfer</p>
                 <p className={'whyus__title-guest'}>{t('guests')}</p>
                 <p className={'whyus__title-why'}>{t('whyUs')}</p>

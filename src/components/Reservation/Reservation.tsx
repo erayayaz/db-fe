@@ -20,6 +20,10 @@ interface Car {
     carType: string;
     price: number;
     doublePrice: number;
+    priceEur: number;
+    doublePriceEur: number;
+    priceUsd: number;
+    doublePriceUsd: number;
 }
 
 interface IProps {
@@ -30,7 +34,8 @@ const Reservation: React.FC<IProps> = (props) => {
     const {t} = useTranslation();
     const location = useLocation();
     const navigate = useNavigate();
-    let {tripType, destination, departure, departureDate, returnDate} = location.state || {};
+    let {tripType, destination, departure, departureDate, returnDate, currency, currencyIcon, isTripIncludeReturn} = location.state || {};
+
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -39,6 +44,9 @@ const Reservation: React.FC<IProps> = (props) => {
     const [departure1, setDeparture] = useState(departure);
     const [departureDate1, setDepartureDate] = useState(departureDate);
     const [returnDate1, setReturnDate] = useState(returnDate);
+    const [currency1, setCurrency] = useState(currency);
+    const [currencyIcon1, setCurrencyIcon] = useState(currencyIcon);
+    const [isTripIncludeReturn1, setIsTripIncludeReturn] = useState(isTripIncludeReturn);
     const [carInfo, setCarInfo] = useState<Car[]>([]);
 
     const handleClick = (id: number) => {
@@ -91,16 +99,21 @@ const Reservation: React.FC<IProps> = (props) => {
         departure = departure1;
         departureDate = departureDate1;
         returnDate = returnDate1;
+        currency = currency1;
+        currencyIcon = currencyIcon1;
         const params = {
             tripType,
             destination,
             departure,
             departureDate,
             returnDate,
+            currencyIcon,
             vehiclePrice,
             vehicleType,
             img
         };
+
+        console.log(params);
         props.reservationButtonClicked();
         navigate('/form', {
             state: params,
@@ -111,6 +124,12 @@ const Reservation: React.FC<IProps> = (props) => {
         {id: 1, url: sedan},
         {id: 2, url: vito},
         {id: 3, url: sprinters},
+    ];
+
+    const currencies = [
+        {id: 1, name: '₺ TRY', icon: '₺'},
+        {id: 2, name: '€ EUR', icon: '€'},
+        {id: 3, name: '$ USD', icon: '$'},
     ];
 
     useEffect(() => {
@@ -124,17 +143,37 @@ const Reservation: React.FC<IProps> = (props) => {
             });
     }, []);
 
+    const trips = [
+        {id: 1, name: t('oneWay')},
+        {id: 2, name: t('ways')},
+    ];
+
+    const handleTripType = (value: string) => {
+        const selectedTrip = trips.find(cur => cur.name === value);
+
+        if (selectedTrip) {
+            setTripType(value);
+            setIsTripIncludeReturn(selectedTrip.id % 2 === 0);
+        }
+    }
+
+    const handleCurrency = (value: string) => {
+        const selectedCurrency = currencies.find(cur => cur.name === value);
+
+        if (selectedCurrency) {
+            setCurrency(value);
+            setCurrencyIcon(selectedCurrency.icon);
+        }
+    }
+
     return (
         <>
             <div className={'reservation'}>
                 <div className={'reservation-dropdown'}>
                     <CustomDropdown
-                        options={[
-                            {id: 1, name: 'Tek Yön'},
-                            {id: 2, name: 'Gidiş-Dönüş'},
-                        ]}
+                        options={trips}
                         value={tripType1}
-                        onChange={(value) => setTripType(value)}
+                        onChange={(value) => handleTripType(value)}
                     />
 
                     <CustomDropdown
@@ -144,17 +183,26 @@ const Reservation: React.FC<IProps> = (props) => {
                     />
 
                     <CustomDropdown
-                        options={regions.filter((region) => region.name !== departure)}
+                        options={regions.filter((region) => region.name !== departure1)}
                         value={destination1}
                         onChange={(value) => setDestination(value)}
                     />
                     <input className={'reservation-dropdown-item'} type="date" value={departureDate1}
                            onChange={(e) => setDepartureDate(e.target.value)}/>
 
-                    { tripType1 === 'Gidiş-Dönüş' &&
+                    { isTripIncludeReturn1 &&
                         <input className={'reservation-dropdown-item'} type="date" value={returnDate1}
                                onChange={(e) => setReturnDate(e.target.value)}/>
                     }
+
+                    <div>
+                        <CustomDropdown
+                            options={currencies.filter((currency2) => currency2.name !== currency1) }
+                            value={currency1}
+                            placeholder={currency1}
+                            onChange={(value) => handleCurrency(value)}
+                        />
+                    </div>
                 </div>
                 <div className={'reservation-right'}>
                     {carInfo.map((vehicle, index) => (
@@ -177,11 +225,21 @@ const Reservation: React.FC<IProps> = (props) => {
                                 </div>
                             </div>
                             <div className={'reservation-vehicle-button'}>
-                                { tripType1 !== 'Gidiş-Dönüş' ?
-                                        <p>{t('totalPrice')}: {vehicle.price} TL</p>
-                                    :   <p>{t('totalPrice')}: {vehicle.doublePrice} TL</p>}
+                                {currencyIcon1 === '₺' ?
+                                    !isTripIncludeReturn1 ?
+                                        <p>{t('totalPrice')}: {vehicle.price} ₺</p>
+                                        : <p>{t('totalPrice')}: {vehicle.doublePrice} ₺</p>
+                                 : currencyIcon1 === '€' ?
+                                        !isTripIncludeReturn1 ?
+                                            <p>{t('totalPrice')}: {vehicle.priceEur} €</p>
+                                            : <p>{t('totalPrice')}: {vehicle.doublePriceEur} €</p>
+                                        :
+                                        !isTripIncludeReturn1 ?
+                                            <p>{t('totalPrice')}: {vehicle.priceUsd} $</p>
+                                            : <p>{t('totalPrice')}: {vehicle.doublePriceUsd} $</p>
+                                }
                                 <button
-                                    onClick={() => handleRedirect(vehicle.id, vehicle.price, vehicle.carType, carInfos.find(info => info.id === vehicle.id)?.url)}>{t('reservation')}</button>
+                                    onClick={() => handleRedirect(vehicle.id, currencyIcon1 === '₺' ? tripType1 !== t('ways') ? vehicle.price : vehicle.doublePrice : currencyIcon1 === '€' ? tripType1 !== t('ways') ? vehicle.priceEur : vehicle.doublePriceEur : tripType1 !== t('ways') ? vehicle.priceUsd : vehicle.doublePriceUsd, vehicle.carType, carInfos.find(info => info.id === vehicle.id)?.url)}>{t('reservation')}</button>
                             </div>
                         </div>
                     ))}

@@ -128,9 +128,10 @@ function App() {
             )}
             {isAboutVisible && <Appointment searchButtonClicked={routeMenu}/>}
             {isAboutVisible && <WhyUs/>}
-            {isAboutVisible && <Payments/>}
+
             {isAboutVisible && <TravelRoutes toggleRegions={routeMenu}/>}
             {isAboutVisible && <Memories/>}
+            {isAboutVisible && <Payments/>}
             {isAboutVisible && <Footer menuButtonClicked={routeMenu}/>}
             {!isAdminPanel && <Facetime/>}
             {!isAdminPanel && <Whatsapp/>}
@@ -140,7 +141,7 @@ function App() {
                 <Route path="/media" Component={Media}/>
                 <Route path="/vehicles" Component={() => <Vehicles reservationButtonClicked={toggleHome}/>}/>
                 <Route path="/contacts" Component={Contacts}/>
-                <Route path="/form" Component={Form}/>
+                <Route path="/form" Component={() => <Form returnHome={toggleHome}/>}/>
                 <Route path="/login" Component={() => <Login loginSuccess={loginSuccess}/>}/>
                 <Route path="/admin" Component={() => <AdminPanel iconClicked={toggleHome}/>}/>
                 <Route path="/reservation" Component={() => <Reservation reservationButtonClicked={routeMenu}/>}/>

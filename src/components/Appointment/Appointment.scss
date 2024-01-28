@@ -1,6 +1,11 @@
 .appointment {
-  padding: 12rem 6rem 24rem 6rem;
-  background: url("../../img/background-vito.png") no-repeat 50% 75%/cover;
+  padding: 17rem 6rem 24rem 6rem;
+  //background: url("../../img/dalaman2.png") no-repeat 50% 75%/cover;
+  //background: url("../../img/bkgr.jpeg") no-repeat 50% 78%/cover;
+  background-image: url("../../img/bckg.png");
+  //background-size: contain;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 
   .appointment-form {
     justify-content: center;
@@ -112,6 +117,34 @@
   @media (max-width: 768px) {
     padding: 2rem;
     background-size: cover;
+
+    .appointment-form {
+      padding: 0;
+      background-color: transparent;
+      border-color: transparent;
+
+      form {
+        .date-label{
+
+          .icon {
+            top: 5px;
+          }
+
+          input[type="text"],
+          input[type="date"] {
+            padding-left: 46px; // Adjust// the padding to make space for the icon
+            height: 28px;
+            padding-right: 20px;
+          }
+        }
+      }
+
+      .appointment-button {
+        .apt-button {
+          min-width: 250px;
+        }
+      }
+    }
     .appointment-form label {
       font-size: 14px;
       padding: 6px;
