@@ -1,6 +1,6 @@
 .footer {
-  background-color: #333;
-  color: #fff;
+  background-color: #F9F6F0;
+  color: #000;
   padding: 2rem 0;
 
   .container {
@@ -11,6 +11,7 @@
       display: flex;
 
       .footer-section {
+        color: black;
         flex: 1;
         text-align: center;
         margin-right: 20px;
@@ -32,7 +33,7 @@
             margin-bottom: 8px;
 
             a {
-              color: #fff;
+              color: #000;
               text-decoration: none;
 
               &:hover {

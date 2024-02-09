@@ -10,7 +10,8 @@
   .app-logo {
     display: flex;
     margin: auto;
-    background-color: #333333;
+    background-color: #fff;
+    border-bottom: 1px solid gray;
 
     img {
       padding-top: 10px;
@@ -21,13 +22,64 @@
   }
 
   .sidebar-btn {
-    position: fixed;
+    position: absolute;
     top: 20px;
     right: 20px;
     font-size: 24px;
     cursor: pointer;
     background: none;
     border: none;
-    color: #ffffff;
+  }
+
+  .language-dropdown {
+    position: relative;
+    border: 1px solid black;
+    border-radius: 15px;
+    .language-button {
+      background-color: #fff;
+      color: #333;
+      padding: 8px 15px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 15px;
+      margin-top: 3px;
+      margin-bottom: 3px;
+    }
+
+    .dropdown-content {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      background-color: #f9f9f9;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      z-index: 1;
+
+      button {
+        color: black;
+        padding: 8px 15px;
+        text-decoration: none;
+        display: block;
+        background-color: #f9f9f9;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 15px;
+
+
+        &:hover {
+          background-color: #ddd;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .language-dropdown {
+      position: absolute;
+      top: 23px;
+      right: 80px;
+    }
   }
 }

@@ -11,12 +11,16 @@ const About: React.FC = () => {
 
     return (
         <>
-            <div className={'about-us'}>
-                <p>{t('about-paragraph')}</p>
+            <div className={'about'}>
+                <div className={'about-us'}>
+                    <p>{t('about-paragraph')}</p>
+
+                </div>
                 <div className={'about-img'}>
                     <img src={about} alt={''}/>
                 </div>
             </div>
+
             <Payments/>
             <Footer/>
         </>

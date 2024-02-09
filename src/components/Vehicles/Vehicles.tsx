@@ -22,7 +22,7 @@ const Vehicles: React.FC<IProps> = (props) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const handleClick = (id: number) => {
-        setCurrentImageIndex((id-1));
+        setCurrentImageIndex((id - 1));
         setIsGalleryOpen(true);
     }
 
@@ -67,7 +67,7 @@ const Vehicles: React.FC<IProps> = (props) => {
                 ))}
             </div>
             <Footer/>
-            {isGalleryOpen && <VehicleGallery vehicleId={currentImageIndex} onClose={handleClose} />}
+            {isGalleryOpen && <VehicleGallery vehicleId={currentImageIndex} onClose={handleClose}/>}
         </>
 
     );

@@ -1,12 +1,11 @@
-
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #333;
-  color: #fff;
-
+  background-color: #fff;
+  color: #000;
+  border-bottom: 1px solid gray;
   .logo {
     margin-left: auto;
 
@@ -25,7 +24,7 @@
       margin-right: 25px;
       cursor: pointer;
       text-decoration: none;
-      color: white;
+      color: black;
       font-weight: bold;
 
       &:hover {

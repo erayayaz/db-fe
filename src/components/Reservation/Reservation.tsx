@@ -34,7 +34,16 @@ const Reservation: React.FC<IProps> = (props) => {
     const {t} = useTranslation();
     const location = useLocation();
     const navigate = useNavigate();
-    let {tripType, destination, departure, departureDate, returnDate, currency, currencyIcon, isTripIncludeReturn} = location.state || {};
+    let {
+        tripType,
+        destination,
+        departure,
+        departureDate,
+        returnDate,
+        currency,
+        currencyIcon,
+        isTripIncludeReturn
+    } = location.state || {};
 
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -50,7 +59,7 @@ const Reservation: React.FC<IProps> = (props) => {
     const [carInfo, setCarInfo] = useState<Car[]>([]);
 
     const handleClick = (id: number) => {
-        setCurrentImageIndex((id-1));
+        setCurrentImageIndex((id - 1));
         setIsGalleryOpen(true);
     }
 
@@ -190,14 +199,14 @@ const Reservation: React.FC<IProps> = (props) => {
                     <input className={'reservation-dropdown-item'} type="date" value={departureDate1}
                            onChange={(e) => setDepartureDate(e.target.value)}/>
 
-                    { isTripIncludeReturn1 &&
+                    {isTripIncludeReturn1 &&
                         <input className={'reservation-dropdown-item'} type="date" value={returnDate1}
                                onChange={(e) => setReturnDate(e.target.value)}/>
                     }
 
                     <div>
                         <CustomDropdown
-                            options={currencies.filter((currency2) => currency2.name !== currency1) }
+                            options={currencies.filter((currency2) => currency2.name !== currency1)}
                             value={currency1}
                             placeholder={currency1}
                             onChange={(value) => handleCurrency(value)}
@@ -209,7 +218,8 @@ const Reservation: React.FC<IProps> = (props) => {
                         <div key={vehicle.id} className="reservation-vehicle">
                             <div className="reservation-vehicle-img">
                                 <img src={carInfos.find(info => info.id === vehicle.id)?.url} alt={''}/>
-                                <button className={'reservation-vehicle__gallery'} onClick={() => handleClick(vehicle.id)}>
+                                <button className={'reservation-vehicle__gallery'}
+                                        onClick={() => handleClick(vehicle.id)}>
                                     <img src={photo} alt={''}/>
                                 </button>
                             </div>
@@ -229,7 +239,7 @@ const Reservation: React.FC<IProps> = (props) => {
                                     !isTripIncludeReturn1 ?
                                         <p>{t('totalPrice')}: {vehicle.price} ₺</p>
                                         : <p>{t('totalPrice')}: {vehicle.doublePrice} ₺</p>
-                                 : currencyIcon1 === '€' ?
+                                    : currencyIcon1 === '€' ?
                                         !isTripIncludeReturn1 ?
                                             <p>{t('totalPrice')}: {vehicle.priceEur} €</p>
                                             : <p>{t('totalPrice')}: {vehicle.doublePriceEur} €</p>
@@ -246,7 +256,7 @@ const Reservation: React.FC<IProps> = (props) => {
                 </div>
             </div>
             <Footer/>
-            {isGalleryOpen && <VehicleGallery vehicleId={currentImageIndex} onClose={handleClose} />}
+            {isGalleryOpen && <VehicleGallery vehicleId={currentImageIndex} onClose={handleClose}/>}
         </>
     );
 };

@@ -3,7 +3,7 @@ import './Form.scss';
 import {useTranslation} from "react-i18next";
 import Footer from "../Footer/Footer";
 import logo from "../../img/logo.png";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {jsPDF} from 'jspdf';
 import 'jspdf-autotable';
 import axios from 'axios';
@@ -17,7 +17,17 @@ const Form: React.FC<IProps> = (props) => {
     const {t} = useTranslation();
 
     const location = useLocation();
-    const {tripType, destination, departure, departureDate, returnDate, currencyIcon, vehiclePrice, vehicleType, img} = location.state || {};
+    const {
+        tripType,
+        destination,
+        departure,
+        departureDate,
+        returnDate,
+        currencyIcon,
+        vehiclePrice,
+        vehicleType,
+        img
+    } = location.state || {};
     const [time, setTime] = useState('12:00');
     const [numberOfPeople, setNumberOfPeople] = useState(0);
     const [numberOfChild, setNumberOfChild] = useState(0);
@@ -65,6 +75,7 @@ const Form: React.FC<IProps> = (props) => {
             tripDeparture: departure,
             vehicleType: vehicleType,
             vehiclePrice: vehiclePrice,
+            currency: currencyIcon === '₺' ? "TRY" : currencyIcon === '€' ? "EUR" : "USD",
         };
         sendReservation(reservation);
         showNotification(`${t('success')} \u2713`);
@@ -103,18 +114,25 @@ const Form: React.FC<IProps> = (props) => {
         pdf.setFont('Roboto-Medium');
 
         pdf.addImage(logo, 'PNG', logoX, logoY, logoWidth, logoHeight);
-        const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' } as Intl.DateTimeFormatOptions;;
+        const options = {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        } as Intl.DateTimeFormatOptions;
+        ;
         const currentDateTime = new Intl.DateTimeFormat('tr-TR', options).format(new Date());
 
 
         // Add the current date to the top-right corner
         pdf.setFontSize(10);
-        pdf.text(currentDateTime, pageWidth - 25, logoY + 10, { align: 'right' });
+        pdf.text(currentDateTime, pageWidth - 25, logoY + 10, {align: 'right'});
 
         pdf.setFontSize(16);
         pdf.setDrawColor(255, 100, 102);
         pdf.setLineWidth(0.3);
-        pdf.rect(15, logoY + logoHeight + 10, pageWidth - 30, logoY + logoHeight + 110);
+        pdf.rect(15, logoY + logoHeight + 10, pageWidth - 30, logoY + logoHeight + 120);
 
         pdf.text(`${t('fullName')}: ${formData.fullName}`, 20, logoY + logoHeight + 20);
         pdf.text(`${t('telephone')}: ${formData.phoneNumber}`, 20, logoY + logoHeight + 30);
@@ -122,7 +140,7 @@ const Form: React.FC<IProps> = (props) => {
         pdf.text(`${t('flightNumber')}: ${formData.flightNumber}`, 20, logoY + logoHeight + 50);
         pdf.text(`${t('extraInformation')}: ${formData.additionalInfo}`, 20, logoY + logoHeight + 60);
 
-        pdf.text(`${t('departureType')}: ${tripType}` , 20, logoY + logoHeight + 80);
+        pdf.text(`${t('departureType')}: ${tripType}`, 20, logoY + logoHeight + 80);
         pdf.text(`${t('fromWhere')}: ${destination}`, 20, logoY + logoHeight + 90);
         pdf.text(`${t('where')}: ${departure}`, 20, logoY + logoHeight + 100);
         pdf.text(`${t('departureDateString')}: ${departureDate}`, 20, logoY + logoHeight + 110);
@@ -130,7 +148,9 @@ const Form: React.FC<IProps> = (props) => {
         pdf.text(`${t('hour')}: ${time}`, 20, logoY + logoHeight + 130);
         pdf.text(`${t('numberOfPerson')}: ${numberOfPeople}`, 20, logoY + logoHeight + 140);
         pdf.text(`${t('numberOfChild')}: ${numberOfChild}`, 20, logoY + logoHeight + 150);
-        { childSeat && pdf.text(`${t('childSeat')}: \u2713`, 20, logoY + logoHeight + 160); }
+        {
+            childSeat && pdf.text(`${t('childSeat')}: \u2713`, 20, logoY + logoHeight + 160);
+        }
 
 
         pdf.text(t('carInformation'), 20, logoY + logoHeight + 175);

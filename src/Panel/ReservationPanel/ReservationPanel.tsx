@@ -20,6 +20,7 @@ interface Reservation {
     tripDeparture: string;
     vehicleType: string;
     vehiclePrice: string;
+    currency: string;
     reservationStatus: string;
 }
 
@@ -28,6 +29,8 @@ const ReservationPanel: React.FC = () => {
     const [reservations, setReservations] = useState<Reservation[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [showPending, setShowPending] = useState(true);
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+    const [selectedReservationId, setSelectedReservationId] = useState<number | null>(null);
 
     const ITEMS_PER_PAGE = 8;
     const MAX_PAGE_BUTTONS = 3;
@@ -132,8 +135,18 @@ const ReservationPanel: React.FC = () => {
         }
     };
 
+    const handlePopUp = (reservationId: number) => {
+        setSelectedReservationId(reservationId);
+        setShowDeleteConfirmation(true);
+    }
+
+    const cancelDeleteConfirmation = () => {
+        setShowDeleteConfirmation(false);
+    }
+
     const handleDelete = async (reservationId: number) => {
         try {
+            setShowDeleteConfirmation(false);
             const response = await axios.delete(`http://localhost:8080/api/reservation/${reservationId}`);
             setReservations(response.data);
         } catch (error) {
@@ -172,6 +185,7 @@ const ReservationPanel: React.FC = () => {
                     <th>Nereye</th>
                     <th>Araç Tipi</th>
                     <th>Fiyat</th>
+                    <th>Fiyat Birimi</th>
                     <th>Aksiyon</th>
                 </tr>
                 </thead>
@@ -194,6 +208,7 @@ const ReservationPanel: React.FC = () => {
                         <td>{reservation.tripDeparture}</td>
                         <td>{reservation.vehicleType}</td>
                         <td>{reservation.vehiclePrice}</td>
+                        <td>{reservation.currency}</td>
                         <td>
                             {showPending ?
                                 <button onClick={() => handleApproval(reservation.id)}>
@@ -208,7 +223,7 @@ const ReservationPanel: React.FC = () => {
                                 </button>
                             }
 
-                            <button onClick={() => handleDelete(reservation.id)}>
+                            <button onClick={() => handlePopUp(reservation.id)}>
                               <span role="img" aria-label="Sil">
                                 ❌
                               </span>
@@ -224,6 +239,17 @@ const ReservationPanel: React.FC = () => {
                 </div>
             }
 
+            {showDeleteConfirmation && (
+                <div className={'confirmation-popup'}>
+                    <p>Emin misin?</p>
+                    <button onClick={() => handleDelete(selectedReservationId!)}>
+                        Yes
+                    </button>
+                    <button onClick={() => cancelDeleteConfirmation()}>
+                        No
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

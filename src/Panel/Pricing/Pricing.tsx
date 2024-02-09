@@ -9,6 +9,10 @@ interface Car {
     carType: string;
     price: number;
     doublePrice: number;
+    priceEur: number;
+    doublePriceEur: number;
+    priceUsd: number;
+    doublePriceUsd: number;
 }
 
 interface IProps {
@@ -23,7 +27,9 @@ const Pricing: React.FC<IProps> = (props) => {
             .catch(error => console.error('Veri çekme hatası:', error));
     }, []);
 
-    const handlePriceChange = (id: number, carType: string, personLimit: number, luggageLimit: number, newPrice: number, newDoublePrice: number) => {
+    const handlePriceChange = (id: number, carType: string, personLimit: number, luggageLimit: number, newPrice: number,
+                               newDoublePrice: number, newPriceEur: number, newDoubleEurPrice: number, newPriceUsd: number,
+                               newDoublePriceUsd: number) => {
         const newCar = {
             id: id,
             carType: carType,
@@ -31,6 +37,10 @@ const Pricing: React.FC<IProps> = (props) => {
             luggageLimit: luggageLimit,
             price: newPrice,
             doublePrice: newDoublePrice,
+            priceEur: newPriceEur,
+            doublePriceEur: newDoubleEurPrice,
+            priceUsd: newPriceUsd,
+            doublePriceUsd: newDoublePriceUsd,
         };
 
         axios.put(`http://localhost:8080/api/car`, newCar)
@@ -51,6 +61,10 @@ const Pricing: React.FC<IProps> = (props) => {
                     <th>Bagaj Limiti</th>
                     <th>Gidiş Fiyat (TL)</th>
                     <th>Gidiş-Dönüş Fiyat (TL)</th>
+                    <th>Gidiş Fiyat (Eur)</th>
+                    <th>Gidiş-Dönüş Fiyat (Eur)</th>
+                    <th>Gidiş Fiyat (Usd)</th>
+                    <th>Gidiş-Dönüş Fiyat (Usd)</th>
                     <th>İşlemler</th>
                 </tr>
                 </thead>
@@ -111,8 +125,60 @@ const Pricing: React.FC<IProps> = (props) => {
                             />
                         </td>
                         <td>
+                            <input
+                                type="number"
+                                value={car.priceEur}
+                                onChange={(e) => {
+                                    const newPrice = parseFloat(e.target.value);
+                                    setCars(prevCars => prevCars.map(c => (c.id === car.id ? {
+                                        ...c,
+                                        priceEur: newPrice
+                                    } : c)));
+                                }}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                type="number"
+                                value={car.doublePriceEur}
+                                onChange={(e) => {
+                                    const newDoublePrice = parseFloat(e.target.value);
+                                    setCars(prevCars => prevCars.map(c => (c.id === car.id ? {
+                                        ...c,
+                                        doublePriceEur: newDoublePrice
+                                    } : c)));
+                                }}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                type="number"
+                                value={car.priceUsd}
+                                onChange={(e) => {
+                                    const newPrice = parseFloat(e.target.value);
+                                    setCars(prevCars => prevCars.map(c => (c.id === car.id ? {
+                                        ...c,
+                                        priceUsd: newPrice
+                                    } : c)));
+                                }}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                type="number"
+                                value={car.doublePriceUsd}
+                                onChange={(e) => {
+                                    const newDoublePrice = parseFloat(e.target.value);
+                                    setCars(prevCars => prevCars.map(c => (c.id === car.id ? {
+                                        ...c,
+                                        doublePriceUsd: newDoublePrice
+                                    } : c)));
+                                }}
+                            />
+                        </td>
+                        <td>
                             <button
-                                onClick={() => handlePriceChange(car.id, car.carType, car.personLimit, car.luggageLimit, car.price, car.doublePrice)}>Kaydet
+                                onClick={() => handlePriceChange(car.id, car.carType, car.personLimit, car.luggageLimit, car.price, car.doublePrice, car.priceEur, car.doublePriceEur, car.priceUsd, car.doublePriceUsd)}>Kaydet
                             </button>
                         </td>
                     </tr>

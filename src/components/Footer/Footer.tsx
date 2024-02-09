@@ -27,14 +27,12 @@ const Footer: React.FC<IProps> = (props) => {
                             <li><Link to="/regions" onClick={props.menuButtonClicked}>{t('regions')}</Link></li>
                             <li><Link to="/media" onClick={props.menuButtonClicked}>{t('media')}</Link></li>
                             <li><Link to="/vehicles" onClick={props.menuButtonClicked}>{t('vehicles')}</Link></li>
-                            <li><Link to="/contacts" onClick={props.menuButtonClicked}>{t('contacts')}</Link></li>
                         </ul>
                     </div>
 
                     <div className="footer-section">
                         <h2>{t('contacts')}</h2>
-                        <p>{t('address')}: {t('ourAddress')}</p>
-                        <p>{t('telephone')}: +90 123 456 7890</p>
+                        <p>{t('telephone')}: +90 543 816 9230</p>
                         <p>{t('email')}: info@turacentasi.com</p>
                     </div>
 

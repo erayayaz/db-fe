@@ -52,20 +52,6 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                     <Link to="/media" onClick={props.menuButtonClicked} className="menu-item">{t('media')}</Link>
                     <Link to="/vehicles" onClick={props.menuButtonClicked} className="menu-item">{t('vehicles')}</Link>
                 </div>
-                <div className="language-dropdown">
-                    <button onClick={toggleLanguageDropdown} className="language-button">
-                        {selectedLanguage.toUpperCase()}
-                    </button>
-                    {dropdownVisible && (
-                        <div className="dropdown-content">
-                            {languages.map((lang) => lang.language !== selectedLanguage && (
-                                <button key={lang.id} onClick={() => handleLanguageChange(lang.language)}>
-                                    {lang.language.toUpperCase()}
-                                </button>
-                            ))}
-                        </div>
-                    )}
-                </div>
             </div>
         </div>
     );

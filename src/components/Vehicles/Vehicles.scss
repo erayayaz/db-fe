@@ -24,6 +24,7 @@
         background-color: transparent;
         width: 24px;
         height: 24px;
+
         img {
           width: 24px;
           height: 24px;
@@ -38,12 +39,14 @@
 
     .vehicle-info {
       min-width: 320px;
+
       h2 {
         margin-top: 0;
       }
 
       .vehicle-info__person-size {
         display: flex;
+
         .vehicle-info__person-size__info {
           margin-top: 4px;
           margin-left: 4px;

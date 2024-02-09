@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './VehicleGallery.scss';
 import sedan1 from "../../img/vehicles/sedan1.png";
 import vito1 from "../../img/vehicles/vito1.png";
@@ -13,7 +13,7 @@ interface VehicleGalleryProps {
     onClose: () => void;
 }
 
-const VehicleGallery: React.FC<VehicleGalleryProps> = ({ vehicleId, onClose }) => {
+const VehicleGallery: React.FC<VehicleGalleryProps> = ({vehicleId, onClose}) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const images = [[sedan1, sedan1, sedan1], [vito1, vito2, vito3], [sprinter1, sprinter2, sprinter3]]
 
@@ -34,7 +34,7 @@ const VehicleGallery: React.FC<VehicleGalleryProps> = ({ vehicleId, onClose }) =
                 <button className="prev" onClick={handlePrev}>
                     &#10094;
                 </button>
-                <img src={images[vehicleId][currentImageIndex]} alt="Vehicle" />
+                <img src={images[vehicleId][currentImageIndex]} alt="Vehicle"/>
                 <button className="next" onClick={handleNext}>
                     &#10095;
                 </button>

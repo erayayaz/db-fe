@@ -21,6 +21,7 @@ import Reservation from "./components/Reservation/Reservation";
 import Form from "./components/Form/Form";
 import AdminPanel from "./Panel/AdminPanel/AdminPanel";
 import Login from "./Panel/Login/Login";
+import {useTranslation} from "react-i18next";
 
 function App() {
     const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
@@ -51,6 +52,7 @@ function App() {
     };
 
     const toggleHome = () => {
+        navigate('/');
         setIsAdminPanel(false);
         setIsAboutVisible(true);
     }
@@ -108,7 +110,23 @@ function App() {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-
+    const {t, i18n} = useTranslation();
+    const languages = [
+        {id: 0, language: 'tr'},
+        {id: 1, language: 'en'},
+        {id: 2, language: 'ru'},
+        {id: 3, language: 'ar'},
+    ];
+    const [dropdownVisible, setDropdownVisible] = useState(false);
+    const [selectedLanguage, setSelectedLanguage] = useState('tr');
+    const toggleLanguageDropdown = () => {
+        setDropdownVisible(!dropdownVisible);
+    };
+    const handleLanguageChange = async (newLang: string) => {
+        setSelectedLanguage(newLang);
+        setDropdownVisible(false);
+        await i18n.changeLanguage(newLang);
+    };
     return (
         <div className="app">
             {isMobile && !isAdminPanel ? (
@@ -116,6 +134,20 @@ function App() {
                     <Link to="/" className="app-logo" onClick={toggleHome}>
                         <img src={logo} alt="DB Transfer"/>
                     </Link>
+                    <div className="language-dropdown">
+                        <button onClick={toggleLanguageDropdown} className="language-button">
+                            {selectedLanguage.toUpperCase()}
+                        </button>
+                        {dropdownVisible && (
+                            <div className="dropdown-content">
+                                {languages.map((lang) => lang.language !== selectedLanguage && (
+                                    <button key={lang.id} onClick={() => handleLanguageChange(lang.language)}>
+                                        {lang.language.toUpperCase()}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                     <button onClick={toggleSidebar} className="sidebar-btn">
                         ☰
                     </button>
@@ -126,7 +158,7 @@ function App() {
                     {!isAdminPanel && <Navbar iconClicked={toggleHome} menuButtonClicked={routeMenu}/>}
                 </>
             )}
-            {isAboutVisible && <Appointment searchButtonClicked={routeMenu}/>}
+            {isAboutVisible && <Appointment searchButtonClicked={routeMenu} isMobile={isMobile}/>}
             {isAboutVisible && <WhyUs/>}
 
             {isAboutVisible && <TravelRoutes toggleRegions={routeMenu}/>}

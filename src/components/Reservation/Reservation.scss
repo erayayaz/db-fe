@@ -40,6 +40,7 @@
 
       .reservation-vehicle-img {
         margin-right: 40px;
+
         .reservation-vehicle__gallery {
           cursor: pointer;
           border: none;
@@ -48,12 +49,14 @@
           background-color: transparent;
           width: 24px;
           height: 24px;
+
           img {
             width: 24px;
             height: 24px;
           }
         }
-        img{
+
+        img {
           width: 300px;
           height: 200px;
         }
@@ -61,6 +64,7 @@
 
       .reservation-vehicle-info {
         min-width: 320px;
+
         h2 {
           margin-top: 0;
         }
@@ -99,7 +103,7 @@
 
     .reservation-vehicle:first-child {
       .reservation-vehicle-img {
-        img{
+        img {
           //transform: scaleX(-1);
         }
 
@@ -121,18 +125,30 @@
     }
 
     .reservation-right {
+      text-align: center;
       padding: 2rem 0;
 
       .reservation-vehicle {
         display: grid;
         width: 100%;
+
         .reservation-vehicle-img {
           margin-right: 0;
         }
+
         .reservation-vehicle-info {
           margin: auto;
+
           h2 {
             font-size: 20px;
+          }
+        }
+
+        .reservation-vehicle-button {
+          margin-left: 0;
+
+          button {
+            margin-left: 0;
           }
         }
       }

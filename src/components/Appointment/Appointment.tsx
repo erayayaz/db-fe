@@ -3,9 +3,17 @@ import './Appointment.scss';
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import CustomDropdown from "../Dropdown/CustomDropdown";
-import { AiOutlineCalendar } from 'react-icons/ai';
+import {AiOutlineCalendar} from 'react-icons/ai';
+import bckg1 from "../../img/bckg1.png";
+import bckg2 from "../../img/bckg2.png";
+import bckg3 from "../../img/bckg3.png";
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 interface IProps {
     searchButtonClicked: () => void;
+    isMobile: boolean;
 }
 
 const Appointment: React.FC<IProps> = (props) => {
@@ -16,7 +24,20 @@ const Appointment: React.FC<IProps> = (props) => {
     const [returnDate, setReturnDate] = useState('');
     const [isTripIncludeReturn, setIsTripIncludeReturn] = useState(false);
     const navigate = useNavigate();
+
     const {t} = useTranslation();
+    const backgroundImages = [bckg1, bckg2, bckg3];
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 6000,
+        cssEase: "linear",
+        arrows: true,
+    };
 
     const notSortedRegions = [
         {id: 1, name: 'Alanya'},
@@ -104,6 +125,18 @@ const Appointment: React.FC<IProps> = (props) => {
     const isFormValid = tripType && departure && destination && departureDate;
     return (
         <div className={'appointment'}>
+            {!props.isMobile ?
+            <div className={'appointment-background'}>
+                <Slider {...settings}>
+                    {backgroundImages.map((image, index) => (
+                        <div className={'appointment-background-i'} key={index}>
+                            <img className={'appointment-background-img'} src={image} alt={''}/>
+                        </div>
+                    ))}
+                </Slider>
+            </div> :
+                <></>
+            }
             <div className="appointment-form">
                 <form onSubmit={handleRedirect}>
                     <div>
@@ -135,19 +168,21 @@ const Appointment: React.FC<IProps> = (props) => {
 
                     <div>
                         <label className={'date-label'}>
-                            <AiOutlineCalendar className="icon" />
-                            <input id ="typeId" type="text" placeholder={t('departureDate')} onFocus={(e) => (e.target.type = "date")}
+                            <AiOutlineCalendar className="icon"/>
+                            <input id="typeId" type="text" placeholder={t('departureDate')}
+                                   onFocus={(e) => (e.target.type = "date")}
                                    onBlur={(e) => (e.target.type = "text")} value={departureDate}
                                    onChange={(e) => setDepartureDate(e.target.value)}/>
 
                         </label>
                     </div>
 
-                    { isTripIncludeReturn &&
+                    {isTripIncludeReturn &&
                         <div>
                             <label className={'date-label'}>
-                                <AiOutlineCalendar className="icon" />
-                                <input id ="typeId" type="text" placeholder={t('returnDate')}   onFocus={(e) => (e.target.type = "date")}
+                                <AiOutlineCalendar className="icon"/>
+                                <input id="typeId" type="text" placeholder={t('returnDate')}
+                                       onFocus={(e) => (e.target.type = "date")}
                                        onBlur={(e) => (e.target.type = "text")} value={returnDate}
                                        onChange={(e) => setReturnDate(e.target.value)}/>
                             </label>
@@ -156,7 +191,7 @@ const Appointment: React.FC<IProps> = (props) => {
 
                     <div>
                         <CustomDropdown
-                            options={currencies.filter((currency2) => currency2.name !== currency) }
+                            options={currencies.filter((currency2) => currency2.name !== currency)}
                             value={currency}
                             placeholder={currencies[0].name}
                             onChange={(value) => handleCurrency(value)}
