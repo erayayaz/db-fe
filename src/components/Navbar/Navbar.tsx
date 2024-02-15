@@ -40,6 +40,7 @@ const Navbar: React.FC<IProps> = (props) => {
         {id: 3, language: 'ar'},
     ];
     //                     <Link to="/contacts" onClick={props.menuButtonClicked} className="menu-item">{t('contacts')}</Link>
+    //                     <Link to="/media" onClick={props.menuButtonClicked} className="menu-item">{t('media')}</Link>
     return (
         <div>
             <nav className="navbar">
@@ -49,7 +50,6 @@ const Navbar: React.FC<IProps> = (props) => {
                 <div className="menu">
                     <Link to="/about-us" onClick={props.menuButtonClicked} className={'menu-item'}>{t('aboutUs')}</Link>
                     <Link to="/regions" onClick={props.menuButtonClicked} className="menu-item">{t('regions')}</Link>
-                    <Link to="/media" onClick={props.menuButtonClicked} className="menu-item">{t('media')}</Link>
                     <Link to="/vehicles" onClick={props.menuButtonClicked} className="menu-item">{t('vehicles')}</Link>
                 </div>
                 <div className="language-dropdown">

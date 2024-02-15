@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Vehicles.scss';
 import {useTranslation} from "react-i18next";
 import Footer from "../Footer/Footer";
@@ -29,6 +29,10 @@ const Vehicles: React.FC<IProps> = (props) => {
     const handleClose = () => {
         setIsGalleryOpen(false);
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const images = [
         {id: 1, url: sedan, person: 3, luggage: 3, type: t('sedan')},

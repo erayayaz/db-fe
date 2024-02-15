@@ -10,35 +10,10 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
-    const {t, i18n} = useTranslation();
-    const [dropdownVisible, setDropdownVisible] = useState(false);
-    const [selectedLanguage, setSelectedLanguage] = useState('tr');
+    const {t} = useTranslation();
 
-    const handleLanguageChange = async (newLang: string) => {
-        setSelectedLanguage(newLang);
-        setDropdownVisible(false);
-        await i18n.changeLanguage(newLang);
-    };
-
-    const toggleLanguageDropdown = () => {
-        setDropdownVisible(!dropdownVisible);
-    };
-
-    useEffect(() => {
-        const changeLanguage = async () => {
-            await i18n.changeLanguage(selectedLanguage);
-        };
-
-        changeLanguage();
-    }, []);
-
-    const languages = [
-        {id: 0, language: 'tr'},
-        {id: 1, language: 'en'},
-        {id: 2, language: 'ru'},
-        {id: 3, language: 'ar'},
-    ];
     //                    <Link to="/contacts" onClick={props.menuButtonClicked} className="menu-item">{t('contacts')}</Link>
+    //                     <Link to="/media" onClick={props.menuButtonClicked} className="menu-item">{t('media')}</Link>
     return (
         <div className={`sidebar ${props.isOpen ? 'open' : ''}`}>
 
@@ -49,7 +24,6 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                 <div className="sidebar-menu">
                     <Link to="/about-us" onClick={props.menuButtonClicked} className={'menu-item'}>{t('aboutUs')}</Link>
                     <Link to="/regions" onClick={props.menuButtonClicked} className="menu-item">{t('regions')}</Link>
-                    <Link to="/media" onClick={props.menuButtonClicked} className="menu-item">{t('media')}</Link>
                     <Link to="/vehicles" onClick={props.menuButtonClicked} className="menu-item">{t('vehicles')}</Link>
                 </div>
             </div>

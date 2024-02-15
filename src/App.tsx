@@ -174,7 +174,7 @@ function App() {
             {isAboutVisible && <WhyUs/>}
 
             {isAboutVisible && <TravelRoutes toggleRegions={routeMenu}/>}
-            {isAboutVisible && <Memories/>}
+
             {isAboutVisible && <Payments/>}
             {isAboutVisible && <Footer menuButtonClicked={routeMenu}/>}
             {!isAdminPanel && <Facetime/>}

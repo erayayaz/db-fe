@@ -148,9 +148,7 @@ const Form: React.FC<IProps> = (props) => {
         pdf.text(`${t('hour')}: ${time}`, 20, logoY + logoHeight + 130);
         pdf.text(`${t('numberOfPerson')}: ${numberOfPeople}`, 20, logoY + logoHeight + 140);
         pdf.text(`${t('numberOfChild')}: ${numberOfChild}`, 20, logoY + logoHeight + 150);
-        {
-            childSeat && pdf.text(`${t('childSeat')}: \u2713`, 20, logoY + logoHeight + 160);
-        }
+        { childSeat && pdf.text(`${t('childSeat')}: \u2713`, 20, logoY + logoHeight + 160); }
 
 
         pdf.text(t('carInformation'), 20, logoY + logoHeight + 175);

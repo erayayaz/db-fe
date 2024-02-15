@@ -10,7 +10,6 @@ interface IProps {
 const Login: React.FC<IProps> = (props) => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const navigate = useNavigate();
     const handleLogin = () => {
         const user = {
             username: username,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './About.scss';
 import {useTranslation} from "react-i18next";
 import about from "../../img/about.png";
@@ -8,7 +8,9 @@ import Payments from "../Payments/Payments";
 
 const About: React.FC = () => {
     const {t} = useTranslation();
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <>
             <div className={'about'}>

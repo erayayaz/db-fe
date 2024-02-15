@@ -9,8 +9,7 @@ interface IProps {
 
 const Footer: React.FC<IProps> = (props) => {
     const {t} = useTranslation();
-
-    const defaultProps = {menuButtonClicked: {}}
+    //                             <li><Link to="/media" onClick={props.menuButtonClicked}>{t('media')}</Link></li>
     return (
         <footer className="footer">
             <div className="container">
@@ -25,7 +24,6 @@ const Footer: React.FC<IProps> = (props) => {
                         <ul>
                             <li><Link to="/about-us" onClick={props.menuButtonClicked}>{t('aboutUs')}</Link></li>
                             <li><Link to="/regions" onClick={props.menuButtonClicked}>{t('regions')}</Link></li>
-                            <li><Link to="/media" onClick={props.menuButtonClicked}>{t('media')}</Link></li>
                             <li><Link to="/vehicles" onClick={props.menuButtonClicked}>{t('vehicles')}</Link></li>
                         </ul>
                     </div>
