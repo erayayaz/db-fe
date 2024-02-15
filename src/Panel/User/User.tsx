@@ -23,7 +23,7 @@ const User: React.FC<IProps> = (props) => {
         };
 
         // Axios ile POST isteği gönderelim
-        axios.put('http://localhost:8080/api/authorization', newUser)
+        axios.put('https://db-be-d85969a6a61b.herokuapp.com/api/authorization', newUser)
             .then(response => {
             })
             .catch(error => {

@@ -142,7 +142,7 @@ const Reservation: React.FC<IProps> = (props) => {
     ];
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/car')
+        axios.get('https://db-be-d85969a6a61b.herokuapp.com/api/car')
             .then(response => {
                 const carInfo: Car[] = response.data;
                 setCarInfo(carInfo);

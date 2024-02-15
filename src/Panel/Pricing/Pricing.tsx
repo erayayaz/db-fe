@@ -22,7 +22,7 @@ const Pricing: React.FC<IProps> = (props) => {
     const [cars, setCars] = useState<Car[]>([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/car')
+        axios.get('https://db-be-d85969a6a61b.herokuapp.com/api/car')
             .then(response => setCars(response.data))
             .catch(error => console.error('Veri çekme hatası:', error));
     }, []);
@@ -43,7 +43,7 @@ const Pricing: React.FC<IProps> = (props) => {
             doublePriceUsd: newDoublePriceUsd,
         };
 
-        axios.put(`http://localhost:8080/api/car`, newCar)
+        axios.put(`https://db-be-d85969a6a61b.herokuapp.com/api/car`, newCar)
             .then(response => {
                 const cars: Car[] = response.data;
                 setCars(cars);

@@ -16,7 +16,7 @@ const Login: React.FC<IProps> = (props) => {
             username: username,
             password: password
         }
-        axios.post('http://localhost:8080/api/authorization/auth', user)
+        axios.post('https://db-be-d85969a6a61b.herokuapp.com/api/authorization/auth', user)
             .then(response => {
                 if (response.data) {
                     props.loginSuccess();
