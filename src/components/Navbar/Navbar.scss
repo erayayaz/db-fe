@@ -3,8 +3,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #fff;
-  color: #000;
+  background-color: #000 !important;
+  color: #fff;
   border-bottom: 1px solid gray;
   .logo {
     margin-left: auto;
@@ -24,7 +24,7 @@
       margin-right: 25px;
       cursor: pointer;
       text-decoration: none;
-      color: black;
+      color: white;
       font-weight: bold;
 
       &:hover {
@@ -41,13 +41,13 @@
     position: relative;
 
     .language-button {
-      background-color: #fff;
-      color: #333;
+      background-color: #000;
+      color: white;
       padding: 8px 15px;
-      border: none;
       cursor: pointer;
       font-weight: bold;
       border-radius: 15px;
+      border: 1px solid white;
     }
 
     .dropdown-content {

@@ -22,6 +22,7 @@ import Form from "./components/Form/Form";
 import AdminPanel from "./Panel/AdminPanel/AdminPanel";
 import Login from "./Panel/Login/Login";
 import {useTranslation} from "react-i18next";
+import Animation from "./components/Animation/Animation";
 
 function App() {
     const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
@@ -29,6 +30,7 @@ function App() {
     const [isAboutVisible, setIsAboutVisible] = useState(true);
     const [isAdminPanel, setIsAdminPanel] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [showAnimation, setShowAnimation] = useState(false);
     const urls = [
         {url: "/regions"},
         {url: "/about-us"},
@@ -52,6 +54,14 @@ function App() {
     };
 
     const toggleHome = () => {
+        navigate('/');
+        setIsAdminPanel(false);
+        setIsAboutVisible(true);
+    }
+
+    const toggleFromForm = () => {
+        setShowAnimation(true);
+
         navigate('/');
         setIsAdminPanel(false);
         setIsAboutVisible(true);
@@ -129,6 +139,8 @@ function App() {
     };
     return (
         <div className="app">
+            <Animation />
+            {showAnimation && <Animation />}
             {isMobile && !isAdminPanel ? (
                 <>
                     <Link to="/" className="app-logo" onClick={toggleHome}>
@@ -173,7 +185,7 @@ function App() {
                 <Route path="/media" Component={Media}/>
                 <Route path="/vehicles" Component={() => <Vehicles reservationButtonClicked={toggleHome}/>}/>
                 <Route path="/contacts" Component={Contacts}/>
-                <Route path="/form" Component={() => <Form returnHome={toggleHome}/>}/>
+                <Route path="/form" Component={() => <Form returnHome={toggleFromForm}/>}/>
                 <Route path="/login" Component={() => <Login loginSuccess={loginSuccess}/>}/>
                 <Route path="/admin" Component={() => <AdminPanel iconClicked={toggleHome}/>}/>
                 <Route path="/reservation" Component={() => <Reservation reservationButtonClicked={routeMenu}/>}/>

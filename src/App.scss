@@ -10,7 +10,7 @@
   .app-logo {
     display: flex;
     margin: auto;
-    background-color: #fff;
+    background-color: #000;
     border-bottom: 1px solid gray;
 
     img {
@@ -29,15 +29,15 @@
     cursor: pointer;
     background: none;
     border: none;
+    color: white;
   }
 
   .language-dropdown {
     position: relative;
-    border: 1px solid black;
     border-radius: 15px;
     .language-button {
-      background-color: #fff;
-      color: #333;
+      background-color: #000;
+      color: #fff;
       padding: 8px 15px;
       border: none;
       cursor: pointer;
@@ -77,6 +77,7 @@
 
   @media (max-width: 768px) {
     .language-dropdown {
+      border: 1px solid white;
       position: absolute;
       top: 23px;
       right: 80px;

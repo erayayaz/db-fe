@@ -26,7 +26,7 @@ const Appointment: React.FC<IProps> = (props) => {
     const navigate = useNavigate();
 
     const {t} = useTranslation();
-    const backgroundImages = [bckg1, bckg2, bckg3];
+    const backgroundImages = [bckg2, bckg3];
     const settings = {
         dots: true,
         infinite: true,

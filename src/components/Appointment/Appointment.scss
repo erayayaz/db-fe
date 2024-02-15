@@ -1,5 +1,5 @@
 .appointment {
-  padding: 17rem 6rem 24rem 6rem;
+  padding: 24rem 6rem 20rem 6rem;
   position: relative;
 
   .appointment-background {
@@ -16,16 +16,6 @@
         height: fit-content;
         object-fit: cover;
         object-position: center;
-      }
-
-      .slick-prev {
-        left: 10px;
-        z-index: 1;
-      }
-
-      .slick-next {
-        right: 10px;
-        z-index: 1;
       }
     }
 
@@ -186,7 +176,6 @@
 
 @media (min-width: 1800px) {
   .appointment {
-    padding: 17rem 6rem 32rem 6rem;
-
+    padding: 24rem 6rem 32rem 6rem;
   }
 }

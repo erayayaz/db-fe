@@ -1,7 +1,7 @@
 import React from 'react';
 import './WhyUs.scss';
 import {useTranslation} from "react-i18next";
-import logo from "../../img/logo.png";
+import logo from "../../img/logowithoutbg.png";
 
 const WhyUs: React.FC = () => {
     const {t} = useTranslation();

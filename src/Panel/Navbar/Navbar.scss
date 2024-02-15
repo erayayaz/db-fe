@@ -4,8 +4,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #fff;
-  color: #000;
+  background-color: #000;
+  color: #fff;
   border-bottom: 1px solid gray;
   .logo {
     margin-left: auto;
@@ -30,7 +30,7 @@
       li {
         display: inline-block;
         margin-right: 10px;
-        color: black;
+        color: white;
         cursor: pointer;
 
         &:hover {
