@@ -46,4 +46,5 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 
-sprinter güncel foto
+1 mobil safaride tarih
+2. kaanın attığı son ss

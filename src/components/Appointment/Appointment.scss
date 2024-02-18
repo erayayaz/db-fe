@@ -13,13 +13,13 @@
     .appointment-background-i {
       .appointment-background-img {
         max-width: 100%;
-        height: fit-content;
+        height: auto;
         object-fit: cover;
         object-position: center;
       }
     }
-
   }
+
   .appointment-form {
     z-index: 2;
     justify-content: center;
@@ -41,6 +41,10 @@
       justify-content: center;
 
       .date-label {
+        input#typeId {
+          min-height: 1px;
+        }
+
         position: relative;
 
         .icon {

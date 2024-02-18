@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import CustomDropdown from "../Dropdown/CustomDropdown";
 import {AiOutlineCalendar} from 'react-icons/ai';
-import bckg1 from "../../img/bckg1.png";
 import bckg2 from "../../img/bckg2.png";
 import bckg3 from "../../img/bckg3.png";
 import Slider from 'react-slick';
@@ -172,8 +171,8 @@ const Appointment: React.FC<IProps> = (props) => {
                             <input id="typeId" type="text" placeholder={t('departureDate')}
                                    onFocus={(e) => (e.target.type = "date")}
                                    onBlur={(e) => (e.target.type = "text")} value={departureDate}
-                                   onChange={(e) => setDepartureDate(e.target.value)}/>
-
+                                   onChange={(e) => setDepartureDate(e.target.value)}
+                            />
                         </label>
                     </div>
 
@@ -184,7 +183,8 @@ const Appointment: React.FC<IProps> = (props) => {
                                 <input id="typeId" type="text" placeholder={t('returnDate')}
                                        onFocus={(e) => (e.target.type = "date")}
                                        onBlur={(e) => (e.target.type = "text")} value={returnDate}
-                                       onChange={(e) => setReturnDate(e.target.value)}/>
+                                       onChange={(e) => setReturnDate(e.target.value)}
+                                />
                             </label>
                         </div>
                     }

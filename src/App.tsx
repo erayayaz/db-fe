@@ -11,7 +11,6 @@ import Vehicles from "./components/Vehicles/Vehicles";
 import Contacts from "./components/Contact/Contact";
 import Appointment from "./components/Appointment/Appointment";
 import WhyUs from "./components/WhyUs/WhyUs";
-import Memories from "./components/Memories/Memories";
 import TravelRoutes from "./components/TravelRoutes/TravelRoutes";
 import Payments from "./components/Payments/Payments";
 import Footer from "./components/Footer/Footer";
@@ -93,34 +92,41 @@ function App() {
         setIsMobile(window.innerWidth <= 768);
     };
 
+    const handlePopState = () => {
+        toggleHome();
+    };
+
     useEffect(() => {
+        handleLanguageChange('tr');
         const currentPath = location.pathname;
         urls.forEach((item) => {
-            if (currentPath === item.url) {
-                if (currentPath === '/login' || currentPath === '/admin') {
-                    if (isLoggedIn) {
-                        navigate('/admin');
+                if (currentPath === item.url) {
+                    if (currentPath === '/login' || currentPath === '/admin') {
+                        if (isLoggedIn) {
+                            navigate('/admin');
+                        } else {
+                            navigate('/login');
+                        }
+
+                        routeAdminPanel();
                     } else {
-                        navigate('/login');
+                        routeMenu();
+                        routeWebsite();
+                        navigate(item.url);
                     }
-
-                    routeAdminPanel();
-                } else {
-                    routeMenu();
-                    routeWebsite();
-                    navigate(item.url);
                 }
-
             }
-        });
+        );
 
         window.addEventListener('resize', handleResize);
-
+        window.addEventListener('popstate', handlePopState);
         return () => {
+            window.removeEventListener('popstate', handlePopState);
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-    const {t, i18n} = useTranslation();
+
+    const {i18n} = useTranslation();
     const languages = [
         {id: 0, language: 'tr'},
         {id: 1, language: 'en'},
@@ -139,8 +145,9 @@ function App() {
     };
     return (
         <div className="app">
-            <Animation />
-            {showAnimation && <Animation />}
+            <Animation/>
+            {showAnimation && <Animation/>}
+
             {isMobile && !isAdminPanel ? (
                 <>
                     <Link to="/" className="app-logo" onClick={toggleHome}>
@@ -150,6 +157,7 @@ function App() {
                         <button onClick={toggleLanguageDropdown} className="language-button">
                             {selectedLanguage.toUpperCase()}
                         </button>
+
                         {dropdownVisible && (
                             <div className="dropdown-content">
                                 {languages.map((lang) => lang.language !== selectedLanguage && (
@@ -170,25 +178,25 @@ function App() {
                     {!isAdminPanel && <Navbar iconClicked={toggleHome} menuButtonClicked={routeMenu}/>}
                 </>
             )}
+
             {isAboutVisible && <Appointment searchButtonClicked={routeMenu} isMobile={isMobile}/>}
             {isAboutVisible && <WhyUs/>}
-
             {isAboutVisible && <TravelRoutes toggleRegions={routeMenu}/>}
-
             {isAboutVisible && <Payments/>}
             {isAboutVisible && <Footer menuButtonClicked={routeMenu}/>}
             {!isAdminPanel && <Facetime/>}
             {!isAdminPanel && <Whatsapp/>}
+
             <Routes>
-                <Route path="/about-us" Component={About}/>
-                <Route path="/regions" Component={Regions}/>
-                <Route path="/media" Component={Media}/>
-                <Route path="/vehicles" Component={() => <Vehicles reservationButtonClicked={toggleHome}/>}/>
-                <Route path="/contacts" Component={Contacts}/>
-                <Route path="/form" Component={() => <Form returnHome={toggleFromForm}/>}/>
-                <Route path="/login" Component={() => <Login loginSuccess={loginSuccess}/>}/>
-                <Route path="/admin" Component={() => <AdminPanel iconClicked={toggleHome}/>}/>
-                <Route path="/reservation" Component={() => <Reservation reservationButtonClicked={routeMenu}/>}/>
+                <Route path="/about-us" element={<About/>}/>
+                <Route path="/regions" element={<Regions />}/>
+                <Route path="/media" element={<Media/>}/>
+                <Route path="/vehicles" element={<Vehicles reservationButtonClicked={toggleHome}/>}/>
+                <Route path="/contacts" element={<Contacts/>}/>
+                <Route path="/form" element={<Form returnHome={toggleFromForm}/>}/>
+                <Route path="/login" element={<Login loginSuccess={loginSuccess}/>}/>
+                <Route path="/admin" element={<AdminPanel iconClicked={toggleHome}/>}/>
+                <Route path="/reservation" element={<Reservation reservationButtonClicked={routeMenu}/>}/>
             </Routes>
         </div>
     );
