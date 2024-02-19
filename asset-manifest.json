@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.0bdea9a6.css",
-    "main.js": "/static/js/main.e83ca3f3.js",
+    "main.css": "/static/css/main.90c7b337.css",
+    "main.js": "/static/js/main.06e5372d.js",
     "static/js/239.362c4e40.chunk.js": "/static/js/239.362c4e40.chunk.js",
     "static/js/213.ca3bc4f1.chunk.js": "/static/js/213.ca3bc4f1.chunk.js",
     "static/js/553.0e8cb3cb.chunk.js": "/static/js/553.0e8cb3cb.chunk.js",
@@ -20,6 +20,7 @@
     "static/media/wito2.png": "/static/media/wito2.50e8c0bba41db1299dc4.png",
     "static/media/about.png": "/static/media/about.d57fe16166ea5311faed.png",
     "static/media/göcek.png": "/static/media/göcek.431caacbec01a70cfeee.png",
+    "static/media/dalaman4.png": "/static/media/dalaman4.ac0785332022a3725f90.png",
     "static/media/bckg3.png": "/static/media/bckg3.09db29083eacedfe8259.png",
     "static/media/D-marin.png": "/static/media/D-marin.2a7a46ee5eac14745504.png",
     "static/media/söğüt.png": "/static/media/söğüt.c099c0f48d83c2017a97.png",
@@ -63,14 +64,14 @@
     "index.html": "/index.html",
     "static/media/person.svg": "/static/media/person.d7361e714c47fb7551d408fe34f6f10f.svg",
     "static/media/getFetch.cjs": "/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "main.0bdea9a6.css.map": "/static/css/main.0bdea9a6.css.map",
-    "main.e83ca3f3.js.map": "/static/js/main.e83ca3f3.js.map",
+    "main.90c7b337.css.map": "/static/css/main.90c7b337.css.map",
+    "main.06e5372d.js.map": "/static/js/main.06e5372d.js.map",
     "239.362c4e40.chunk.js.map": "/static/js/239.362c4e40.chunk.js.map",
     "213.ca3bc4f1.chunk.js.map": "/static/js/213.ca3bc4f1.chunk.js.map",
     "553.0e8cb3cb.chunk.js.map": "/static/js/553.0e8cb3cb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0bdea9a6.css",
-    "static/js/main.e83ca3f3.js"
+    "static/css/main.90c7b337.css",
+    "static/js/main.06e5372d.js"
   ]
 }
