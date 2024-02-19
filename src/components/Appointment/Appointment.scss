@@ -40,6 +40,26 @@
       gap: 20px;
       justify-content: center;
 
+      .appointment-form_date-input {
+        .react-datepicker-wrapper {
+          .react-datepicker__input-container {
+            input::placeholder {
+              color: black;
+            }
+          }
+        }
+        .react-datepicker__tab-loop {
+          .react-datepicker-popper {
+            .react-datepicker {
+              .react-datepicker__navigation, .react-datepicker__navigation--previous {
+                width: 30px;
+                height: 23px;
+              }
+            }
+          }
+        }
+      }
+
       .date-label {
         input#typeId {
           min-height: 1px;
@@ -155,6 +175,17 @@
             padding-left: 46px; // Adjust// the padding to make space for the icon
             height: 28px;
             padding-right: 20px;
+          }
+        }
+
+        .appointment-form_date-input {
+          .react-datepicker-wrapper {
+            .react-datepicker__input-container {
+              input {
+                min-width: 225px;
+                height: 25px;
+              }
+            }
           }
         }
       }

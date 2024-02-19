@@ -31,7 +31,7 @@ const Footer: React.FC<IProps> = (props) => {
                     <div className="footer-section">
                         <h2>{t('contacts')}</h2>
                         <p>{t('telephone')}: +90 543 816 9230</p>
-                        <p>{t('address')}: Dalaman, Muğla</p>
+                        <p>{t('address')}: Marmaris, Muğla</p>
                     </div>
 
                 </div>

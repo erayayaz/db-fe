@@ -1,14 +1,20 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Appointment.scss';
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import CustomDropdown from "../Dropdown/CustomDropdown";
-import {AiOutlineCalendar} from 'react-icons/ai';
 import bckg2 from "../../img/bckg2.png";
 import bckg3 from "../../img/bckg3.png";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { registerLocale } from "react-datepicker";
+import enUS from "date-fns/locale/en-US"; // English locale
+import ru from "date-fns/locale/ru"; // Russian locale
+import ar from "date-fns/locale/ar"; // Arabic locale
+import tr from "date-fns/locale/tr"; // Turkish locale
 
 interface IProps {
     searchButtonClicked: () => void;
@@ -20,11 +26,13 @@ const Appointment: React.FC<IProps> = (props) => {
     const [destination, setDestination] = useState('');
     const [departure, setDeparture] = useState('');
     const [departureDate, setDepartureDate] = useState('');
+    const [startDate, setStartDate] = useState<Date | null>(null);
     const [returnDate, setReturnDate] = useState('');
+    const [endDate, setEndDate] = useState<Date | null>(null);
     const [isTripIncludeReturn, setIsTripIncludeReturn] = useState(false);
     const navigate = useNavigate();
 
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
     const backgroundImages = [bckg2, bckg3];
     const settings = {
         dots: true,
@@ -65,6 +73,9 @@ const Appointment: React.FC<IProps> = (props) => {
         {id: 24, name: 'Söğüt'},
         {id: 25, name: 'Turunç'},
         {id: 26, name: 'İstanbul'},
+        {id: 27, name: 'Dalaman Havalimanı'},
+        {id: 28, name: 'Milas-Bodrum Havalimanı'},
+        {id: 29, name: 'Antalya Havalimanı'},
     ];
 
     const currencies = [
@@ -122,6 +133,46 @@ const Appointment: React.FC<IProps> = (props) => {
     }
 
     const isFormValid = tripType && departure && destination && departureDate;
+
+    useEffect(() => {
+        const currentLanguage = i18n.language.toString();
+        switch (currentLanguage) {
+            case "en":
+                registerLocale("en-US", enUS);
+                break;
+            case "ru":
+                registerLocale("ru", ru);
+                break;
+            case "ar":
+                registerLocale("ar", ar);
+                break;
+            case "tr":
+                registerLocale("tr", tr);
+                break;
+            default:
+                registerLocale("tr", tr);
+                break;
+        }
+    }, [i18n.language]);
+
+    useEffect(() => {
+        if (startDate) {
+            let newDateWithOneDayAdded = new Date(startDate);
+            newDateWithOneDayAdded.setDate(startDate.getDate() + 1);
+            const date = newDateWithOneDayAdded.toISOString();
+            setDepartureDate(date.substring(0, date.indexOf('T')));
+        }
+    }, [startDate]);
+
+    useEffect(() => {
+        if (endDate) {
+            let newDateWithOneDayAdded = new Date(endDate);
+            newDateWithOneDayAdded.setDate(endDate.getDate() + 1);
+            const date = newDateWithOneDayAdded.toISOString();
+            setReturnDate(date.substring(0, date.indexOf('T')));
+        }
+    }, [endDate]);
+
     return (
         <div className={'appointment'}>
             {!props.isMobile ?
@@ -165,27 +216,23 @@ const Appointment: React.FC<IProps> = (props) => {
                         />
                     </div>
 
-                    <div>
-                        <label className={'date-label'}>
-                            <AiOutlineCalendar className="icon"/>
-                            <input id="typeId" type="text" placeholder={t('departureDate')}
-                                   onFocus={(e) => (e.target.type = "date")}
-                                   onBlur={(e) => (e.target.type = "text")} value={departureDate}
-                                   onChange={(e) => setDepartureDate(e.target.value)}
-                            />
-                        </label>
+                    <div className={'appointment-form_date-input'}>
+                        <DatePicker
+                            selected={startDate}
+                            onChange={(date) => setStartDate(date)}
+                            placeholderText={t('departureDate')}
+                            locale={i18n.language.toString()}
+                        />
                     </div>
 
                     {isTripIncludeReturn &&
-                        <div>
-                            <label className={'date-label'}>
-                                <AiOutlineCalendar className="icon"/>
-                                <input id="typeId" type="text" placeholder={t('returnDate')}
-                                       onFocus={(e) => (e.target.type = "date")}
-                                       onBlur={(e) => (e.target.type = "text")} value={returnDate}
-                                       onChange={(e) => setReturnDate(e.target.value)}
-                                />
-                            </label>
+                        <div className={'appointment-form_date-input'}>
+                            <DatePicker
+                                selected={endDate}
+                                onChange={(date) => setEndDate(date)}
+                                placeholderText={t('returnDate')}
+                                locale={i18n.language.toString()}
+                            />
                         </div>
                     }
 

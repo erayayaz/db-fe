@@ -183,10 +183,12 @@ const Form: React.FC<IProps> = (props) => {
                                 <p className={'form__left-side__details__sub-title'}>{t('departureDateString')}: </p>
                                 <p className={'form__left-side__details__sub-body'}>{departureDate}</p>
                             </div>
-                            <div className={'form__left-side__details__body'}>
-                                <p className={'form__left-side__details__sub-title'}>{t('returnDateString')}: </p>
-                                <p className={'form__left-side__details__sub-body'}>{returnDate}</p>
-                            </div>
+                            {returnDate.length > 1 &&
+                                <div className={'form__left-side__details__body'}>
+                                    <p className={'form__left-side__details__sub-title'}>{t('returnDateString')}: </p>
+                                    <p className={'form__left-side__details__sub-body'}>{returnDate}</p>
+                                </div>
+                            }
                             <div className={'form__left-side__details__body-inputs'}>
                                 <label>
                                     {t('hour')}:

@@ -12,6 +12,13 @@ import axios from "axios";
 import CustomDropdown from "../Dropdown/CustomDropdown";
 import VehicleGallery from "../VehicleGallery/VehicleGallery";
 import photo from "../../img/photo.png";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { registerLocale } from "react-datepicker";
+import enUS from "date-fns/locale/en-US"; // English locale
+import ru from "date-fns/locale/ru"; // Russian locale
+import ar from "date-fns/locale/ar"; // Arabic locale
+import tr from "date-fns/locale/tr"; // Turkish locale
 
 interface Car {
     id: number;
@@ -31,7 +38,7 @@ interface IProps {
 }
 
 const Reservation: React.FC<IProps> = (props) => {
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
     const location = useLocation();
     const navigate = useNavigate();
     let {
@@ -45,6 +52,14 @@ const Reservation: React.FC<IProps> = (props) => {
         isTripIncludeReturn
     } = location.state || {};
 
+    if (returnDate === undefined || returnDate === null) {
+        returnDate = "";
+    }
+
+    if (departureDate === undefined || departureDate === null) {
+        departureDate = "";
+    }
+
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -52,7 +67,9 @@ const Reservation: React.FC<IProps> = (props) => {
     const [destination1, setDestination] = useState(destination);
     const [departure1, setDeparture] = useState(departure);
     const [departureDate1, setDepartureDate] = useState(departureDate);
+    const [startDate, setStartDate] = useState<Date | null>(departureDate.length > 1 ? new Date(departureDate) : null);
     const [returnDate1, setReturnDate] = useState(returnDate);
+    const [endDate, setEndDate] = useState<Date | null>(returnDate.length > 1 ? new Date(returnDate) : null);
     const [currency1, setCurrency] = useState(currency);
     const [currencyIcon1, setCurrencyIcon] = useState(currencyIcon);
     const [isTripIncludeReturn1, setIsTripIncludeReturn] = useState(isTripIncludeReturn);
@@ -122,7 +139,6 @@ const Reservation: React.FC<IProps> = (props) => {
             img
         };
 
-        console.log(params);
         props.reservationButtonClicked();
         navigate('/form', {
             state: params,
@@ -175,6 +191,39 @@ const Reservation: React.FC<IProps> = (props) => {
         }
     }
 
+    useEffect(() => {
+        const currentLanguage = i18n.language.toString();
+        switch (currentLanguage) {
+            case "en":
+                registerLocale("en-US", enUS);
+                break;
+            case "ru":
+                registerLocale("ru", ru);
+                break;
+            case "ar":
+                registerLocale("ar", ar);
+                break;
+            case "tr":
+                registerLocale("tr", tr);
+                break;
+            default:
+                registerLocale("tr", tr);
+                break;
+        }
+    }, [i18n.language]);
+    useEffect(() => {
+        if (startDate) {
+            const date = startDate.toISOString();
+            setDepartureDate(date.substring(0, date.indexOf('T')));
+        }
+    }, [startDate]);
+
+    useEffect(() => {
+        if (endDate) {
+            const date = endDate.toISOString();
+            setReturnDate(date.substring(0, date.indexOf('T')));
+        }
+    }, [endDate]);
     return (
         <>
             <div className={'reservation'}>
@@ -196,12 +245,23 @@ const Reservation: React.FC<IProps> = (props) => {
                         value={destination1}
                         onChange={(value) => setDestination(value)}
                     />
-                    <input className={'reservation-dropdown-item'} type="date" value={departureDate1}
-                           onChange={(e) => setDepartureDate(e.target.value)}/>
+
+                    <div className={'reservation-dropdown_date-input'}>
+                        <DatePicker
+                            selected={startDate}
+                            onChange={(date) => setStartDate(date)}
+                            locale={i18n.language.toString()}
+                        />
+                    </div>
 
                     {isTripIncludeReturn1 &&
-                        <input className={'reservation-dropdown-item'} type="date" value={returnDate1}
-                               onChange={(e) => setReturnDate(e.target.value)}/>
+                        <div className={'reservation-dropdown_date-input'}>
+                            <DatePicker
+                                selected={endDate}
+                                onChange={(date) => setEndDate(date)}
+                                locale={i18n.language.toString()}
+                            />
+                        </div>
                     }
 
                     <div>

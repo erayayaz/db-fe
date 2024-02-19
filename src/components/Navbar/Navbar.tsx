@@ -15,7 +15,6 @@ const Navbar: React.FC<IProps> = (props) => {
     const [selectedLanguage, setSelectedLanguage] = useState('tr');
 
     const handleLanguageChange = async (newLang: string) => {
-        console.log(newLang);
         setSelectedLanguage(newLang);
         setDropdownVisible(false);
         await i18n.changeLanguage(newLang);
