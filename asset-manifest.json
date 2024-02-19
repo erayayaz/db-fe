@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.ae6a3594.css",
-    "main.js": "/static/js/main.d7b16e6a.js",
+    "main.css": "/static/css/main.e5160bfd.css",
+    "main.js": "/static/js/main.a43dfb64.js",
     "static/js/239.362c4e40.chunk.js": "/static/js/239.362c4e40.chunk.js",
     "static/js/213.ca3bc4f1.chunk.js": "/static/js/213.ca3bc4f1.chunk.js",
-    "static/js/553.fd82f316.chunk.js": "/static/js/553.fd82f316.chunk.js",
+    "static/js/553.0e8cb3cb.chunk.js": "/static/js/553.0e8cb3cb.chunk.js",
     "static/media/izmir.png": "/static/media/izmir.fcf2e57328eca9ec1d75.png",
     "static/media/selimiye.png": "/static/media/selimiye.c1da804154bc687f0143.png",
     "static/media/sprinter3.png": "/static/media/sprinter3.43dd8e016ead630047be.png",
@@ -63,14 +63,14 @@
     "index.html": "/index.html",
     "static/media/person.svg": "/static/media/person.d7361e714c47fb7551d408fe34f6f10f.svg",
     "static/media/getFetch.cjs": "/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "main.ae6a3594.css.map": "/static/css/main.ae6a3594.css.map",
-    "main.d7b16e6a.js.map": "/static/js/main.d7b16e6a.js.map",
+    "main.e5160bfd.css.map": "/static/css/main.e5160bfd.css.map",
+    "main.a43dfb64.js.map": "/static/js/main.a43dfb64.js.map",
     "239.362c4e40.chunk.js.map": "/static/js/239.362c4e40.chunk.js.map",
     "213.ca3bc4f1.chunk.js.map": "/static/js/213.ca3bc4f1.chunk.js.map",
-    "553.fd82f316.chunk.js.map": "/static/js/553.fd82f316.chunk.js.map"
+    "553.0e8cb3cb.chunk.js.map": "/static/js/553.0e8cb3cb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ae6a3594.css",
-    "static/js/main.d7b16e6a.js"
+    "static/css/main.e5160bfd.css",
+    "static/js/main.a43dfb64.js"
   ]
 }
