@@ -5,6 +5,7 @@ import {useTranslation} from "react-i18next";
 import CustomDropdown from "../Dropdown/CustomDropdown";
 import bckg2 from "../../img/bckg2.png";
 import bckg3 from "../../img/bckg3.png";
+import dalaman from "../../img/dalaman4.png";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -185,7 +186,12 @@ const Appointment: React.FC<IProps> = (props) => {
                     ))}
                 </Slider>
             </div> :
-                <></>
+                <div className={'appointment-background__mobile'}>
+                    <img src={dalaman} alt={''}>
+
+                    </img>
+                </div>
+
             }
             <div className="appointment-form">
                 <form onSubmit={handleRedirect}>

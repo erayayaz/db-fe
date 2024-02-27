@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, lazy, Suspense} from 'react';
 import './App.scss';
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -8,7 +8,6 @@ import About from "./components/AboutUs/About";
 import Regions from "./components/Regions/Regions";
 import Media from "./components/Media/Media";
 import Vehicles from "./components/Vehicles/Vehicles";
-import Contacts from "./components/Contact/Contact";
 import Appointment from "./components/Appointment/Appointment";
 import WhyUs from "./components/WhyUs/WhyUs";
 import TravelRoutes from "./components/TravelRoutes/TravelRoutes";
@@ -17,7 +16,7 @@ import Footer from "./components/Footer/Footer";
 import Facetime from "./components/Facetime/Facetime";
 import Whatsapp from "./components/Whatsapp/Whatsapp";
 import Reservation from "./components/Reservation/Reservation";
-import Form from "./components/Form/Form";
+//import Form from "./components/Form/Form";
 import AdminPanel from "./Panel/AdminPanel/AdminPanel";
 import Login from "./Panel/Login/Login";
 import {useTranslation} from "react-i18next";
@@ -30,6 +29,8 @@ function App() {
     const [isAdminPanel, setIsAdminPanel] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showAnimation, setShowAnimation] = useState(false);
+    const Form = lazy(() => import('./components/Form/Form'));
+
     const urls = [
         {url: "/regions"},
         {url: "/about-us"},
@@ -192,8 +193,11 @@ function App() {
                 <Route path="/regions" element={<Regions />}/>
                 <Route path="/media" element={<Media/>}/>
                 <Route path="/vehicles" element={<Vehicles reservationButtonClicked={toggleHome}/>}/>
-                <Route path="/contacts" element={<Contacts/>}/>
-                <Route path="/form" element={<Form returnHome={toggleFromForm}/>}/>
+                <Route path="/form" element={
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Form returnHome={toggleFromForm} />
+                    </Suspense>
+                }/>
                 <Route path="/login" element={<Login loginSuccess={loginSuccess}/>}/>
                 <Route path="/admin" element={<AdminPanel iconClicked={toggleHome}/>}/>
                 <Route path="/reservation" element={<Reservation reservationButtonClicked={routeMenu}/>}/>
