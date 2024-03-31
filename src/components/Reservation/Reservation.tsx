@@ -15,10 +15,10 @@ import photo from "../../img/photo.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
-import enUS from "date-fns/locale/en-US"; // English locale
-import ru from "date-fns/locale/ru"; // Russian locale
-import ar from "date-fns/locale/ar"; // Arabic locale
-import tr from "date-fns/locale/tr"; // Turkish locale
+import { enUS } from "date-fns/locale/en-US"; // English locale
+import { ru } from "date-fns/locale/ru"; // Russian locale
+import { ar } from "date-fns/locale/ar"; // Arabic locale
+import { tr } from "date-fns/locale/tr"; // Turkish locale
 
 interface Car {
     id: number;
