@@ -47,8 +47,6 @@ const Reservation: React.FC<IProps> = (props) => {
         departure,
         departureDate,
         returnDate,
-        currency,
-        currencyIcon,
         isTripIncludeReturn
     } = location.state || {};
 
@@ -70,8 +68,6 @@ const Reservation: React.FC<IProps> = (props) => {
     const [startDate, setStartDate] = useState<Date | null>(departureDate.length > 1 ? new Date(departureDate) : null);
     const [returnDate1, setReturnDate] = useState(returnDate);
     const [endDate, setEndDate] = useState<Date | null>(returnDate.length > 1 ? new Date(returnDate) : null);
-    const [currency1, setCurrency] = useState(currency);
-    const [currencyIcon1, setCurrencyIcon] = useState(currencyIcon);
     const [isTripIncludeReturn1, setIsTripIncludeReturn] = useState(isTripIncludeReturn);
     const [carInfo, setCarInfo] = useState<Car[]>([]);
 
@@ -85,32 +81,34 @@ const Reservation: React.FC<IProps> = (props) => {
     }
     const notSortedRegions = [
         {id: 1, name: 'Alanya'},
-        {id: 2, name: 'Antalya'},
-        {id: 3, name: 'Bozburun'},
-        {id: 4, name: 'Fethiye'},
-        {id: 5, name: 'Marmaris'},
-        {id: 6, name: 'İzmir'},
-        {id: 7, name: 'İçmeler'},
-        {id: 8, name: 'Orhaniye'},
-        {id: 9, name: 'Selimiye'},
-        {id: 10, name: 'Angels Marmaris'},
+        {id: 3, name: 'Antalya'},
+        {id: 5, name: 'Bozburun'},
+        {id: 10, name: 'Fethiye'},
+        {id: 19, name: 'Marmaris'},
+        {id: 17, name: 'İzmir'},
+        {id: 15, name: 'İçmeler'},
+        {id: 23, name: 'Orhaniye'},
+        {id: 26, name: 'Selimiye'},
+        {id: 2, name: 'Angels Marmaris'},
         {id: 11, name: 'Göcek'},
         {id: 12, name: 'Hillside Beach'},
-        {id: 13, name: 'Liberty Hotels'},
-        {id: 14, name: 'Marmaris Netsel Marina'},
-        {id: 15, name: 'Marmaris Yatch Marina'},
-        {id: 16, name: 'Rixos Premium Göcek'},
-        {id: 17, name: 'Hilton Sarıgerme'},
-        {id: 18, name: 'Akyaka'},
-        {id: 19, name: 'D-Marin'},
-        {id: 20, name: 'D-Maris Bay'},
-        {id: 21, name: 'Akdeniz'},
-        {id: 22, name: 'Datça'},
-        {id: 23, name: 'Hisarönü'},
+        {id: 18, name: 'Liberty Hotels'},
+        {id: 20, name: 'Marmaris Netsel Marina'},
+        {id: 21, name: 'Marmaris Yatch Marina'},
+        {id: 25, name: 'Rixos Premium Göcek'},
+        {id: 13, name: 'Hilton Sarıgerme'},
+        {id: 0, name: 'Akyaka'},
+        {id: 6, name: 'D-Marin'},
+        {id: 7, name: 'D-Maris Bay'},
+        {id: 9, name: 'Datça'},
+        {id: 14, name: 'Hisarönü'},
         {id: 24, name: 'Ölüdeniz'},
-        {id: 25, name: 'Söğüt'},
-        {id: 26, name: 'Turunç'},
-        {id: 27, name: 'İstanbul'},
+        {id: 27, name: 'Söğüt'},
+        {id: 28, name: 'Turunç'},
+        {id: 16, name: 'İstanbul'},
+        {id: 8, name: 'Dalaman Havalimanı'},
+        {id: 22, name: 'Milas-Bodrum Havalimanı'},
+        {id: 4, name: 'Antalya Havalimanı'},
     ];
 
     const sortRegions = () => {
@@ -119,21 +117,18 @@ const Reservation: React.FC<IProps> = (props) => {
 
     const regions = sortRegions();
 
-    const handleRedirect = (vehicleId: number, vehiclePrice: number, vehicleType: string, img: any) => {
+    const handleRedirect = (vehiclePrice: number, vehicleType: string, img: any) => {
         tripType = tripType1;
         destination = destination1;
         departure = departure1;
         departureDate = departureDate1;
         returnDate = returnDate1;
-        currency = currency1;
-        currencyIcon = currencyIcon1;
         const params = {
             tripType,
             destination,
             departure,
             departureDate,
             returnDate,
-            currencyIcon,
             vehiclePrice,
             vehicleType,
             img
@@ -151,17 +146,18 @@ const Reservation: React.FC<IProps> = (props) => {
         {id: 3, url: sprinters},
     ];
 
-    const currencies = [
-        {id: 1, name: '₺ TRY', icon: '₺'},
-        {id: 2, name: '€ EUR', icon: '€'},
-        {id: 3, name: '$ USD', icon: '$'},
-    ];
 
     useEffect(() => {
-        axios.get('https://db-be-d85969a6a61b.herokuapp.com/api/car')
+        const departureRegion = notSortedRegions.find(region => region.name === departure1);
+        const destinationRegion = notSortedRegions.find(region => region.name === destination1);
+        const startId = departureRegion?.id;
+        const endId = destinationRegion?.id;
+
+        axios.get(`https://db-be-d85969a6a61b.herokuapp.com/api/car/${startId}/${endId}`)
             .then(response => {
                 const carInfo: Car[] = response.data;
-                setCarInfo(carInfo);
+                const filteredCars = carInfo.filter(car => car.price !== 0);
+                setCarInfo(filteredCars);
             })
             .catch(error => {
                 console.error('Veri çekme hatası:', error);
@@ -179,15 +175,6 @@ const Reservation: React.FC<IProps> = (props) => {
         if (selectedTrip) {
             setTripType(value);
             setIsTripIncludeReturn(selectedTrip.id % 2 === 0);
-        }
-    }
-
-    const handleCurrency = (value: string) => {
-        const selectedCurrency = currencies.find(cur => cur.name === value);
-
-        if (selectedCurrency) {
-            setCurrency(value);
-            setCurrencyIcon(selectedCurrency.icon);
         }
     }
 
@@ -263,15 +250,6 @@ const Reservation: React.FC<IProps> = (props) => {
                             />
                         </div>
                     }
-
-                    <div>
-                        <CustomDropdown
-                            options={currencies.filter((currency2) => currency2.name !== currency1)}
-                            value={currency1}
-                            placeholder={currency1}
-                            onChange={(value) => handleCurrency(value)}
-                        />
-                    </div>
                 </div>
                 <div className={'reservation-right'}>
                     {carInfo.map((vehicle, index) => (
@@ -295,21 +273,12 @@ const Reservation: React.FC<IProps> = (props) => {
                                 </div>
                             </div>
                             <div className={'reservation-vehicle-button'}>
-                                {currencyIcon1 === '₺' ?
-                                    !isTripIncludeReturn1 ?
-                                        <p>{t('totalPrice')}: {vehicle.price} ₺</p>
-                                        : <p>{t('totalPrice')}: {vehicle.doublePrice} ₺</p>
-                                    : currencyIcon1 === '€' ?
-                                        !isTripIncludeReturn1 ?
-                                            <p>{t('totalPrice')}: {vehicle.priceEur} €</p>
-                                            : <p>{t('totalPrice')}: {vehicle.doublePriceEur} €</p>
-                                        :
-                                        !isTripIncludeReturn1 ?
-                                            <p>{t('totalPrice')}: {vehicle.priceUsd} $</p>
-                                            : <p>{t('totalPrice')}: {vehicle.doublePriceUsd} $</p>
+                                {!isTripIncludeReturn1 ?
+                                        <p>{t('totalPrice')}: {vehicle.price} £</p>
+                                        : <p>{t('totalPrice')}: {vehicle.doublePrice} £</p>
                                 }
                                 <button
-                                    onClick={() => handleRedirect(vehicle.id, currencyIcon1 === '₺' ? tripType1 !== t('ways') ? vehicle.price : vehicle.doublePrice : currencyIcon1 === '€' ? tripType1 !== t('ways') ? vehicle.priceEur : vehicle.doublePriceEur : tripType1 !== t('ways') ? vehicle.priceUsd : vehicle.doublePriceUsd, vehicle.carType, carInfos.find(info => info.id === vehicle.id)?.url)}>{t('reservation')}</button>
+                                    onClick={() => handleRedirect(tripType1 !== t('ways') ? vehicle.price : vehicle.doublePrice, vehicle.carType, carInfos.find(info => info.id === vehicle.id)?.url)}>{t('reservation')}</button>
                             </div>
                         </div>
                     ))}

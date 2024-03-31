@@ -23,7 +23,6 @@ const Form: React.FC<IProps> = (props) => {
         departure,
         departureDate,
         returnDate,
-        currencyIcon,
         vehiclePrice,
         vehicleType,
         img
@@ -75,7 +74,7 @@ const Form: React.FC<IProps> = (props) => {
             tripDeparture: departure,
             vehicleType: vehicleType,
             vehiclePrice: vehiclePrice,
-            currency: currencyIcon === '₺' ? "TRY" : currencyIcon === '€' ? "EUR" : "USD",
+            currency: "Pound",
         };
         sendReservation(reservation);
         showNotification(`${t('success')} \u2713`);
@@ -121,7 +120,7 @@ const Form: React.FC<IProps> = (props) => {
             hour: '2-digit',
             minute: '2-digit'
         } as Intl.DateTimeFormatOptions;
-        ;
+
         const currentDateTime = new Intl.DateTimeFormat('tr-TR', options).format(new Date());
 
 
@@ -148,12 +147,12 @@ const Form: React.FC<IProps> = (props) => {
         pdf.text(`${t('hour')}: ${time}`, 20, logoY + logoHeight + 130);
         pdf.text(`${t('numberOfPerson')}: ${numberOfPeople}`, 20, logoY + logoHeight + 140);
         pdf.text(`${t('numberOfChild')}: ${numberOfChild}`, 20, logoY + logoHeight + 150);
-        { childSeat && pdf.text(`${t('childSeat')}: \u2713`, 20, logoY + logoHeight + 160); }
+        { childSeat && pdf.text(`${t('childSeat')}: ${t('yes')}`, 20, logoY + logoHeight + 160); }
 
 
-        pdf.text(t('carInformation'), 20, logoY + logoHeight + 175);
-        pdf.text(`${t('carType')}: ${vehicleType}`, 20, logoY + logoHeight + 185);
-        pdf.text(`${t('allPrice')}: ${vehiclePrice} ${currencyIcon}`, 20, logoY + logoHeight + 195);
+        pdf.text(t('carInformation'), 20, logoY + logoHeight + 180);
+        pdf.text(`${t('carType')}: ${vehicleType}`, 20, logoY + logoHeight + 190);
+        pdf.text(`${t('allPrice')}: ${vehiclePrice} £`, 20, logoY + logoHeight + 200);
 
         const fileName = `${formData.fullName.replace(/\s+/g, '_')}_Reservation.pdf`;
         pdf.save(fileName);
@@ -204,7 +203,7 @@ const Form: React.FC<IProps> = (props) => {
                                 <label>
                                     {t('numberOfPerson')}:
                                     <input
-                                        className={'form__left-side__details__body-hour__input'}
+                                        className={'form__left-side__details__body-hour__input2'}
                                         placeholder={'Kişi Sayısı'}
                                         type="number"
                                         value={numberOfPeople}
@@ -217,7 +216,7 @@ const Form: React.FC<IProps> = (props) => {
                                 <label>
                                     {t('numberOfChild')}:
                                     <input
-                                        className={'form__left-side__details__body-hour__input'}
+                                        className={'form__left-side__details__body-hour__input3'}
                                         placeholder={'Çocuk Sayısı'}
                                         type="number"
                                         value={numberOfChild}
@@ -232,7 +231,7 @@ const Form: React.FC<IProps> = (props) => {
                                     <input
                                         type="checkbox"
                                         checked={childSeat}
-                                        className={'form__left-side__details__body-hour__input'}
+                                        className={'form__left-side__details__body-hour__input4'}
                                         onChange={(e) => setChildSeat(e.target.checked)}
                                     />
                                 </label>
@@ -246,7 +245,7 @@ const Form: React.FC<IProps> = (props) => {
                                 <img src={img} alt="chosen-vehicle"/>
                                 <div className={'form__left-side__details__body-car__attr'}>
                                     <p className={'form__left-side__details__body-car__type'}>{vehicleType}</p>
-                                    <p className={'form__left-side__details__body-car__type'}>{vehiclePrice} {currencyIcon}</p>
+                                    <p className={'form__left-side__details__body-car__type'}>{vehiclePrice} £ (Pound)</p>
                                     <p className={'form__left-side__details__body-car__price'}>{t('allPrice')}</p>
                                 </div>
                             </div>

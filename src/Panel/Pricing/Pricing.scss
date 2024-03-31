@@ -1,10 +1,12 @@
 .pricing-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+  .pricing-container__departure {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .pricing-table {
-    width: 80%; // Tablonun genişliği sayfa genişliğinin 80%'i
+    width: 90%;
+    margin: auto;
     border-collapse: collapse;
     margin-top: 20px; // İstenirse boşluk ekleyebilirsiniz
   }

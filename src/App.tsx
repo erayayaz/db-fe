@@ -30,6 +30,7 @@ function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showAnimation, setShowAnimation] = useState(false);
     const Form = lazy(() => import('./components/Form/Form'));
+    const navigate = useNavigate();
 
     const urls = [
         {url: "/regions"},
@@ -88,7 +89,6 @@ function App() {
         setIsAdminPanel(false);
     }
     const location = useLocation();
-    const navigate = useNavigate();
     const handleResize = () => {
         setIsMobile(window.innerWidth <= 768);
     };
@@ -99,7 +99,7 @@ function App() {
 
     useEffect(() => {
         handleLanguageChange('tr');
-        const currentPath = location.pathname;
+        const currentPath = location.hash;
         urls.forEach((item) => {
                 if (currentPath === item.url) {
                     if (currentPath === '/login' || currentPath === '/admin') {
@@ -108,7 +108,6 @@ function App() {
                         } else {
                             navigate('/login');
                         }
-
                         routeAdminPanel();
                     } else {
                         routeMenu();

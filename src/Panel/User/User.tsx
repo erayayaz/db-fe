@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './User.scss';
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 interface IProps {
 }
@@ -10,21 +11,21 @@ const User: React.FC<IProps> = (props) => {
     const [newUsername, setNewUsername] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const navigate = useNavigate();
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
     };
 
     const handleSave = () => {
-        // Yeni kullanıcı adı ve şifreyi bir nesne içinde paketleyelim
         const newUser = {
             username: newUsername,
             password: newPassword,
         };
 
-        // Axios ile POST isteği gönderelim
         axios.put('https://db-be-d85969a6a61b.herokuapp.com/api/authorization', newUser)
             .then(response => {
+                navigate('/login');
             })
             .catch(error => {
             });
