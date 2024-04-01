@@ -99,15 +99,11 @@ function App() {
 
     useEffect(() => {
         handleLanguageChange('tr');
-        const currentPath = location.hash;
+        const currentPath = location.pathname;
         urls.forEach((item) => {
                 if (currentPath === item.url) {
-                    if (currentPath === '/login' || currentPath === '/admin') {
-                        if (isLoggedIn) {
-                            navigate('/admin');
-                        } else {
-                            navigate('/login');
-                        }
+                    if (currentPath === '/login') {
+                        navigate('/login');
                         routeAdminPanel();
                     } else {
                         routeMenu();
@@ -124,7 +120,7 @@ function App() {
             window.removeEventListener('popstate', handlePopState);
             window.removeEventListener('resize', handleResize);
         };
-    }, []);
+    }, [location.hash]);
 
     const {i18n} = useTranslation();
     const languages = [
